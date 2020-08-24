@@ -15856,7 +15856,7 @@ sub_F7C0:
 		tst.b	(Respawn_table_keep).w
 		bne.s	loc_F7D6
 		lea	(Ring_status_table).w,a1
-		move.w	#$FF,d1
+		move.w	#(Ring_status_table_end-Ring_status_table)/4-1,d1
 
 loc_F7D0:
 		move.l	d0,(a1)+
@@ -120116,6 +120116,6 @@ Pachinko_128x128_Kos:
 Slots_16x16_Kos:
 ArtKosM_Slots:
 Slots_128x128_Kos:
-		org $200000
+	;	org $200000
 EndOfROM:
 		END

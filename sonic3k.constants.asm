@@ -245,7 +245,7 @@ Chunk_table			ds.b $8000		; chunk (128x128) definitions, $80 bytes per definitio
 Level_layout_header		ds.b 8			; first word = chunks per FG row, second word = chunks per BG row, third word = FG rows, fourth word = BG rows
 Level_layout_main		ds.b $FF8		; $40 word-sized line pointers followed by actual layout data
 Object_respawn_table_2 =	Level_layout_header+$400; $200 bytes ; respawn table used by glowing spheres bonus stage, because... Reasons?
-Ring_status_table_2 =		Level_layout_header+$600; $400 bytes ; rinng status table used by glowing spheres bonus stage, because... Reasons?
+Ring_status_table_2 =		Level_layout_header+$600; $300 bytes ; rinng status table used by glowing spheres bonus stage, because... Reasons?
 Block_table			ds.b $1800		; block (16x16) definitions, 8 bytes per definition, spece for $300 blocks
 SStage_collision_response_list = Block_table+$1400	; $100 bytes ; sprite collision list during a special stage
 SStage_unkA500 =		Block_table+$1500	; unknown special stage array
@@ -256,11 +256,13 @@ _unkA8E0 =			HScroll_table+$E0	; used in SSZ screen/background events
 Nem_code_table			ds.b $200		; code table is built up here and then used during decompression
 Sprite_table_input		ds.b $400		; 8 priority levels, $80 bytes per level
 
+			ds.b $660			; unused
+
 Object_RAM =			*			; $1FCC bytes ; $4A bytes per object, 110 objects
 Player_1			ds.b object_size	; main character in 1 player mode, player 1 in Competition mode
 Player_2			ds.b object_size	; Tails in a Sonic and Tails game, player 2 in Competition mode
 Reserved_object_3		ds.b object_size	; during a level, an object whose sole purpose is to clear the collision response list is stored here
-Dynamic_object_RAM		ds.b object_size*84	; $1A04 bytes ; 84 objects
+Dynamic_object_RAM		ds.b object_size*80	; $1A04 bytes ; 84 objects
 Dynamic_object_RAM_end =	*
 Level_object_RAM =		Dynamic_object_RAM_end	; $4EA bytes ; various fixed in-level objects		; unknown
 Breathing_bubbles		ds.b object_size	; for the main character
@@ -271,9 +273,9 @@ Tails_tails			ds.b object_size	; Tails' tails
 Dust				ds.b object_size
 Dust_P2				ds.b object_size
 Shield				ds.b object_size
-Shield_P2			ds.b object_size	; left over from Sonic 2 I'm guessing
+Shield_P2			;ds.b object_size	; left over from Sonic 2 I'm guessing
+Invincibility_stars_P2		;ds.b object_size*3
 Invincibility_stars		ds.b object_size*4
-Invincibility_stars_P2		ds.b object_size*3
 Wave_Splash			ds.b object_size	; Obj_HCZWaveSplash is loaded here
 Object_RAM_end =		*
 Object_clr_end =		*
@@ -287,9 +289,13 @@ Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
 Saved_data			ds.b $54		; saved data from 1 player mode
 Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
-Ring_status_table		ds.b $400		; 1 word per ring
+Ring_status_table		ds.b $300		; 1 word per ring
+Ring_status_table_end =		*
 Emerald_flicker_flag =		*			; controls the emerald flicker in save screen and special stage results.
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry
+
+DMA_queue			ds.w $12*7		; stores all the VDP commands necessary to initiate a DMA transfer
+DMA_queue_slot			ds.l 1			; points to the next free slot on the queue
 
 Camera_RAM =			*			; various camera and scroll-related variables are stored here
 H_scroll_amount			ds.w 1			; number of pixels camera scrolled horizontally in the last frame * $100
@@ -686,11 +692,6 @@ _unkFAF4			ds.w 1
 _unkFAF8			ds.w 1
 _unkFAFA			ds.w 1
 _unkFAFC			ds.w 1
-
-DMA_queue			ds.w $12*7		; stores all the VDP commands necessary to initiate a DMA transfer
-DMA_queue_slot			ds.l 1			; points to the next free slot on the queue
-
-			ds.b $310			; unused
 
 Restart_level_flag		ds.w 1
 Level_frame_counter		ds.w 1			; the number of frames which have elapsed since the level started

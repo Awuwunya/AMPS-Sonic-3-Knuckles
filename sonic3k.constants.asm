@@ -297,12 +297,9 @@ Stat_table =			*			; used by Tails' AI in a Sonic and Tails game
 Pos_table_P2			ds.b $100		; used by Player 2 in competition mode
 Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
-			ds.b $C				; unused
+Saved_data			ds.b $54		; saved data from 1 player mode
 Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
-			ds.w 1				; unused
 Emerald_flicker_flag		ds.w 1			; controls the emerald flicker in save screen and special stage results.
-			ds.b $44			; unused
-Saved_data			ds.b $54			; saved data from 1 player mode
 Ring_status_table		ds.b $400		; 1 word per ring
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry
 
@@ -421,6 +418,7 @@ _unkEEF4			ds.w 1			; used exclusively in SSZ background events code
 _unkEEF6			ds.l 1			; used exclusively in SSZ background events code
 _unkEEFA			ds.w 1			; used exclusively in SSZ background events code
 			ds.b $3E			; used in some instances (see above)
+			ds.b $52			; unused
 
 Spritemask_flag			ds.w 1			; when set, indicates that special sprites are used for sprite masking
 Use_normal_sprite_table		ds.w 1			; if this is set Sprite_table_buffer and Sprite_table_buffer_P2 will be DMAed instead of Sprite_table_buffer_2 and Sprite_table_buffer_P2_2

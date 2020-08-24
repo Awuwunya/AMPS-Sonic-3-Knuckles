@@ -16,24 +16,25 @@
 		include "sonic3k.macros.asm"		; include some simplifying macros and functions
 		include "sonic3k.constants.asm"		; include some constants
 ;		include "s3.constants.asm"		; Sonic 3 had different RAM mappings from Sonic & Knuckles. This is not the case with AMPS.
+		include	"ErrorDebugger/Debugger.asm"
 ; ---------------------------------------------------------------------------
 
-Vectors:	dc.l	Vectors,	EntryPoint,	ErrorTrap,	ErrorTrap	; 0
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 4
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 8
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 12
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 16
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 20
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 24
-		dc.l	JmpTo_HInt,	ErrorTrap,	VInt,		ErrorTrap	; 28
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 32
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 36
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 40
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 44
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 48
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 52
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 56
-		dc.l	ErrorTrap,	ErrorTrap,	ErrorTrap,	ErrorTrap	; 60
+Vectors:	dc.l 0, EntryPoint, BusError, AddressError
+		dc.l IllegalInstr, ZeroDivide, ChkInstr, TrapvInstr
+		dc.l PrivilegeViol, Trace, Line1010Emu,	Line1111Emu
+		dc.l ErrorExcept, ErrorExcept, ErrorExcept, ErrorExcept
+		dc.l ErrorExcept, ErrorExcept, ErrorExcept, ErrorExcept
+		dc.l ErrorExcept, ErrorExcept, ErrorExcept, ErrorExcept
+		dc.l ErrorExcept, ErrorTrap, ErrorTrap,	ErrorTrap
+		dc.l JmpTo_HInt, ErrorTrap, VInt, ErrorTrap
+		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
+		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
+		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
+		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
+		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
+		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
+		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
+		dc.l ErrorTrap,	ErrorTrap, ErrorTrap, ErrorTrap
 Header:		dc.b "SEGA GENESIS    "
 Copyright:	dc.b "(C)SEGA 1993.NOV"
 Domestic_Name:	dc.b "SONIC THE             HEDGEHOG 3                "
@@ -59,12 +60,6 @@ Unknown_Header:	dc.w 1
 		dc.l $2003FF
 		dc.b "                "
 Country_Code:	dc.b "U               "
-; ---------------------------------------------------------------------------
-
-ErrorTrap:
-		nop
-		nop
-		bra.s	ErrorTrap
 ; ---------------------------------------------------------------------------
 
 EntryPoint:
@@ -410,18 +405,6 @@ Test_Checksum:
 		beq.w	Test_Checksum_Done
 
 loc_6BC:
-		movea.l	#ErrorTrap,a0
-		movea.l	#ROMEndLoc,a1
-		move.l	(a1),d0
-		moveq	#0,d1
-		add.w	(a0)+,d1
-		cmp.l	a0,d0
-		nop
-		nop
-		movea.l	#$18E,a1
-		cmp.w	(a1),d1
-		nop
-		nop
 		lea	(System_stack).w,a6
 		moveq	#0,d7
 		move.w	#$7F,d6
@@ -537,7 +520,6 @@ loc_7F2:
 ; ---------------------------------------------------------------------------
 
 VInt:
-		nop
 		movem.l	d0-a6,-(sp)
 		tst.b	(V_int_routine).w
 		beq.w	VInt_0_Main
@@ -1693,7 +1675,6 @@ loc_1552:
 
 
 SndDrvInit:
-		nop
 		move.w	#$100,(Z80_bus_request).l
 		move.w	#$100,(Z80_reset).l
 		lea	(Z80_SoundDriver).l,a0
@@ -1812,7 +1793,6 @@ loc_1654:
 
 
 Pause_Game:
-		nop
 		tst.b	(Life_count).w
 		beq.w	Pause_Unpause
 		tst.w	(Game_paused).w
@@ -1840,7 +1820,6 @@ Pause_Loop:
 		btst	#6,(Ctrl_1_pressed).w
 		beq.s	Pause_ChkFrameAdvance
 		move.b	#$28,(Game_mode).w
-		nop
 		bra.s	Pause_ResumeMusic
 ; ---------------------------------------------------------------------------
 
@@ -2316,7 +2295,6 @@ Process_Nem_Queue_Init:
 		bne.s	locret_1A60
 		movea.l	(Nem_decomp_queue).w,a0
 		lea	(Nem_PCD_WriteRowToVDP).l,a3
-		nop
 		lea	(Nem_code_table).w,a1
 		move.w	(a0)+,d2
 		bpl.s	loc_1A2E
@@ -4571,12 +4549,6 @@ loc_384E:
 		move.l	#Obj_TitleTailsPlane,(Dynamic_object_RAM+(object_size*3)).w
 		moveq	#0,d0
 		bsr.w	Load_PLC_2
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
 		move.b	#0,(Title_anim_delay).w
 
 loc_38D8:
@@ -7303,9 +7275,8 @@ LoadWaterPalette:
 		beq.s	loc_5FD6
 		moveq	#$2E,d0
 		move.l	#WaterTransition_LBZ2,(Water_palette_data_addr).w
-		cmpi.w	#$601,(Current_zone_and_act).w
-		beq.s	loc_5FD6
-		nop
+	;	cmpi.w	#$601,(Current_zone_and_act).w
+	;	beq.s	loc_5FD6
 
 loc_5FD6:
 		move.w	d0,d1
@@ -15074,7 +15045,6 @@ locret_EA80:
 
 
 UpdateHUD:
-		nop
 		lea	(VDP_data_port).l,a6
 		tst.w	(Competition_mode).w
 		bne.w	loc_EBF2
@@ -15193,7 +15163,6 @@ loc_EBBA:
 		bne.s	locret_EBF0
 		lea	(Timer).w,a1
 		cmpi.l	#$93B3B,(a1)+
-		nop
 		addq.b	#1,-(a1)
 		cmpi.b	#$3C,(a1)
 		bcs.s	locret_EBF0
@@ -18361,7 +18330,6 @@ locret_11144:
 
 
 TouchResponse_CompetitionMode:
-		nop
 		move.w	$10(a0),d2
 		move.w	$14(a0),d3
 		subi.w	#4,d2
@@ -18375,7 +18343,6 @@ TouchResponse_CompetitionMode:
 ; ---------------------------------------------------------------------------
 
 TouchResponse:
-		nop
 		jsr	(Test_Ring_Collisions).l
 		bsr.w	ShieldTouchResponse
 		tst.b	$38(a0)
@@ -18715,7 +18682,6 @@ Touch_ChkHurt_HaveShield:
 ; ---------------------------------------------------------------------------
 
 Touch_Hurt:
-		nop
 		tst.b	$34(a0)
 		bne.s	Touch_ChkHurt_Return
 		movea.l	a1,a2
@@ -21100,7 +21066,6 @@ locret_12D4E:
 
 
 Player_SlopeRepel:
-		nop
 		tst.b	$3C(a0)
 		bne.s	locret_12D94
 		tst.w	$32(a0)
@@ -25605,7 +25570,6 @@ locret_15ED4:
 
 
 Tails_SlopeRepel:
-		nop
 		tst.b	$3C(a0)
 		bne.s	locret_15F10
 		tst.w	$32(a0)
@@ -78021,16 +77985,12 @@ ArtNem_EndingGraphics:
 ; ---------------------------------------------------------------------------
 		movea.l ObjB0(pc,d6.w),a6
 		jsr	(a6)
-		nop
-		nop
 		move	sr,d5
 		move.w	(sp),d6
 		andi.w	#$1F,d5
 		andi.w	#-$20,d6
 		or.w	d5,d6
 		move.w	d6,(sp)
-		nop
-		nop
 		rte
 ; ---------------------------------------------------------------------------
 
@@ -120147,6 +120107,9 @@ Gumball_8x8_KosM:
 		even
 Gumball_128x128_Kos:
 		binclude "Levels/Gumball/Chunks/Primary.bin"
+
+		include	"ErrorDebugger/ErrorHandler.asm"
+
 Pachinko_16x16_Kos:
 ArtKosM_Pachinko:
 Pachinko_128x128_Kos:

@@ -26,12 +26,14 @@ set AS_MSGPATH=AS\Win32
 set USEANSI=n
 
 REM // allow the user to choose to output error messages to file by supplying the -logerrors parameter
+"AMPS/Includer.exe" AS AMPS AMPS/.Data
 IF "%1"=="-logerrors" ( "AS\Win32\asw.exe" -xx -q -c -D Sonic3_Complete=1 -E -A -L sonic3k.asm ) ELSE "AS\Win32\asw.exe" -xx -q -c -D Sonic3_Complete=1 -A -L sonic3k.asm
 
 REM // if there were errors, a log file is produced
 IF "%1"=="-logerrors" ( IF EXIST sonic3k.log goto LABLERROR3 )
 
 REM // combine the assembler output into a rom
+"ErrorDebugger/ConvSym.exe" sonic3k.lst sonic3k.bin -input as_lst -a
 IF EXIST sonic3k.p "AS\Win32\s3p2bin" sonic3k.p sonic3k.bin sonic3k.h
 
 REM // done -- pause if we seem to have failed, then exit
@@ -64,5 +66,6 @@ echo.
 pause
 
 :LABLEXIT
+del AMPS\.Data
 popd
 exit /b

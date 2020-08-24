@@ -4377,7 +4377,7 @@ loc_35B2:
 		dbf	d1,loc_35B2
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_35C2:
 		move.l	d0,(a1)+
@@ -5357,7 +5357,7 @@ loc_47A4:
 		dbf	d1,loc_47A4
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_47B4:
 		move.l	d0,(a1)+
@@ -7420,7 +7420,7 @@ loc_618C:
 		dbf	d1,loc_618C
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_619C:
 		move.l	d0,(a1)+
@@ -8788,7 +8788,7 @@ loc_7500:
 		dbf	d1,loc_7500
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_7510:
 		move.l	d0,(a1)+
@@ -11160,7 +11160,7 @@ loc_957C:
 		dbf	d1,loc_957C
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_958C:
 		move.l	d0,(a1)+
@@ -11452,7 +11452,7 @@ loc_9A48:
 		dbf	d1,loc_9A48
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_9A58:
 		move.l	d0,(a1)+
@@ -12180,7 +12180,7 @@ loc_A1C2:
 		dbf	d1,loc_A1C2
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_A1D2:
 		move.l	d0,(a1)+
@@ -12603,7 +12603,7 @@ loc_A9F2:
 		dbf	d1,loc_A9F2
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_AA02:
 		move.l	d0,(a1)+
@@ -13074,7 +13074,7 @@ loc_AF76:
 		dbf	d1,loc_AF76
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_AF86:
 		move.l	d0,(a1)+
@@ -13854,7 +13854,7 @@ loc_B8DC:
 		dbf	d1,loc_B8DC
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_B8EC:
 		move.l	d0,(a1)+
@@ -28966,9 +28966,9 @@ locret_191D0:
 loc_191D2:	; this is broken?
 		moveq	#((Dynamic_object_RAM+object_size)-Object_RAM)/object_size-1,d7
 		bsr.s	sub_191C0
-		moveq	#((Level_object_RAM+object_size)-(Dynamic_object_RAM+object_size))/object_size-1,d7
+		moveq	#(Level_object_RAM-(Dynamic_object_RAM+object_size))/object_size-1,d7
 		bsr.s	sub_191DE
-		moveq	#(Object_RAM_end-(Level_object_RAM+object_size))/object_size-1,d7
+		moveq	#(Object_RAM_end-Level_object_RAM)/object_size-1,d7
 		bra.s	sub_191C0
 
 ; =============== S U B R O U T I N E =======================================
@@ -53617,7 +53617,7 @@ loc_2D260:
 		dbf	d1,loc_2D260
 		lea	(Object_RAM).w,a1
 		moveq	#0,d0
-		move.w	#(Kos_decomp_buffer-Object_RAM)/4-1,d1
+		move.w	#(Object_clr_end-Object_RAM)/4-1,d1
 
 loc_2D270:
 		move.l	d0,(a1)+

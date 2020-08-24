@@ -260,10 +260,9 @@ Object_RAM =			*			; $1FCC bytes ; $4A bytes per object, 110 objects
 Player_1			ds.b object_size	; main character in 1 player mode, player 1 in Competition mode
 Player_2			ds.b object_size	; Tails in a Sonic and Tails game, player 2 in Competition mode
 Reserved_object_3		ds.b object_size	; during a level, an object whose sole purpose is to clear the collision response list is stored here
-Dynamic_object_RAM		ds.b object_size*90	; $1A04 bytes ; 90 objects
+Dynamic_object_RAM		ds.b object_size*84	; $1A04 bytes ; 84 objects
 Dynamic_object_RAM_end =	*
-Level_object_RAM =		Dynamic_object_RAM_end	; $4EA bytes ; various fixed in-level objects
-		ds.b object_size			; unknown
+Level_object_RAM =		Dynamic_object_RAM_end	; $4EA bytes ; various fixed in-level objects		; unknown
 Breathing_bubbles		ds.b object_size	; for the main character
 Breathing_bubbles_P2		ds.b object_size	; for Tails in a Sonic and Tails game
 Super_stars =			*			; for Super Sonic and Super Knuckles
@@ -277,9 +276,19 @@ Invincibility_stars		ds.b object_size*4
 Invincibility_stars_P2		ds.b object_size*3
 Wave_Splash			ds.b object_size	; Obj_HCZWaveSplash is loaded here
 Object_RAM_end =		*
-			ds.b $14			; unused
 Conveyor_belt_load_array	ds.b $E			; each subtype of hcz conveyor belt uses a different byte to check if it's already loaded. Since they're so wide, the object loader may try loading them multiple times
-			ds.b $12			; unused
+Palette_cycle_counters		ds.b $C			; various counters and variables for palette cycles
+Level_trigger_array		ds.b $10		; used by buttons, etc.
+Anim_Counters			ds.b $10		; each word stores data on animated level art, including duration and current frame
+Object_clr_end =		*
+
+Target_water_palette		ds.b $80		; used by palette fading routines
+Water_palette			ds.b $80		; this is what actually gets displayed
+Water_palette_line_2 =		Water_palette+$20	; $20 bytes
+Water_palette_line_3 =		Water_palette+$40	; $20 bytes
+Water_palette_line_4 =		Water_palette+$60	; $20 bytes
+				ds.b $100		; stack contents
+System_stack =			*			; this is the top of the stack, it grows downwards
 
 Kos_decomp_buffer		ds.b $1000		; each module in a KosM archive is decompressed here and then DMAed to VRAM
 H_scroll_buffer			ds.b $380		; horizontal scroll table is built up here and then DMAed to VRAM
@@ -454,11 +463,6 @@ Demo_number			ds.w 1			; the currently running demo
 Ring_consumption_table =	*			; $80 bytes ; stores the addresses of all rings currently being consumed
 Ring_consumption_count		ds.w 1			; the number of rings being consumed currently
 Ring_consumption_list		ds.w $3F		; the remaining part of the ring consumption table
-Target_water_palette		ds.b $80		; used by palette fading routines
-Water_palette			ds.b $80		; this is what actually gets displayed
-Water_palette_line_2 =		Water_palette+$20	; $20 bytes
-Water_palette_line_3 =		Water_palette+$40	; $20 bytes
-Water_palette_line_4 =		Water_palette+$60	; $20 bytes
 Plane_buffer			ds.b $480		; used by level drawing routines
 VRAM_buffer			ds.b $80		; used to temporarily hold data while it is being transferred from one VRAM location to another
 
@@ -514,7 +518,7 @@ Water_speed			ds.b 1			; this is added to or subtracted from Mean_water_level ev
 Water_entered_counter		ds.b 1			; incremented when entering and exiting water, read by the the floating AIZ spike log, cleared on level initialisation and dynamic events of certain levels
 Water_full_screen_flag		ds.b 1			; set if water covers the entire screen (i.e. the underwater pallete should be DMAed during V-int rather than the normal palette)
 Do_Updates_in_H_int		ds.b 1			; if this is set Do_Updates will be called from H-int instead of V-int
-Palette_cycle_counters		ds.b $C			; various counters and variables for palette cycles
+			ds.b $C
 Palette_frame			ds.w 1
 Palette_timer			ds.b 1
 Super_palette_status		ds.b 1			 ; appears to be a flag for the palette's current status: '0' for 'off', '1' for 'fading', -1 for 'fading done'
@@ -635,8 +639,7 @@ Camera_X_pos_coarse_back	ds.w 1			; Camera_X_pos_coarse - $80
 _unkF7DC			ds.w 1
 Player_prev_frame_P2		ds.b 1			; used by DPLC routines to detect whether a DMA transfer is required
 Player_prev_frame_P2_tail	ds.b 1			; used by DPLC routines to detect whether a DMA transfer is required
-Level_trigger_array		ds.b $10		; used by buttons, etc.
-Anim_Counters			ds.b $10		; each word stores data on animated level art, including duration and current frame
+			ds.b $20
 
 Sprite_table_buffer		ds.b $280
 _unkFA80			ds.w 1			; unused
@@ -711,8 +714,7 @@ Target_palette			ds.b $80		; used by palette fading routines
 Target_palette_line_2 =		Target_palette+$20	; $20 bytes
 Target_palette_line_3 =		Target_palette+$40	; $20 bytes
 Target_palette_line_4 =		Target_palette+$60	; $20 bytes
-				ds.b $100		; stack contents
-System_stack =			*			; this is the top of the stack, it grows downwards
+			ds.b $100
 
 			ds.w 1				; unused
 Restart_level_flag		ds.w 1

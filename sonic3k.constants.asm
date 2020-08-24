@@ -276,19 +276,7 @@ Invincibility_stars		ds.b object_size*4
 Invincibility_stars_P2		ds.b object_size*3
 Wave_Splash			ds.b object_size	; Obj_HCZWaveSplash is loaded here
 Object_RAM_end =		*
-Conveyor_belt_load_array	ds.b $E			; each subtype of hcz conveyor belt uses a different byte to check if it's already loaded. Since they're so wide, the object loader may try loading them multiple times
-Palette_cycle_counters		ds.b $C			; various counters and variables for palette cycles
-Level_trigger_array		ds.b $10		; used by buttons, etc.
-Anim_Counters			ds.b $10		; each word stores data on animated level art, including duration and current frame
 Object_clr_end =		*
-
-Target_water_palette		ds.b $80		; used by palette fading routines
-Water_palette			ds.b $80		; this is what actually gets displayed
-Water_palette_line_2 =		Water_palette+$20	; $20 bytes
-Water_palette_line_3 =		Water_palette+$40	; $20 bytes
-Water_palette_line_4 =		Water_palette+$60	; $20 bytes
-				ds.b $100		; stack contents
-System_stack =			*			; this is the top of the stack, it grows downwards
 
 Kos_decomp_buffer		ds.b $1000		; each module in a KosM archive is decompressed here and then DMAed to VRAM
 H_scroll_buffer			ds.b $380		; horizontal scroll table is built up here and then DMAed to VRAM
@@ -299,8 +287,8 @@ Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
 Saved_data			ds.b $54		; saved data from 1 player mode
 Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
-Emerald_flicker_flag		ds.w 1			; controls the emerald flicker in save screen and special stage results.
 Ring_status_table		ds.b $400		; 1 word per ring
+Emerald_flicker_flag =		*			; controls the emerald flicker in save screen and special stage results.
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry
 
 Camera_RAM =			*			; various camera and scroll-related variables are stored here
@@ -418,7 +406,6 @@ _unkEEF4			ds.w 1			; used exclusively in SSZ background events code
 _unkEEF6			ds.l 1			; used exclusively in SSZ background events code
 _unkEEFA			ds.w 1			; used exclusively in SSZ background events code
 			ds.b $3E			; used in some instances (see above)
-			ds.b $52			; unused
 
 Spritemask_flag			ds.w 1			; when set, indicates that special sprites are used for sprite masking
 Use_normal_sprite_table		ds.w 1			; if this is set Sprite_table_buffer and Sprite_table_buffer_P2 will be DMAed instead of Sprite_table_buffer_2 and Sprite_table_buffer_P2_2
@@ -463,6 +450,20 @@ Ring_consumption_count		ds.w 1			; the number of rings being consumed currently
 Ring_consumption_list		ds.w $3F		; the remaining part of the ring consumption table
 Plane_buffer			ds.b $480		; used by level drawing routines
 VRAM_buffer			ds.b $80		; used to temporarily hold data while it is being transferred from one VRAM location to another
+
+Target_water_palette		ds.b $80		; used by palette fading routines
+Target_palette			ds.b $80		; used by palette fading routines
+Target_palette_line_2 =		Target_palette+$20	; $20 bytes
+Target_palette_line_3 =		Target_palette+$40	; $20 bytes
+Target_palette_line_4 =		Target_palette+$60	; $20 bytes
+Water_palette			ds.b $80		; this is what actually gets displayed
+Water_palette_line_2 =		Water_palette+$20	; $20 bytes
+Water_palette_line_3 =		Water_palette+$40	; $20 bytes
+Water_palette_line_4 =		Water_palette+$60	; $20 bytes
+Normal_palette			ds.b $80
+Normal_palette_line_2 =		Normal_palette+$20	; $20 bytes
+Normal_palette_line_3 =		Normal_palette+$40	; $20 bytes
+Normal_palette_line_4 =		Normal_palette+$60	; $20 bytes
 
 Game_mode			ds.b 1
 			ds.b 1				; unused
@@ -516,7 +517,7 @@ Water_speed			ds.b 1			; this is added to or subtracted from Mean_water_level ev
 Water_entered_counter		ds.b 1			; incremented when entering and exiting water, read by the the floating AIZ spike log, cleared on level initialisation and dynamic events of certain levels
 Water_full_screen_flag		ds.b 1			; set if water covers the entire screen (i.e. the underwater pallete should be DMAed during V-int rather than the normal palette)
 Do_Updates_in_H_int		ds.b 1			; if this is set Do_Updates will be called from H-int instead of V-int
-			ds.b $C
+Palette_cycle_counters		ds.b $C			; various counters and variables for palette cycles
 Palette_frame			ds.w 1
 Palette_timer			ds.b 1
 Super_palette_status		ds.b 1			 ; appears to be a flag for the palette's current status: '0' for 'off', '1' for 'fading', -1 for 'fading done'
@@ -542,20 +543,6 @@ Scroll_forced_X_pos		ds.w 1
 Scroll_forced_Y_pos		ds.w 1			; note: must be exactly 4 bytes after Scroll_forced_X_pos
 			ds.w 1				; unused
 
-Nem_decomp_queue		ds.b 6*$10		; 6 bytes per entry, first longword is source location and next word is VRAM destination
-Nem_decomp_source =		Nem_decomp_queue	; long ; the compressed data location for the first entry in the queue
-Nem_decomp_destination =	Nem_decomp_queue+4	; word ; destination in VRAM for the first entry in the queue
-Nem_decomp_vars =		*			; $20 bytes ; various variables used by the Nemesis decompression queue processor
-Nem_write_routine		ds.l 1			; points to either Nem_PCD_WriteRowToVDP or Nem_PCD_WriteRowToVDP_XOR
-Nem_repeat_count		ds.l 1			; stored repeat count for the current palette index
-Nem_palette_index		ds.l 1			; the current palette index
-Nem_previous_row		ds.l 1			; used in XOR mode
-Nem_data_word			ds.l 1			; contains the current compressed word being processed
-Nem_shift_value			ds.l 1			; the number of bits the data word needs to be shifted by
-Nem_patterns_left		ds.w 1			; the number of patterns remaining to be decompressed
-Nem_frame_patterns_left		ds.w 1			; the number of patterns remaining to be decompressed in the current frame
-			ds.l 1				; unused?
-
 Tails_CPU_interact		ds.w 1			; RAM address of the last object Tails stood on while controlled by AI
 Tails_CPU_idle_timer		ds.w 1			; counts down while controller 2 is idle, when it reaches 0 the AI takes over
 Tails_CPU_flight_timer		ds.w 1			; counts up while Tails is respawning, when it reaches 300 he drops into the level
@@ -569,9 +556,8 @@ Rings_manager_routine		ds.b 1
 Level_started_flag		ds.b 1
 _unkF712			ds.b $1C		; ??? ; unknown object respawn table
 AIZ1_palette_cycle_flag		ds.b 1			; selects which palette cycles are used in AIZ1
-			ds.b 1				; unused
 Water_flag			ds.b 1
-			ds.b $D				; unused
+Conveyor_belt_load_array	ds.b $E			; each subtype of hcz conveyor belt uses a different byte to check if it's already loaded. Since they're so wide, the object loader may try loading them multiple times
 Flying_carrying_Sonic_flag	ds.b 1			; set when Tails carries Sonic in a Sonic and Tails game
 Flying_picking_Sonic_timer	ds.b 1			; until this is 0 Tails can't pick Sonic up
 _unkF740			ds.w 1
@@ -637,7 +623,8 @@ Camera_X_pos_coarse_back	ds.w 1			; Camera_X_pos_coarse - $80
 _unkF7DC			ds.w 1
 Player_prev_frame_P2		ds.b 1			; used by DPLC routines to detect whether a DMA transfer is required
 Player_prev_frame_P2_tail	ds.b 1			; used by DPLC routines to detect whether a DMA transfer is required
-			ds.b $20
+Level_trigger_array		ds.b $10		; used by buttons, etc.
+Anim_Counters			ds.b $10		; each word stores data on animated level art, including duration and current frame
 
 Sprite_table_buffer		ds.b $280
 _unkFA80			ds.w 1			; unused
@@ -699,22 +686,12 @@ _unkFAF4			ds.w 1
 _unkFAF8			ds.w 1
 _unkFAFA			ds.w 1
 _unkFAFC			ds.w 1
-			ds.w 1				; unused
 
 DMA_queue			ds.w $12*7		; stores all the VDP commands necessary to initiate a DMA transfer
 DMA_queue_slot			ds.l 1			; points to the next free slot on the queue
 
-Normal_palette			ds.b $80
-Normal_palette_line_2 =		Normal_palette+$20	; $20 bytes
-Normal_palette_line_3 =		Normal_palette+$40	; $20 bytes
-Normal_palette_line_4 =		Normal_palette+$60	; $20 bytes
-Target_palette			ds.b $80		; used by palette fading routines
-Target_palette_line_2 =		Target_palette+$20	; $20 bytes
-Target_palette_line_3 =		Target_palette+$40	; $20 bytes
-Target_palette_line_4 =		Target_palette+$60	; $20 bytes
-			ds.b $100
+			ds.b $310			; unused
 
-			ds.w 1				; unused
 Restart_level_flag		ds.w 1
 Level_frame_counter		ds.w 1			; the number of frames which have elapsed since the level started
 Debug_object			ds.b 1			; the current position in the debug mode object list
@@ -844,6 +821,20 @@ Kos_module_queue		ds.w 3*4		; 6 bytes per entry, first longword is source locati
 Kos_module_source =		Kos_module_queue	; long ; the compressed data location for the first module in the queue
 Kos_module_destination =	Kos_module_queue+4	; word ; the VRAM destination for the first module in the queue
 
+Nem_decomp_queue		ds.b 6*$10		; 6 bytes per entry, first longword is source location and next word is VRAM destination
+Nem_decomp_source =		Nem_decomp_queue	; long ; the compressed data location for the first entry in the queue
+Nem_decomp_destination =	Nem_decomp_queue+4	; word ; destination in VRAM for the first entry in the queue
+Nem_decomp_vars =		*			; $20 bytes ; various variables used by the Nemesis decompression queue processor
+Nem_write_routine		ds.l 1			; points to either Nem_PCD_WriteRowToVDP or Nem_PCD_WriteRowToVDP_XOR
+Nem_repeat_count		ds.l 1			; stored repeat count for the current palette index
+Nem_palette_index		ds.l 1			; the current palette index
+Nem_previous_row		ds.l 1			; used in XOR mode
+Nem_data_word			ds.l 1			; contains the current compressed word being processed
+Nem_shift_value			ds.l 1			; the number of bits the data word needs to be shifted by
+Nem_patterns_left		ds.w 1			; the number of patterns remaining to be decompressed
+Nem_frame_patterns_left		ds.w 1			; the number of patterns remaining to be decompressed in the current frame
+			ds.l 1				; unused?
+
 _unkFF7C			ds.w 1
 _unkFF7E			ds.w 1
 Level_select_repeat		ds.w 1			; delay counter for repeating the button press. Allows the menu move even when up/down is held down
@@ -911,16 +902,19 @@ Debug_mode_cheat_counter	ds.w 1			; progress entering debug mode cheat, unused
 Competition_mode		ds.w 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P1_character			ds.b 1			; Sonic 3 has a different address... So uh... Yes
 P2_character			ds.b 1			; Sonic 3 has a different address... So uh... Yes
-_dbgFFDC			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
-_dbgFFDD			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
-_dbgFFDE			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
-_dbgFFDF			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+			ds.l 1				; unused
 
 V_int_jump			ds.b 6			; contains an instruction to jump to the V-int handler
 V_int_addr =			V_int_jump+2		; long
 H_int_jump			ds.b 6			; contains an instruction to jump to the H-int handler
 H_int_addr =			H_int_jump+2		; long
 Checksum_string			ds.l 1			; set to 'SM&K' or 'init' once the checksum routine has run
+				ds.b $80		; stack contents
+System_stack =			*			; this is the top of the stack, it grows downwards
+_dbgFFDC =			*			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDD =			*			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDE =			*			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDF =			*			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
 
 .check =	(*)&$FFFFFF
 	if (.check>0)&(.check<$FF0000)
@@ -935,7 +929,7 @@ SStage_scalar_index_2		ds.w 1			; unknown scalar table index value
 SStage_scalar_result_0		ds.l 1			; unknown scalar table results values
 SStage_scalar_result_1		ds.l 1			; unknown scalar table results values
 SStage_scalar_result_2		ds.l 1			; unknown scalar table results values
-	ds.b $A
+		ds.b $A
 SStage_scalar_result_3		ds.l 1			; unknown scalar table results values
 Special_stage_anim_frame	ds.w 1			; special stage globe's current animation frame, $10 and higher is turning
 Special_stage_X_pos		ds.w 1
@@ -969,9 +963,8 @@ Special_stage_clear_routine	ds.b 1			; if set, the player can't jump
 Special_stage_emerald_timer	ds.b 1			; counts down when the emerald appears, when it reaches 0 the emerald sound plays
 Special_stage_interact		ds.w 1			; address of the last bumper touched, or the emerald at the end of the stage
 Special_stage_started		ds.b 1			; set when the player begins moving at the start of the stage
-			ds.b $2F			; unused
-SStage_extra_sprites :=		*			; some extra sprite info for special stages
-				ds.b $70		; Sonic 3 has a different address... So uh... Yes
+			ds.b 1				; unused
+SStage_extra_sprites		ds.b $70		; some extra sprite info for special stages
 
 	phase _unkF712+8
 CNZ_bumper_routine		ds.b 1			; left over from Sonic 2

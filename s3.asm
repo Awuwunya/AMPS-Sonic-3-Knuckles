@@ -421,7 +421,7 @@ Test_Checksum_Done:
 		bsr.w	DetectPAL
 		lea	($FF0000).l,a6
 		moveq	#0,d7
-		move.w	#$3F7F,d6
+		move.w	#(V_int_jump)/4-1,d6
 
 loc_716:
 		move.l	d7,(a6)+
@@ -4377,7 +4377,7 @@ loc_35E2:
 		jsr	(Init_SpriteTable).l
 		lea	(Normal_palette).w,a1
 		moveq	#0,d0
-		move.w	#$3F,d1
+		move.w	#($80)/4-1,d1
 
 loc_35F8:
 		move.l	d0,(a1)+

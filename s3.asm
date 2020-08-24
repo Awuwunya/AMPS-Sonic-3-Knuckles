@@ -83429,7 +83429,7 @@ loc_46ED4:
 		jsr	(CreateChild1_Normal).l
 		jmp	(BossDefeated_StopTimer).l
 ; ---------------------------------------------------------------------------
-word_46EFC:	dc.w  $FC2E, $FC34, $FC36, $FC3C
+word_46EFC:	dc.w Normal_palette_line_2+$0E, Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1C
 word_46F04:	dc.w   $644,  $240,   $20,  $644
 		dc.w   $888,  $AAA,  $EEE,  $AAA
 ObjDat3_46F14:	dc.l Map_AIZMiniboss
@@ -86172,7 +86172,8 @@ loc_48AEA:
 ; End of function sub_48A8C
 
 ; ---------------------------------------------------------------------------
-word_48B0A:	dc.w  $FC28, $FC2E, $FC32, $FC34, $FC36, $FC3A, $FC3C
+word_48B0A:	dc.w Normal_palette_line_2+$08, Normal_palette_line_2+$0E, Normal_palette_line_2+$12, Normal_palette_line_2+$14
+		dc.w Normal_palette_line_2+$16, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_48B18:	dc.w      4,     0,    $C,     8,   $20,  $826,  $624
 		dc.w   $AAA,  $AAA,  $888,  $AAA,  $EEE,  $888,  $AAA
 ObjDat3_48B34:	dc.l Map_HCZMiniboss
@@ -87615,7 +87616,7 @@ loc_49A5E:
 ; End of function sub_49A06
 
 ; ---------------------------------------------------------------------------
-word_49A72:	dc.w  $FC34, $FC36, $FC3C
+word_49A72:	dc.w Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1C
 word_49A78:	dc.w      6,   $20,  $624
 		dc.w   $EEE,  $EEE,  $EEE
 
@@ -91958,7 +91959,7 @@ loc_4C7D0:
 ; End of function sub_4C778
 
 ; ---------------------------------------------------------------------------
-word_4C7E4:	dc.w  $FC32, $FC34, $FC36, $FC3C
+word_4C7E4:	dc.w Normal_palette_line_2+$12, Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1C
 word_4C7EC:	dc.w    $60,   $20,   $20,  $640
 		dc.w   $888,  $EEE,  $EEE,  $AAA
 
@@ -93251,7 +93252,7 @@ loc_4D40E:
 ; End of function sub_4D3C6
 
 ; ---------------------------------------------------------------------------
-word_4D430:	dc.w  $FC24, $FC28, $FC36, $FC3E
+word_4D430:	dc.w Normal_palette_line_2+$04, Normal_palette_line_2+$08, Normal_palette_line_2+$16, Normal_palette_line_2+$1E
 word_4D438:	dc.w   $222,  $644,   $20,   $20
 		dc.w   $AAA,  $AAA,  $EEE,  $EEE
 
@@ -93374,12 +93375,14 @@ ChildObjDat_4D4F6:dc.w 4
 		dc.b $FC
 Pal_FBZMiniboss:binclude "Levels/FBZ/Palettes/S3 Miniboss.bin"
 		even
-word_4D540:	dc.w 4
+
+word_4D540:	palscriptptr .header, .data
 		dc.w 0
-		dc.l word_4D54A
-		dc.w 0
-word_4D54A:	dc.w $FC3E
-		dc.w      6,  $EEE,     0,  $644,     3, $FFF4
+.header	palscripthdr	Normal_palette_line_2+$1E, 1, 7-1
+
+.data	palscriptdata	1, $EEE
+	palscriptdata	4, $644
+	palscriptrun
 ; ---------------------------------------------------------------------------
 
 Obj_AB_1_FBZ_Laser_Boss:
@@ -93897,7 +93900,7 @@ locret_4DAE8:
 ; End of function sub_4DA98
 
 ; ---------------------------------------------------------------------------
-word_4DAEA:	dc.w  $FC38, $FC3A, $FC3C
+word_4DAEA:	dc.w Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_4DAF0:	dc.w   $866,  $644,   $20
 		dc.w   $EEE,  $EEE,  $EEE
 ObjDat3_4DAFC:	dc.l Map_FBZ2Subboss
@@ -94645,7 +94648,7 @@ loc_4E256:
 ; End of function sub_4E200
 
 ; ---------------------------------------------------------------------------
-word_4E260:	dc.w  $FC26, $FC28, $FC32, $FC3C
+word_4E260:	dc.w Normal_palette_line_2+$06, Normal_palette_line_2+$08, Normal_palette_line_2+$12, Normal_palette_line_2+$1C
 word_4E268:	dc.w    $2A,   $26,   $20,  $644
 		dc.w   $888,  $AAA,  $EEE,  $AAA
 ObjDat3_4E278:	dc.l Map_FBZEndBoss
@@ -95644,18 +95647,21 @@ ChildObjDat_4EB98:dc.w 3
 		dc.b 0
 Pal_ICZMiniboss:binclude "Levels/ICZ/Palettes/Miniboss.bin"
 		even
-word_4EBE2:	dc.w 4
+word_4EBE2:	palscriptptr .header, .data
 		dc.w 0
-		dc.l word_4EBEC
-		dc.w 0
-word_4EBEC:	dc.w $FC62
-		dc.w   $901,  $EEC,  $CC6,  $C80,  $C60,  $C40,  $A40,  $820,  $620,  $200,  $600,     7,  $EEC,  $CC6,  $C82,  $C80
-		dc.w   $C40,  $A40,  $820,  $820,  $200,  $600,     7,  $EEC,  $CC8,  $E82,  $C82,  $C40,  $C40,  $A20,  $820,  $200
-		dc.w   $600,     7,  $EEE,  $EC8,  $EA4,  $C82,  $C60,  $C40,  $A20,  $A20,  $400,  $600,     7,  $EEE,  $EC8,  $EA4
-		dc.w   $E82,  $C60,  $C40,  $C20,  $A20,  $400,  $600,     7,  $EEE,  $EC8,  $EA6,  $E82,  $C62,  $C40,  $C20,  $C20
-		dc.w   $600,  $800,     7,  $EEE,  $EE8,  $EC6,  $EA2,  $C80,  $C60,  $C20,  $C20,  $600,  $A00,     7,  $EEE,  $EEA
-		dc.w   $EC6,  $EA4,  $C82,  $C60,  $C40,  $C20,  $800,  $C00,     7,  $EEE,  $EEA,  $EC8,  $EA4,  $C82,  $C60,  $C40
-		dc.w   $E20,  $A00,  $C00,     7,  $EEE,  $EEA,  $EC8,  $EA4,  $C82,  $C60,  $C40,  $E20,  $A00,  $E00,     7, $FFF4
+
+.header	palscripthdr	Normal_palette_line_4+$02, 10, 2-1
+.data	palscriptdata	8, $EEC, $CC6, $C80, $C60, $C40, $A40, $820, $620, $200, $600
+	palscriptdata	8, $EEC, $CC6, $C82, $C80, $C40, $A40, $820, $820, $200, $600
+	palscriptdata	8, $EEC, $CC8, $E82, $C82, $C40, $C40, $A20, $820, $200, $600
+	palscriptdata	8, $EEE, $EC8, $EA4, $C82, $C60, $C40, $A20, $A20, $400, $600
+	palscriptdata	8, $EEE, $EC8, $EA4, $E82, $C60, $C40, $C20, $A20, $400, $600
+	palscriptdata	8, $EEE, $EC8, $EA6, $E82, $C62, $C40, $C20, $C20, $600, $800
+	palscriptdata	8, $EEE, $EE8, $EC6, $EA2, $C80, $C60, $C20, $C20, $600, $A00
+	palscriptdata	8, $EEE, $EEA, $EC6, $EA4, $C82, $C60, $C40, $C20, $800, $C00
+	palscriptdata	8, $EEE, $EEA, $EC8, $EA4, $C82, $C60, $C40, $E20, $A00, $C00
+	palscriptdata	8, $EEE, $EEA, $EC8, $EA4, $C82, $C60, $C40, $E20, $A00, $E00
+	palscriptrun
 ; ---------------------------------------------------------------------------
 
 Obj_ICZEndBoss:
@@ -96316,7 +96322,7 @@ sub_4F382:
 ; End of function sub_4F382
 
 ; ---------------------------------------------------------------------------
-word_4F38E:	dc.w  $FC34, $FC3C
+word_4F38E:	dc.w Normal_palette_line_2+$14, Normal_palette_line_2+$1C
 word_4F392:	dc.w    $20,  $644
 		dc.w   $EEE,  $AAA
 ObjDat3_4F39A:	dc.l Map_ICZEndBoss
@@ -97792,7 +97798,7 @@ sub_501E2:
 ; End of function sub_501E2
 
 ; ---------------------------------------------------------------------------
-word_501EE:	dc.w  $FC28, $FC3C
+word_501EE:	dc.w Normal_palette_line_2+$08, Normal_palette_line_2+$1C
 word_501F2:	dc.w    $26,   $20
 		dc.w   $EEE,  $EEE
 
@@ -100443,7 +100449,8 @@ sub_51D88:
 ; End of function sub_51D88
 
 ; ---------------------------------------------------------------------------
-word_51D94:	dc.w  $FC28, $FC2E, $FC30, $FC38, $FC3A, $FC3C
+word_51D94:	dc.w Normal_palette_line_2+$08, Normal_palette_line_2+$0E, Normal_palette_line_2+$10
+		dc.w Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_51DA0:	dc.w      8,    $A,     4,  $644,  $422,     0
 		dc.w   $888,  $666,  $AAA,  $AAA,  $EEE,  $EEE
 
@@ -100853,23 +100860,25 @@ Pal_SuperSonicEndPose:
 		even
 Map_SonicTailsEndPoses:
 		include "General/Ending/Map - Sonic Tails Ending Poses S3.asm"
-PalSPtr_LBZFinalBoss2_FadeIn:
-		dc.w 4
+PalSPtr_LBZFinalBoss2_FadeIn:	palscriptptr .header, .data
 		dc.w 0
-		dc.l PalScript_LBZFinalBoss2_FadeIn
+
+.header	palscripthdr	Normal_palette_line_4+$16, 4, 2-1
+.data	palscriptdata	16, $ECE, $E8A, $E48, $E46
+	palscriptdata	16, $CAC, $C68, $C46, $A44
+	palscriptdata	16, $A88, $A46, $824, $622
+	palscriptdata	16, $844, $622, $400, $200
+	palscriptrun
+
+PalSPtr_LBZFinalBoss2_FadeOut:	palscriptptr .header, .data
 		dc.w 0
-PalScript_LBZFinalBoss2_FadeIn:
-		dc.w $FC76
-		dc.w   $301,  $ECE,  $E8A,  $E48,  $E46,    $F,  $CAC,  $C68,  $C46,  $A44,    $F,  $A88,  $A46,  $824,  $622,    $F
-		dc.w   $844,  $622,  $400,  $200,    $F, $FFF4
-PalSPtr_LBZFinalBoss2_FadeOut:
-		dc.w 4
-		dc.w 0
-		dc.l PalScript_LBZFinalBoss2_FadeOut
-		dc.w 0
-PalScript_LBZFinalBoss2_FadeOut:dc.w $FC76
-		dc.w   $301,  $844,  $622,  $400,  $200,    $F,  $A88,  $A46,  $824,  $622,    $F,  $CAC,  $C68,  $C46,  $A44,    $F
-		dc.w   $ECE,  $E8A,  $E48,  $E46,    $F, $FFF4
+
+.header	palscripthdr	Normal_palette_line_4+$16, 4, 2-1
+.data	palscriptdata	16, $844, $622, $400, $200
+	palscriptdata	16, $A88, $A46, $824, $622
+	palscriptdata	16, $CAC, $C68, $C46, $A44
+	palscriptdata	16, $ECE, $E8A, $E48, $E46
+	palscriptrun
 ; ---------------------------------------------------------------------------
 
 Obj_HiddenMonitor:
@@ -108650,7 +108659,7 @@ loc_56880:
 ; End of function sub_5682E
 
 ; ---------------------------------------------------------------------------
-word_568A2:	dc.w  $FC38, $FC3A, $FC3C
+word_568A2:	dc.w Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
 word_568A8:	dc.w   $CAA,  $866,  $644
 		dc.w   $EEE,  $EEE,  $EEE
 ObjDat3_568B4:	dc.l Map_MGZMiniBoss
@@ -119286,52 +119295,139 @@ Map_HCZMinibossSplash:
 DPLC_HCZMinibossSplash:
 		include "Levels/HCZ/Misc Object Data/DPLC - Miniboss Splash.asm"
 Map_ICZEndBoss:	include "Levels/ICZ/Misc Object Data/Map - End Boss.asm"
-PalSPtr_CNZMinibossNormal:
-		dc.w 4
+PalSPtr_CNZMinibossNormal:	palscriptptr .header, .data
 		dc.w 0
-		dc.l PalScript_CNZMinibossNormal
+.header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+
+.data	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	6, $020
+	palscriptloop	.headr2
+
+.headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	4, $020
+	palscriptloop	.headr3
+
+.headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	2, $020
+	palscriptloop	.headr4
+
+.headr4	palscripthdr	Normal_palette_line_2+$14, 1, $B-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	1, $020
+	palscriptrun
+
+PalSPtr_CNZMinibossSparks:	palscriptptr .header, .data
 		dc.w 0
-PalScript_CNZMinibossNormal:
-		dc.w $FC34
-		dc.w      2,  $EEE,     0,  $A22,     0,   $20,     5, $FFF8,   $14, $FC34,     2,  $EEE,     0,  $A22,     0,   $20
-		dc.w      3, $FFF8,   $14, $FC34,     2,  $EEE,     0,  $A22,     0,   $20,     1, $FFF8,   $14, $FC34,    $A,  $EEE
-		dc.w      0,  $A22,     0,   $20,     0, $FFF4
-PalSPtr_CNZMinibossSparks:
-		dc.w 4
+.header	palscripthdr	Normal_palette_line_2+$14, 1, $31-1
+
+.data	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	1, $020
+	palscriptloop	.headr2
+
+.headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	2, $020
+	palscriptloop	.headr3
+
+.headr3	palscripthdr	Normal_palette_line_2+$14, 1, 4-1
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	4, $020
+	palscriptloop	.headr4
+
+.headr4	palscripthdr	Normal_palette_line_2+$14, 1, 2-1
+	palscriptdata	96, $020
+	palscriptloop	PalSPtr_CNZMinibossNormal.headr3
+
+PalSPtr_CNZMinibossOpen:	palscriptptr .header, .data
 		dc.w 0
-		dc.l PalScript_CNZMinibossSparks
-		dc.w 0
-PalScript_CNZMinibossSparks:
-		dc.w $FC34
-		dc.w    $30,  $EEE,     0,  $A22,     0,   $20,     0, $FFF8,   $14, $FC34,     2,  $EEE,     0,  $A22,     0,   $20
-		dc.w      1, $FFF8,   $14, $FC34,     3,  $EEE,     0,  $A22,     0,   $20,     3, $FFF8,   $14, $FC34,     1,   $20
-		dc.w    $5F, $FFF8, $FF94
-PalSPtr_CNZMinibossOpen:
-		dc.w 4
-		dc.w 0
-		dc.l PalScript_CNZMinibossOpen
-		dc.w 0
-PalScript_CNZMinibossOpen:
-		dc.w $FC34
-		dc.w      0,  $EEE,     0,  $A22,     0,   $20,     1,  $EEE,     0,  $A22,     0,   $20,     7,  $EEE,     0,  $A22
-		dc.w      0,   $20,     2, $FFFC
+.header	palscripthdr	Normal_palette_line_2+$14, 1, 0
+
+.data	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	2, $020
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	8, $020
+	palscriptdata	1, $EEE
+	palscriptdata	1, $A22
+	palscriptdata	3, $020
+	palscriptrept
+
 Map_CNZMiniboss:include "Levels/CNZ/Misc Object Data/Map - Miniboss.asm"
-word_16322C:	dc.w 4
+word_16322C:	palscriptptr .header, .data
 		dc.w 0
-		dc.l word_163236
+
+.header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+.data	palscriptdata	8, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr2
+
+.headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	6, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr3
+
+.headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	4, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr4
+
+.headr4	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	2, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr5
+
+.headr5	palscripthdr	Normal_palette_line_2+$14, 1, 0
+	palscriptdata	1, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptrept
+
+word_163298:	palscriptptr .header, .data
 		dc.w 0
-word_163236:	dc.w $FC34
-		dc.w      2,  $222,     7,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     2,  $222,     5,  $C22,     0,  $EE0
-		dc.w      0, $FFF8,   $14, $FC34,     2,  $222,     3,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     2,  $222
-		dc.w      1,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     0,  $222,     0,  $C22,     0,  $EE0,     0, $FFFC
-word_163298:	dc.w 4
-		dc.w 0
-		dc.l word_1632A2
-		dc.w 0
-word_1632A2:	dc.w $FC34
-		dc.w      2,  $222,     1,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     2,  $222,     3,  $C22,     0,  $EE0
-		dc.w      0, $FFF8,   $14, $FC34,     2,  $222,     5,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     2,  $222
-		dc.w      7,  $C22,     0,  $EE0,     0, $FFF8,   $14, $FC34,     4,  $222,     9,  $C22,     0,  $EE0,     0, $FFF4
+
+.header	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+.data	palscriptdata	2, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr2
+
+.headr2	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	4, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr3
+
+.headr3	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	6, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr4
+
+.headr4	palscripthdr	Normal_palette_line_2+$14, 1, 3-1
+	palscriptdata	8, $222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptloop	.headr5
+
+.headr5	palscripthdr	Normal_palette_line_2+$14, 1, 5-1
+	palscriptdata	10,$222
+	palscriptdata	1, $C22
+	palscriptdata	1, $EE0
+	palscriptrun
 ICZMiniboss_OrbAngleLookup:
 		dc.b    0,   1,   2,   4,   5,   6,   7,   8,   9,  $B,  $C,  $D,  $E,  $F, $10, $11
 		dc.b  $12, $13, $15, $16, $17, $18, $19, $1A, $1B, $1C, $1D, $1E, $1E, $1F, $20, $21

@@ -244,15 +244,15 @@ Chunk_table			ds.b $8000		; chunk (128x128) definitions, $80 bytes per definitio
 
 Level_layout_header		ds.b 8			; first word = chunks per FG row, second word = chunks per BG row, third word = FG rows, fourth word = BG rows
 Level_layout_main		ds.b $FF8		; $40 word-sized line pointers followed by actual layout data
-Object_respawn_table_2 :=	Level_layout_header+$400; $200 bytes ; respawn table used by glowing spheres bonus stage, because... Reasons?
-Ring_status_table_2 :=		Level_layout_header+$600; $400 bytes ; rinng status table used by glowing spheres bonus stage, because... Reasons?
+Object_respawn_table_2 =	Level_layout_header+$400; $200 bytes ; respawn table used by glowing spheres bonus stage, because... Reasons?
+Ring_status_table_2 =		Level_layout_header+$600; $400 bytes ; rinng status table used by glowing spheres bonus stage, because... Reasons?
 Block_table			ds.b $1800		; block (16x16) definitions, 8 bytes per definition, spece for $300 blocks
-SStage_collision_response_list := Block_table+$1400	; $100 bytes ; sprite collision list during a special stage
-SStage_unkA500 :=		Block_table+$1500	; unknown special stage array
-SStage_unkA600 :=		Block_table+$1600	; unknown special stage array
+SStage_collision_response_list = Block_table+$1400	; $100 bytes ; sprite collision list during a special stage
+SStage_unkA500 =		Block_table+$1500	; unknown special stage array
+SStage_unkA600 =		Block_table+$1600	; unknown special stage array
 HScroll_table			ds.b $200		; array of background scroll positions for the level. WARNING: some references are before this label
-_unkA880 :=			HScroll_table+$80	; used in SSZ screen/background events
-_unkA8E0 :=			HScroll_table+$E0	; used in SSZ screen/background events
+_unkA880 =			HScroll_table+$80	; used in SSZ screen/background events
+_unkA8E0 =			HScroll_table+$E0	; used in SSZ screen/background events
 Nem_code_table			ds.b $200		; code table is built up here and then used during decompression
 Sprite_table_input		ds.b $400		; 8 priority levels, $80 bytes per level
 
@@ -288,13 +288,11 @@ Pos_table_P2			ds.b $100		; used by Player 2 in competition mode
 Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
 			ds.b $C				; unused
-Save_pointer :=			*			; pointer to the active save slot in 1 player mode
-				ds.l 1			; Sonic 3 has a different address... So uh... Yes
+Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
 			ds.w 1				; unused
 Emerald_flicker_flag		ds.w 1			; controls the emerald flicker in save screen and special stage results.
 			ds.b $44			; unused
-Saved_data :=			*			; saved data from 1 player mode
-				ds.b $54		; Sonic 3 has a different address... So uh... Yes
+Saved_data			ds.b $54			; saved data from 1 player mode
 Ring_status_table		ds.b $400		; 1 word per ring
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry
 
@@ -852,17 +850,18 @@ Level_select_option		ds.w 1			; the current selected option in the level select
 Sound_test_sound		ds.w 1
 Title_screen_option		ds.b 1
 			ds.b 1				; unused
-_tempFF88		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+Current_zone_2P			ds.b 1			; left over from Sonic 2, used only in Sonic 3 Alone
+Current_act_2P			ds.b 1			; left over from Sonic 2, used only in Sonic 3 Alone
 Competition_mode_monitors	ds.b 1			; 0 = Enabled, FF = Disabled.
 Competition_mode_type		ds.b 1			; 0 = grand prix, 3 = match race, -1 = time attack
-_tempFF8C		ds.b 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+Options_menu_box		ds.b 1			; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
 			ds.b 1				; unused
 Total_bonus_countup		ds.w 1			; the total points to be added due to various bonuses this frame in the end of level results screen
 Level_music			ds.w 1
 Collected_special_ring_array	ds.l 1			; each bit indicates a special stage entry ring in the current zone
 Saved2_status_secondary		ds.b 1
 Respawn_table_keep		ds.b 1			; if set, respawn table is not reset during level load
-_tempFF98		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+_unkFF98			ds.w 1			; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
 Saved_apparent_zone_and_act	ds.w 1
 Saved2_apparent_zone_and_act	ds.w 1
 			ds.b 1				; unused
@@ -891,50 +890,36 @@ Title_anim_frame		ds.b 1			; title animation frame number
 			ds.b 1				; unused
 Next_extra_life_score		ds.l 1
 Next_extra_life_score_P2	ds.l 1			; left over from Sonic 2
-			ds.w 1				; unused
+Ending_demo_number		ds.w 1			; zone for the ending demos, unused
 Debug_P1_mappings		ds.l 1			; player 1 mappings while in debug mode
 Debug_P2_mappings		ds.w 1			; long! ; player 2 mappings while in debug mode
-Demo_mode_flag :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Next_demo_number :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Blue_spheres_stage_flag :=	*			; set if a Blue Sphere special stage is being run
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
+Demo_mode_flag			ds.w 1
+Next_demo_number		ds.w 1
+Blue_spheres_stage_flag		ds.b 1			; set if a Blue Sphere special stage is being run
 			ds.b 1				; unused
-V_blank_cycles :=		*			; the number of cycles between V-blanks
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Graphics_flags :=		*			; bit 7 set := English system, bit 6 set := PAL system
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
+V_blank_cycles			ds.w 1			; the number of cycles between V-blanks
+Graphics_flags			ds.b 1			; bit 7 set := English system, bit 6 set := PAL system
 			ds.b 1				; unused
-Debug_mode_flag :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
+Debug_mode_flag			ds.w 1
 			ds.l 1				; unused
-Level_select_flag :=		*
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
-Slow_motion_flag :=		*
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
-Debug_cheat_flag :=		*			; set if the debug cheat's been entered
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Level_select_cheat_counter :=	*			; progress entering level select cheat, unused
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Debug_mode_cheat_counter :=	*			; progress entering debug mode cheat, unused
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-Competition_mode :=		*
-				ds.w 1			; Sonic 3 has a different address... So uh... Yes
-P1_character :=			*			; 0 := Sonic, 1 := Tails, 2 := Knuckles
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
-P2_character :=			*
-				ds.b 1			; Sonic 3 has a different address... So uh... Yes
-			ds.l 1				; unused
+Level_select_flag		ds.b 1
+Slow_motion_flag		ds.b 1			; Sonic 3 has a different address... So uh... Yes
+Debug_cheat_flag		ds.w 1			; set if the debug cheat's been entered
+Level_select_cheat_counter	ds.w 1			; progress entering level select cheat, unused
+Debug_mode_cheat_counter	ds.w 1			; progress entering debug mode cheat, unused
+Competition_mode		ds.w 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
+P1_character			ds.b 1			; Sonic 3 has a different address... So uh... Yes
+P2_character			ds.b 1			; Sonic 3 has a different address... So uh... Yes
+_dbgFFDC			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDD			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDE			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
+_dbgFFDF			ds.b 1			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
 
-V_int_jump :=			*			; contains an instruction to jump to the V-int handler
-				ds.b 6			; Sonic 3 has a different address... So uh... Yes
-V_int_addr :=			V_int_jump+2		; long
-H_int_jump :=			*			; contains an instruction to jump to the H-int handler
-				ds.b 6			; Sonic 3 has a different address... So uh... Yes
-H_int_addr :=			H_int_jump+2		; long
-Checksum_string :=		*			; set to 'SM&K' once the checksum routine has run
-				ds.l 1			; Sonic 3 has a different address... So uh... Yes
+V_int_jump			ds.b 6			; contains an instruction to jump to the V-int handler
+V_int_addr =			V_int_jump+2		; long
+H_int_jump			ds.b 6			; contains an instruction to jump to the H-int handler
+H_int_addr =			H_int_jump+2		; long
+Checksum_string			ds.l 1			; set to 'SM&K' or 'init' once the checksum routine has run
 
 .check =	(*)&$FFFFFF
 	if (.check>0)&(.check<$FF0000)
@@ -986,6 +971,20 @@ Special_stage_started		ds.b 1			; set when the player begins moving at the start
 			ds.b $2F			; unused
 SStage_extra_sprites :=		*			; some extra sprite info for special stages
 				ds.b $70		; Sonic 3 has a different address... So uh... Yes
+
+	phase _unkF712+8
+CNZ_bumper_routine		ds.b 1			; left over from Sonic 2
+CNZ_bumper_unk			ds.b 1			; left over from Sonic 2 ; set only, never used again
+CNZ_visible_bumpers_start	ds.l 1			; left over from Sonic 2
+CNZ_Visible_bumpers_end		ds.l 1			; left over from Sonic 2
+CNZ_Visible_bumpers_start_P2	ds.l 1			; left over from Sonic 2
+CNZ_Visible_bumpers_end_P2	ds.l 1			; left over from Sonic 2
+
+	phase Stat_table+$12
+_unkE412			ds.w 1			; unused, but referenced in sphere test
+_unkE414			ds.w 1			; used in sphere test
+_unkE416			ds.w 1			; used in sphere test
+Sphere_test_address		ds.w 1			; address of the sphere test object
 	dephase
 ; ---------------------------------------------------------------------------
 ; Art tile stuff

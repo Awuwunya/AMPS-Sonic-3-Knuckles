@@ -15,7 +15,7 @@
 		include "sonic3k.macrosetup.asm"	; include a few basic macros
 		include "sonic3k.macros.asm"		; include some simplifying macros and functions
 		include "sonic3k.constants.asm"		; include some constants
-		include "s3.constants.asm"		; RAM addresses moved around between S3 and S&K
+;		include "s3.constants.asm"		; Sonic 3 had different RAM mappings from Sonic & Knuckles. This is not the case with AMPS.
 ; ---------------------------------------------------------------------------
 
 Vectors:	dc.l	Vectors,	EntryPoint,	ErrorTrap,	ErrorTrap	; 0

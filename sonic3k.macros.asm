@@ -250,3 +250,32 @@ palscriptloop	macro header
 palscriptrun	macro header
 	dc.w -$C
     endm
+
+    if 0=1
+; Macro for playing a command
+command		macro id
+	move.b #id,mQueue.w
+    endm
+
+; Macro for playing music
+music		macro id
+	move.b #id,mQueue+1.w
+    endm
+
+; Macro for playing sound effect
+sfx		macro id
+	move.b #id,mQueue+2.w
+    endm
+    endif
+
+; Macro for playing music
+music		macro id
+		moveq	#id,d0
+		jsr	play_music.w
+    endm
+
+; Macro for playing sound effect
+sfx		macro id
+		moveq	#id,d0
+		jsr	play_sfx.w
+    endm

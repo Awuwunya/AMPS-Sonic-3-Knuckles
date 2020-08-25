@@ -256,8 +256,6 @@ _unkA8E0 =			HScroll_table+$E0	; used in SSZ screen/background events
 Nem_code_table			ds.b $200		; code table is built up here and then used during decompression
 Sprite_table_input		ds.b $400		; 8 priority levels, $80 bytes per level
 
-			ds.b $660			; unused
-
 Object_RAM =			*			; $1FCC bytes ; $4A bytes per object, 110 objects
 Player_1			ds.b object_size	; main character in 1 player mode, player 1 in Competition mode
 Player_2			ds.b object_size	; Tails in a Sonic and Tails game, player 2 in Competition mode
@@ -273,9 +271,9 @@ Tails_tails			ds.b object_size	; Tails' tails
 Dust				ds.b object_size
 Dust_P2				ds.b object_size
 Shield				ds.b object_size
-Shield_P2			;ds.b object_size	; left over from Sonic 2 I'm guessing
-Invincibility_stars_P2		;ds.b object_size*3
+Shield_P2			ds.b object_size	; left over from Sonic 2 I'm guessing
 Invincibility_stars		ds.b object_size*4
+Invincibility_stars_P2		ds.b object_size*3
 Wave_Splash			ds.b object_size	; Obj_HCZWaveSplash is loaded here
 Object_RAM_end =		*
 Object_clr_end =		*
@@ -296,6 +294,8 @@ Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level 
 
 DMA_queue			ds.w $12*7		; stores all the VDP commands necessary to initiate a DMA transfer
 DMA_queue_slot			ds.l 1			; points to the next free slot on the queue
+
+			ds.b $540			; unused
 
 Camera_RAM =			*			; various camera and scroll-related variables are stored here
 H_scroll_amount			ds.w 1			; number of pixels camera scrolled horizontally in the last frame * $100
@@ -579,7 +579,6 @@ _unkF74B			ds.b 1
 _unkF74C			ds.w 1
 _unkF74E			ds.b 1
 Disable_wall_grab		ds.b 1			; if set, disables Knuckles wall grab
-			ds.b $10			; unused
 Max_speed			ds.w 1
 Acceleration			ds.w 1
 Deceleration			ds.w 1
@@ -598,10 +597,8 @@ Object_load_addr_front		ds.l 1			; the address inside the object placement data 
 Object_load_addr_back		ds.l 1			; the address inside the object placement data of the first object whose X pos is >= Camera_X_pos_coarse - $80
 Object_respawn_index_front	ds.w 1			; the object respawn table index for the object at Obj_load_addr_front
 Object_respawn_index_back	ds.w 1			; the object respawn table index for the object at Obj_load_addr_back
-			ds.b $16			; unused
 Pal_fade_delay			ds.w 1			; timer for palette fade routines
 Collision_addr			ds.l 1			; points to the primary or secondary collision data as appropriate
-			ds.b $10			; unused
 Boss_flag			ds.b 1			; set if a boss fight is going on
 			ds.b 5				; unused
 _unkF7B0			ds.b 4

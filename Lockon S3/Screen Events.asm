@@ -1,32 +1,3 @@
-
-AIZ1_WaterFGDeformDelta:
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-		dc.w  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.w   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,  0
-		dc.w   0,  0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-AIZ1_WaterBGDeformDelta:
-		dc.w   0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1,  1,  1
-		dc.w   1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1
-		dc.w   1,  1,  1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1
-		dc.w   1,  1,  1,  1,  1,  0, -1, -2, -2, -1,  0,  2,  2,  2,  2,  0
-		dc.w   0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1,  1,  1
-		dc.w   1,  0,  0,  0, -1, -1, -1, -1, -1, -1,  0,  0,  0,  1,  1,  1
-; ---------------------------------------------------------------------------
-
 Comp_ScreenInit:
 		jsr	(Update_CameraPositionP2).l
 		move.w	(Camera_X_pos_copy).w,d0
@@ -677,7 +648,7 @@ loc_23B0EE:
 		jsr	(ApplyDeformation3).l
 		move.l	a1,-(sp)
 		lea	(HScroll_table+$040).w,a1
-		lea	AIZ1_WaterFGDeformDelta(pc),a6
+		lea	AIZ1_WaterFGDeformDelta,a6
 		move.w	(Water_level).w,d0
 		subi.w	#$DE,d1
 		neg.w	d1
@@ -693,7 +664,7 @@ loc_23B0EE:
 		lea	(HScroll_table+$040).w,a2
 		lea	AIZ1_DeformArray(pc),a4
 		lea	(HScroll_table+$008).w,a5
-		lea	AIZ1_WaterBGDeformDelta(pc),a6
+		lea	AIZ1_WaterBGDeformDelta,a6
 		move.w	(Water_level).w,d0
 		sub.w	(Camera_Y_pos_copy).w,d0
 		add.w	(Camera_Y_pos_BG_copy).w,d0
@@ -838,7 +809,7 @@ AIZ2_ApplyDeform:
 		add.w	d0,d2
 
 loc_23B6CA:
-		lea	AIZ1_WaterFGDeformDelta(pc),a6
+		lea	AIZ1_WaterFGDeformDelta,a6
 		moveq	#$7E,d3
 
 loc_23B6D0:
@@ -880,7 +851,7 @@ loc_23B6D0:
 		add.w	d0,d2
 
 loc_23B73E:
-		lea	AIZ1_WaterBGDeformDelta(pc),a6
+		lea	AIZ1_WaterBGDeformDelta,a6
 		moveq	#$7E,d3
 
 loc_23B744:

@@ -284,9 +284,6 @@ Collision_response_list		ds.b $80		; only objects in this list are processed by 
 Stat_table =			*			; used by Tails' AI in a Sonic and Tails game
 Pos_table_P2			ds.b $100		; used by Player 2 in competition mode
 Pos_table 			ds.b $100		;
-Competition_saved_data		ds.b $54		; saved data from Competition Mode
-Saved_data			ds.b $54		; saved data from 1 player mode
-Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
 Ring_status_table		ds.b $380		; 1 word per ring
 Ring_status_table_end =		*
 Emerald_flicker_flag =		*			; controls the emerald flicker in save screen and special stage results.
@@ -294,6 +291,9 @@ Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level 
 
 DMA_queue			ds.w $12*7		; stores all the VDP commands necessary to initiate a DMA transfer
 DMA_queue_slot			ds.l 1			; points to the next free slot on the queue
+Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
+Competition_saved_data		ds.b $54		; saved data from Competition Mode
+Saved_data			ds.b $54		; saved data from 1 player mode
 
 Drvmem				ds.b $598		; this area is reserved for AMPS
 

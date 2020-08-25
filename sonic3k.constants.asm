@@ -454,18 +454,18 @@ Demo_number			ds.w 1			; the currently running demo
 Ring_consumption_table =	*			; $80 bytes ; stores the addresses of all rings currently being consumed
 Ring_consumption_count		ds.w 1			; the number of rings being consumed currently
 Ring_consumption_list		ds.w $3F		; the remaining part of the ring consumption table
+SStage_layout_buffer =		*			; $600 bytes ; yes, this area is used to for special stage layouts!
 Plane_buffer			ds.b $480		; used by level drawing routines
 VRAM_buffer			ds.b $80		; used to temporarily hold data while it is being transferred from one VRAM location to another
-
 Target_water_palette		ds.b $80		; used by palette fading routines
-Target_palette			ds.b $80		; used by palette fading routines
-Target_palette_line_2 =		Target_palette+$20	; $20 bytes
-Target_palette_line_3 =		Target_palette+$40	; $20 bytes
-Target_palette_line_4 =		Target_palette+$60	; $20 bytes
 Water_palette			ds.b $80		; this is what actually gets displayed
 Water_palette_line_2 =		Water_palette+$20	; $20 bytes
 Water_palette_line_3 =		Water_palette+$40	; $20 bytes
 Water_palette_line_4 =		Water_palette+$60	; $20 bytes
+Target_palette			ds.b $80		; used by palette fading routines
+Target_palette_line_2 =		Target_palette+$20	; $20 bytes
+Target_palette_line_3 =		Target_palette+$40	; $20 bytes
+Target_palette_line_4 =		Target_palette+$60	; $20 bytes
 Normal_palette			ds.b $80
 Normal_palette_line_2 =		Normal_palette+$20	; $20 bytes
 Normal_palette_line_3 =		Normal_palette+$40	; $20 bytes

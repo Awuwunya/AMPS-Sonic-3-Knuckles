@@ -90,18 +90,6 @@ clearRAM macro addr,length
     endif
     endm
 
-; tells the Z80 to stop, and waits for it to finish stopping (acquire bus)
-stopZ80 macro
-	move.w	#$100,(Z80_bus_request).l ; stop the Z80
-loop:	btst	#0,(Z80_bus_request).l
-	bne.s	loop ; loop until it says it's stopped
-    endm
-
-; tells the Z80 to start again
-startZ80 macro
-	move.w	#0,(Z80_bus_request).l    ; start the Z80
-    endm
-
 ; function to make a little-endian 16-bit pointer for the Z80 sound driver
 z80_ptr function x,(x)<<8&$FF00|(x)>>8&$7F|$80
 
@@ -251,31 +239,17 @@ palscriptrun	macro header
 	dc.w -$C
     endm
 
-    if 0=1
 ; Macro for playing a command
 command		macro id
+	move.b #id,mQueue+1.w
+    endm
+; Macro for playing music
+music		macro id
 	move.b #id,mQueue.w
     endm
 
-; Macro for playing music
-music		macro id
-	move.b #id,mQueue+1.w
-    endm
-
 ; Macro for playing sound effect
 sfx		macro id
-	move.b #id,mQueue+2.w
-    endm
-    endif
-
-; Macro for playing music
-music		macro id
-		moveq	#id,d0
-		jsr	play_music.w
-    endm
-
-; Macro for playing sound effect
-sfx		macro id
-		moveq	#id,d0
-		jsr	play_sfx.w
+	moveq	#id,d0
+	jsr	play_sfx.w
     endm

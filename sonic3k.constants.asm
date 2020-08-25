@@ -287,7 +287,7 @@ Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
 Saved_data			ds.b $54		; saved data from 1 player mode
 Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
-Ring_status_table		ds.b $300		; 1 word per ring
+Ring_status_table		ds.b $380		; 1 word per ring
 Ring_status_table_end =		*
 Emerald_flicker_flag =		*			; controls the emerald flicker in save screen and special stage results.
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry
@@ -295,7 +295,7 @@ Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level 
 DMA_queue			ds.w $12*7		; stores all the VDP commands necessary to initiate a DMA transfer
 DMA_queue_slot			ds.l 1			; points to the next free slot on the queue
 
-Drvmem				ds.b $618		; this area is reserved for AMPS
+Drvmem				ds.b $598		; this area is reserved for AMPS
 
 Camera_RAM =			*			; various camera and scroll-related variables are stored here
 H_scroll_amount			ds.w 1			; number of pixels camera scrolled horizontally in the last frame * $100

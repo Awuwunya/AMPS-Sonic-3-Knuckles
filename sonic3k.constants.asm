@@ -271,9 +271,9 @@ Tails_tails			ds.b object_size	; Tails' tails
 Dust				ds.b object_size
 Dust_P2				ds.b object_size
 Shield				ds.b object_size
-Shield_P2			ds.b object_size	; left over from Sonic 2 I'm guessing
+Shield_P2		;	ds.b object_size	; left over from Sonic 2 I'm guessing
+Invincibility_stars_P2	;	ds.b object_size*3
 Invincibility_stars		ds.b object_size*4
-Invincibility_stars_P2		ds.b object_size*3
 Wave_Splash			ds.b object_size	; Obj_HCZWaveSplash is loaded here
 Object_RAM_end =		*
 Object_clr_end =		*
@@ -295,7 +295,7 @@ Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level 
 DMA_queue			ds.w $12*7		; stores all the VDP commands necessary to initiate a DMA transfer
 DMA_queue_slot			ds.l 1			; points to the next free slot on the queue
 
-			ds.b $540			; unused
+			ds.b $668			; unused
 
 Camera_RAM =			*			; various camera and scroll-related variables are stored here
 H_scroll_amount			ds.w 1			; number of pixels camera scrolled horizontally in the last frame * $100

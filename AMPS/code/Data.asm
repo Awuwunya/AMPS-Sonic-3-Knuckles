@@ -67,7 +67,7 @@ MusicIndex:
 	ptrMusic Knuckles, $20, KnucklesK, $20, Invincibility, $20, InvincibilityK, $20
 	ptrMusic GotThroughAct, $00, Drowning, $20, GameOver, $00, Emerald, $00
 	ptrMusic ExtraLife, $00, ExtraLifeK, $00, TitleScreen, $00, TitleScreenK, $00
-	ptrMusic ALZ, $20, BPZ, $20, DPZ, $20, CGZ, $20, EMZ, $20, SpecialStage, $20
+	ptrMusic ALZ, $20, BPZ, $20, DPZ, $20, CGZ, $20, EMZ, $20, SpecialStage, $00
 	ptrMusic Gumball, $20, SlotMachine, $20, MagneticOrbs, $20, Continue, $00
 	ptrMusic DataSelect, $20, CompetitionMenu, $20, Ending, $00, EndingK, $00
 	ptrMusic Credits, $00, CreditsK, $00, SEGA, $00

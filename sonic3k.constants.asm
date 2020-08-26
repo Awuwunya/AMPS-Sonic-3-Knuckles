@@ -908,7 +908,7 @@ V_int_addr =			V_int_jump+2		; long
 H_int_jump			ds.b 6			; contains an instruction to jump to the H-int handler
 H_int_addr =			H_int_jump+2		; long
 Checksum_string			ds.l 1			; set to 'SM&K' or 'init' once the checksum routine has run
-				ds.b $100		; stack contents
+Stack_contents			ds.b $100		; stack contents
 System_stack =			*			; this is the top of the stack, it grows downwards
 _dbgFFDC =			*			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
 _dbgFFDD =			*			; seems like a leftover constant. Existed in Sonic 1 and Sonic 2 as well
@@ -1022,5 +1022,3 @@ ArtTile_Shield                        = $079C
 ArtTile_Shield_Sparks                 = $07BB
 ArtTile_DashDust                      = $07E0
 ArtTile_DashDust_P2                   = $07F0
-
-	dephase

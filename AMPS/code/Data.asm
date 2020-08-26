@@ -114,42 +114,6 @@ SoundIndex:
 	ptrSFX	0, UnknownPowerUp, UnknownPowerDown, UnknownRise, UnknownPlink
 	ptrSFX	0, UnknownOminous, UnknownRevving, UnknownFlutter
 
-sfx_Bonus =		sfx_SuperAlt
-sfx_Transform =		sfx_SuperTransform
-sfx_Signpost2P =	sfx_Signpost
-sfx_Rumble2 =		sfx_BigRumble
-sfx_Smash =		sfx_BridgeCollapse
-sfx_Zapper =		sfx_EnergyZap
-sfx_LidPop =		sfx_IceSpikes
-sfx_LaunchSpring =	sfx_SpringLatch
-sfx_GloopDrop =		sfx_MetalLand
-sfx_Elevator =		sfx_Rising
-sfx_TinyBumper =	sfx_SmallBumpers
-sfx_LargeBumper =	sfx_Bumper
-sfx_Stomp =		sfx_Thump
-sfx_Door =		sfx_DoorOpen
-sfx_SpikeRing =		sfx_MagneticSpike
-sfx_Flame =		sfx_FlamethrowerQuiet
-sfx_Fire =		sfx_FlamethrowerLoud
-sfx_ArrowFire =		sfx_Projectile
-sfx_ArrowStick =	sfx_LevelProjectile
-sfx_Saw =		sfx_UnknownSaw
-sfx_TrackLift =		sfx_ChainTick
-sfx_SpikeSwitch =	sfx_MagneticSpike
-sfx_DrawBridgeMove =	sfx_FlipBridge
-sfx_DrawBridgeDown =	sfx_BridgeCollapse
-sfx_Sparkle =		sfx_ElectricShield
-sfx_Helicopter =	sfx_Flying
-sfx_Leaves =		sfx_SandSplash
-sfx_Beep =		sfx_Switch
-sfx_Swap =		sfx_AllSpheres
-sfx_LargeLazer =	sfx_BossLazer
-sfx_LazerFloor =	sfx_EnergyZap
-sfx_PlatformKnock =	sfx_BalloonPlatform
-sfx_OilSlide =		sfx_SlideSkidQuiet
-sfx_MechaSonic =	sfx_MetalSpark
-sfx_Gloop =		sfx_WaveHover
-
 SFXcount =	__sfx-SFXoff		; number of intalled sound effects
 SFXlast =	__sfx
 ; ===========================================================================

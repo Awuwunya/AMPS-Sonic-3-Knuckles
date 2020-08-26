@@ -260,7 +260,7 @@ Object_RAM =			*			; $1FCC bytes ; $4A bytes per object, 110 objects
 Player_1			ds.b object_size	; main character in 1 player mode, player 1 in Competition mode
 Player_2			ds.b object_size	; Tails in a Sonic and Tails game, player 2 in Competition mode
 Reserved_object_3		ds.b object_size	; during a level, an object whose sole purpose is to clear the collision response list is stored here
-Dynamic_object_RAM		ds.b object_size*80	; $1A04 bytes ; 84 objects
+Dynamic_object_RAM		ds.b object_size*78	; $1A04 bytes ; 84 objects
 Dynamic_object_RAM_end =	*
 Level_object_RAM =		Dynamic_object_RAM_end	; $4EA bytes ; various fixed in-level objects		; unknown
 Breathing_bubbles		ds.b object_size	; for the main character
@@ -284,7 +284,7 @@ Collision_response_list		ds.b $80		; only objects in this list are processed by 
 Stat_table =			*			; used by Tails' AI in a Sonic and Tails game
 Pos_table_P2			ds.b $100		; used by Player 2 in competition mode
 Pos_table 			ds.b $100		;
-Ring_status_table		ds.b $380		; 1 word per ring
+Ring_status_table		ds.b $400		; 1 word per ring
 Ring_status_table_end =		*
 Emerald_flicker_flag =		*			; controls the emerald flicker in save screen and special stage results.
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry

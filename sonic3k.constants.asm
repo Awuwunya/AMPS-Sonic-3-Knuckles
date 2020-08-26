@@ -503,7 +503,7 @@ Palette_fade_index		ds.b 1			; colour to start fading from
 Palette_fade_count		ds.b 1			; the number of colours to fade
 Lag_frame_count			ds.w 1			; more specifically, the number of times V-int routine 0 has run. Reset at the end of a normal frame
 V_int_routine			ds.b 1
-			ds.b 1				; unused
+H_int_counter_last		ds.b 1			; last value for h-int counter
 Sprites_drawn			ds.b 1			; used to ensure the sprite limit isn't exceeded
 			ds.b 1				; unused
 Water_palette_data_addr		ds.l 1			; points to the water palette data for the current level

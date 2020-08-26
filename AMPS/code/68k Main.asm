@@ -312,18 +312,10 @@ dUpdateAllAMPS:
 		beq.s	.checkspeed		; if did not, branch
 		move.b	d2,mMasterVolPSG.w	; save new volume
 
-.ch :=	mPSG1					; start at PSG1
-	rept Mus_PSG				; do for all music PSG channels
-		or.b	d0,.ch.w		; tell the channel to update its volume
-.ch :=		.ch+cSize			; go to next channel
-	endm
-
 	if FEATURE_SFX_MASTERVOL
-.ch :=		mSFXPSG1			; start at SFX PSG1
-		rept SFX_PSG			; do for all SFX PSG channels
-			or.b	d0,.ch.w	; tell the channel to update its volume
-.ch :=			.ch+cSizeSFX		; go to next channel
-		endm
+		jsr	dReqVolUpPSG(pc)	; go request volume update for PSG
+	else
+		jsr	dReqVolUpMusicPSG(pc)	; only request music channels to update
 	endif
 ; ---------------------------------------------------------------------------
 ; This piece of code is used to emulate the Sonic 3 & Knuckles speed

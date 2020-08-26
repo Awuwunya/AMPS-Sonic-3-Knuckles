@@ -50,6 +50,7 @@ safe =	1
 	phase 0
 cFlags		ds.b 1		; various channel flags, see below
 cType		ds.b 1		; hardware type for the channel
+cSoundID =	*		; channel sound ID. SFX only. Used for continuous SFX
 cData		ds.l 1		; tracker address for the channel
 	if FEATURE_DACFMVOLENV=0
 cEnvPos =	*		; volume envelope position. PSG only

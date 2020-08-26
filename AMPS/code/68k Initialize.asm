@@ -14,7 +14,7 @@ LoadDualPCM:
 .z80
 		btst	#$00,$A11100.l		; check if Z80 has stopped
 		bne.s	.z80			; if not, wait more
-		jsr	Kos_Decomp		; decompress into z80 RAM
+		jsr	KosDec			; decompress into z80 RAM
 
 		moveq	#2,d0			; set flush timer for 60hz systems
 		btst	#6,ConsoleRegion.w	; is this a PAL Mega Drive?

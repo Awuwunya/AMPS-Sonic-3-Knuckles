@@ -197,6 +197,27 @@ dUpdateFreqDAC3:
 		AMPS_Debug_FreqDAC		; check if DAC frequency is in bounds
 	endif
 
+	if FEATURE_UNDERWATER
+		btst	#mfbWater,mFlags.w	; check if underwater mode is enabled
+		beq.s	.uwdone			; if not, skip
+		moveq	#$C,d3			; prepare frequency displacement to d3
+		tst.w	d2			; check frequency sign
+		bmi.s	.neg			; branch if negative
+
+		sub.w	d3,d2			; sub the frequency from actual freq
+		bcc.s	.uwdone			; if no underflow, branch
+		add.w	d3,d2			; add the displacement back (can't really do much atm)
+		bra.s	.uwdone
+
+.neg
+		add.w	d3,d2			; add the frequency to actual freq
+		bcc.s	.uwdone			; if no underflow, branch
+		add.w	d3,d2			; sub the displacement back (can't really do much atm)
+
+.uwdone
+	endif
+; ---------------------------------------------------------------------------
+
 	if FEATURE_SOUNDTEST
 		move.w	d2,cChipFreq(a1)	; save frequency to chip
 	endif
@@ -338,6 +359,13 @@ dUpdateVolDAC2:
 	endif
 		btst	#cfbInt,(a1)		; is the channel interrupted by SFX?
 		bne.s	locret_VolDAC		; if yes, do not update
+
+	if FEATURE_UNDERWATER
+		btst	#mfbWater,mFlags.w	; check if underwater mode is enabled
+		sne	d2			; if yes, set d2
+		and.b	#4,d2			; volume offset is either 0 or 4
+		add.b	d2,d1			; add to volume
+	endif
 
 		cmp.w	#$80,d1			; check if volume is out of range
 		bls.s	.nocap			; if not, branch

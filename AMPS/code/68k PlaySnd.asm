@@ -567,7 +567,6 @@ dPlaySnd_SFX:
 		moveq	#0,d0
 		move.b	(a2)+,d2		; load sound effect priority to d2
 		move.b	(a2)+,d0		; load number of SFX channels to d0
-		moveq	#cSizeSFX,d6		; prepare SFX channel size to d6
 
 .loopSFX
 		moveq	#0,d3

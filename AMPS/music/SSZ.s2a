@@ -6,10 +6,10 @@ SkySanctuary_Header:
 	sHeaderDAC	SkySanctuary_DAC1
 	sHeaderDAC	SkySanctuary_DAC2
 	sHeaderFM	SkySanctuary_FM1, $E8, $0D
+	sHeaderFM	SkySanctuary_FM5, $00, $15
+	sHeaderFM	SkySanctuary_FM4, $00, $1C
 	sHeaderFM	SkySanctuary_FM2, $00, $17
 	sHeaderFM	SkySanctuary_FM3, $00, $17
-	sHeaderFM	SkySanctuary_FM4, $00, $1C
-	sHeaderFM	SkySanctuary_FM5, $00, $15
 	sHeaderPSG	SkySanctuary_PSG1, $F4, $28, $00, vNone
 	sHeaderPSG	SkySanctuary_PSG2, $F4, $28, $00, vNone
 	sHeaderPSG	SkySanctuary_PSG3, $00, $10, $00, vNone

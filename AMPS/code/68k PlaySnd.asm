@@ -648,8 +648,9 @@ dPlaySnd_SFX:
 		AMPS_Debug_PlayTrackSFX2	; make sure the tracker address is valid
 	endif
 
-		move.b	d6,cSoundID(a1)		; save sound ID to channel
 		move.w	(a2)+,cPitch(a1)	; load pitch offset and channel volume
+		move.b	d6,cSoundID(a1)		; save sound ID to channel
+
 		tst.b	d5			; check if this channel is a PSG channel
 		bmi.s	.loop			; if is, skip over this
 		moveq	#$C0,d3			; set panning to centre

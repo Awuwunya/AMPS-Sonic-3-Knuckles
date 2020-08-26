@@ -74,11 +74,8 @@ locret_MuteFM:
 
 dUpdateVolFM_SFX:
 	if FEATURE_SFX_MASTERVOL=0
-		if FEATURE_DACFMVOLENV
-			btst	#cfbRest,(a1)	; check if channel is resting
-			bne.s	locret_MuteFM	; if is, do not update anything
-		endif
-
+		btst	#cfbRest,(a1)		; check if channel is resting
+		bne.s	locret_MuteFM		; if is, do not update anything
 		move.b	cVolume(a1),d1		; load FM channel volume to d1
 		ext.w	d1			; extend it to word
 		bra.s	dUpdateVolFM3		; do NOT add the master volume!
@@ -86,11 +83,8 @@ dUpdateVolFM_SFX:
 ; ---------------------------------------------------------------------------
 
 dUpdateVolFM:
-	if FEATURE_DACFMVOLENV
 		btst	#cfbRest,(a1)		; check if channel is resting
 		bne.s	locret_MuteFM		; if is, do not update anything
-	endif
-
 		move.b	mMasterVolFM.w,d1	; load FM master volume to d1
 		ext.w	d1			; extend to word
 
@@ -99,7 +93,6 @@ dUpdateVolFM:
 		add.w	d4,d1			; add channel volume to d1
 
 dUpdateVolFM3:
-	if FEATURE_DACFMVOLENV
 		moveq	#0,d4
 		move.b	cVolEnv(a1),d4		; load volume envelope ID to d4
 		beq.s	.ckflag			; if 0, check if volume update was needed
@@ -110,13 +103,10 @@ dUpdateVolFM3:
 .ckflag
 		btst	#cfbVol,(a1)		; test volume update flag
 		beq.s	locret_MuteFM		; branch if no volume update was requested
-	endif
 ; ---------------------------------------------------------------------------
 
 dUpdateVolFM2:
-	if FEATURE_DACFMVOLENV
 		bclr	#cfbVol,(a1)		; clear volume update flag
-	endif
 		btst	#cfbInt,(a1)		; is the channel interrupted by SFX?
 		bne.s	locret_MuteFM		; if yes, do not update
 
@@ -236,11 +226,6 @@ dAMPSnextFMSFX:
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	dAMPSdoPSGSFX, dAMPSnextFMSFX, 1; run modulation + portamento code
 		bsr.w	dUpdateFreqFM3		; send FM frequency to hardware
-
-	if FEATURE_DACFMVOLENV=0
-		bclr	#cfbVol,(a1)		; check if volume update is needed and clear bit
-		beq.s	.next			; if not, skip
-	endif
 		jsr	dUpdateVolFM_SFX(pc)	; update FM volume
 
 .next
@@ -270,11 +255,6 @@ dAMPSnextFMSFX:
 	dProcNote 1, 0				; reset necessary channel memory
 		bsr.w	dUpdateFreqFM		; send FM frequency to hardware
 	dKeyOnFM 1				; send key-on command to YM
-
-	if FEATURE_DACFMVOLENV=0
-		bclr	#cfbVol,(a1)		; check if volume update is needed and clear bit
-		beq.s	.noupdate		; if not, branch
-	endif
 		jsr	dUpdateVolFM_SFX(pc)	; update FM volume
 
 .noupdate
@@ -299,11 +279,6 @@ dAMPSnextFM:
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait dAMPSdoPSG, dAMPSnextFM, 0; run modulation + portamento code
 		bsr.w	dUpdateFreqFM2		; send FM frequency to hardware
-
-	if FEATURE_DACFMVOLENV=0
-		bclr	#cfbVol,(a1)		; check if volume update is needed and clear bit
-		beq.s	.next			; if not, skip
-	endif
 		jsr	dUpdateVolFM(pc)	; update FM volume
 
 .next
@@ -333,11 +308,6 @@ dAMPSnextFM:
 	dProcNote 0, 0				; reset necessary channel memory
 		bsr.s	dUpdateFreqFM		; send FM frequency to hardware
 	dKeyOnFM				; send key-on command to YM
-
-	if FEATURE_DACFMVOLENV=0
-		bclr	#cfbVol,(a1)		; check if volume update is needed and clear bit
-		beq.s	.noupdate		; if not, branch
-	endif
 		jsr	dUpdateVolFM(pc)	; update FM volume
 
 .noupdate

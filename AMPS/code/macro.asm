@@ -52,17 +52,12 @@ cFlags		ds.b 1		; various channel flags, see below
 cType		ds.b 1		; hardware type for the channel
 cSoundID =	*		; channel sound ID. SFX only. Used for continuous SFX
 cData		ds.l 1		; tracker address for the channel
-	if FEATURE_DACFMVOLENV=0
-cEnvPos =	*		; volume envelope position. PSG only
-	endif
+cStatPSG4 =	*		; PSG4 type value. PSG3 only
 cPanning	ds.b 1		; channel panning and LFO. FM and DAC only
 cDetune		ds.b 1		; frequency detune (offset)
 cPitch		ds.b 1		; pitch (transposition) offset
 cVolume		ds.b 1		; channel volume
 cTick		ds.b 1		; channel tick multiplier
-	if FEATURE_DACFMVOLENV=0
-cVolEnv =	*		; volume envelope ID. PSG only
-	endif
 cSample =	*		; channel sample ID, DAC only
 cVoice		ds.b 1		; YM2612 voice ID. FM only
 cDuration	ds.b 1		; current note duration
@@ -85,10 +80,8 @@ cPortaFreq	ds.w 1		; frequency offset for portamento
 cPortaDisp	ds.w 1		; frequency displacement per frame for portamento
 	endif
 
-	if FEATURE_DACFMVOLENV
 cVolEnv		ds.b 1		; volume envelope ID
 cEnvPos		ds.b 1		; volume envelope position
-	endif
 
 	if FEATURE_MODENV
 cModEnv		ds.b 1		; modulation envelope ID
@@ -106,12 +99,6 @@ cLoop		ds.b 3		; loop counter values
 		even
 cSizeSFX =	*		; size of each SFX track (this also sneakily makes sure the memory is aligned to word always. Additional loop counter may be added if last byte is odd byte)
 cPrio =		*-1		; sound effect channel priority. SFX only
-
-	if FEATURE_DACFMVOLENV
-cStatPSG4 =	cPanning	; PSG4 type value. PSG3 only
-	else
-cStatPSG4 =	*-2		; PSG4 type value. PSG3 only
-	endif
 ; ---------------------------------------------------------------------------
 
 cGateCur	ds.b 1		; number of frames until note-off. Music only

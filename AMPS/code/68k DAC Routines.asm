@@ -19,11 +19,6 @@ dAMPSnextDAC:
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	dAMPSdoFM, dAMPSnextDAC, 4; run modulation + portamento code
 		bsr.w	dUpdateFreqDAC		; if frequency needs changing, do it
-
-	if FEATURE_DACFMVOLENV=0
-		bclr	#cfbVol,(a1)		; check if volume update is needed and clear bit
-		beq.s	.next			; if not, skip
-	endif
 		bsr.w	dUpdateVolDAC		; update DAC volume
 
 .next
@@ -60,10 +55,6 @@ dAMPSnextDAC:
 		bsr.s	dNoteOnDAC2		; ''
 
 .ckvol
-	if FEATURE_DACFMVOLENV=0
-		bclr	#cfbVol,(a1)		; check if volume update is needed and clear bit
-		beq.s	.next2			; if not, skip
-	endif
 		bsr.w	dUpdateVolDAC		; update DAC volume
 
 .next2
@@ -262,11 +253,6 @@ dAMPSdoDACSFX:
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	dAMPSdoFMSFX, dAMPSdoFMSFX, 5; run modulation + portamento code
 		bsr.w	dUpdateFreqDAC2		; if frequency needs changing, do it
-
-	if FEATURE_DACFMVOLENV=0
-		bclr	#cfbVol,(a1)		; check if volume update is needed and clear bit
-		beq.s	.next			; if not, skip
-	endif
 		bsr.w	dUpdateVolDAC_SFX	; update DAC volume
 
 .next
@@ -302,10 +288,6 @@ dAMPSdoDACSFX:
 		bsr.w	dNoteOnDAC2		; ''
 
 .ckvol
-	if FEATURE_DACFMVOLENV=0
-		bclr	#cfbVol,(a1)		; check if volume update is needed and clear bit
-		beq.s	.next2			; if not, skip
-	endif
 		bsr.s	dUpdateVolDAC_SFX	; update DAC volume
 
 .next2
@@ -339,7 +321,6 @@ dUpdateVolDAC:
 		add.w	d4,d1			; add channel volume to d1
 
 dUpdateVolDAC3:
-	if FEATURE_DACFMVOLENV
 		moveq	#0,d4
 		move.b	cVolEnv(a1),d4		; load volume envelope ID to d4
 		beq.s	.ckflag			; if 0, check if volume update was needed
@@ -350,13 +331,10 @@ dUpdateVolDAC3:
 .ckflag
 		btst	#cfbVol,(a1)		; test volume update flag
 		beq.s	locret_VolDAC		; branch if no volume update was requested
-	endif
 ; ---------------------------------------------------------------------------
 
 dUpdateVolDAC2:
-	if FEATURE_DACFMVOLENV
 		bclr	#cfbVol,(a1)		; clear volume update flag
-	endif
 		btst	#cfbInt,(a1)		; is the channel interrupted by SFX?
 		bne.s	locret_VolDAC		; if yes, do not update
 

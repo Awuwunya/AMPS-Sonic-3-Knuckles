@@ -16,9 +16,9 @@ dAMPSnextPSGSFX:
 
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	.endm, -1, -1		; run modulation + portamento code
-		bsr.w	dUpdateFreqPSG3		; if frequency needs changing, do it
 
 .endm
+		bsr.w	dUpdateFreqPSG3		; if frequency needs changing, do it
 		jsr	dEnvelopePSG_SFX(pc)	; run envelope program
 
 .next
@@ -67,9 +67,9 @@ dAMPSnextPSG:
 	dGatePSG				; handle PSG-specific gate behavior
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	.endm, -1, -1		; run modulation + portamento code
-		bsr.w	dUpdateFreqPSG2		; if frequency needs changing, do it
 
 .endm
+		bsr.w	dUpdateFreqPSG2		; if frequency needs changing, do it
 		jsr	dEnvelopePSG(pc)	; run envelope program
 
 .next
@@ -248,8 +248,6 @@ dUpdateVolPSG:
 		bclr	#cfbVol,(a1)		; clear volume update flag
 		btst	#cfbInt,(a1)		; is channel interrupted by sfx?
 		bne.s	locret_UpdVolPSG	; if is, do not update
-		btst	#cfbRest,(a1)		; is this channel resting
-		bne.s	locret_UpdVolPSG	; if is, do not update
 
 		btst	#cfbHold,(a1)		; check if note is held
 		beq.s	.send			; if not, update volume
@@ -263,6 +261,13 @@ dUpdateVolPSG:
 ; ---------------------------------------------------------------------------
 
 .send
+	if FEATURE_UNDERWATER
+		btst	#mfbWater,mFlags.w	; check if underwater mode is enabled
+		sne	d2			; if yes, set d2
+		and.w	#$10,d2			; get $10 or $00
+		add.w	d2,d1			; add it to volume
+	endif
+
 		cmp.w	#$7F,d1			; check if volume is out of range
 		bls.s	.nocap			; if not, branch
 		spl	d1			; if positive (above $7F), set to $FF. Otherwise, set to $00

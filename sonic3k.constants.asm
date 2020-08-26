@@ -295,7 +295,7 @@ Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
 Saved_data			ds.b $54		; saved data from 1 player mode
 
-Drvmem				ds.b $598		; this area is reserved for AMPS
+Drvmem				ds.b $5A2		; this area is reserved for AMPS
 
 Camera_RAM =			*			; various camera and scroll-related variables are stored here
 H_scroll_amount			ds.w 1			; number of pixels camera scrolled horizontally in the last frame * $100
@@ -679,7 +679,6 @@ _unkFAC8			ds.w 1
 _unkFACC			ds.b 1
 _unkFACD			ds.b 1
 Pal_fade_delay2			ds.w 1			; timer for palette fade from white routine
-			ds.b $A				; unused
 Palette_rotation_custom		ds.l 1			; custom routine for palette rotation scripts
 Palette_rotation_data		ds.w 9			; data used by palette rotation scripts. Last word must always be 0
 _unkFAF0			ds.w 1

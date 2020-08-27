@@ -16,9 +16,9 @@ dAMPSnextPSGSFX:
 
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	.endm, -1, -1		; run modulation + portamento code
+		bsr.w	dUpdateFreqPSG3		; if frequency needs changing, do it
 
 .endm
-		bsr.w	dUpdateFreqPSG3		; if frequency needs changing, do it
 		jsr	dEnvelopePSG_SFX(pc)	; run envelope program
 
 .next
@@ -67,9 +67,9 @@ dAMPSnextPSG:
 	dGatePSG				; handle PSG-specific gate behavior
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	.endm, -1, -1		; run modulation + portamento code
+		bsr.w	dUpdateFreqPSG2		; if frequency needs changing, do it
 
 .endm
-		bsr.w	dUpdateFreqPSG2		; if frequency needs changing, do it
 		jsr	dEnvelopePSG(pc)	; run envelope program
 
 .next

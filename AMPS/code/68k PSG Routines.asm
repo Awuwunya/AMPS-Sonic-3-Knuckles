@@ -262,12 +262,15 @@ dUpdateVolPSG:
 
 .send
 	if FEATURE_UNDERWATER
+		btst	#cfbWater,(a1)		; check if underwater mode is disabled
+		bne.s	.uwdone			; if yes, skip
 		btst	#mfbWater,mFlags.w	; check if underwater mode is enabled
 		sne	d2			; if yes, set d2
 		and.w	#$10,d2			; get $10 or $00
 		add.w	d2,d1			; add it to volume
 	endif
 
+.uwdone
 		cmp.w	#$7F,d1			; check if volume is out of range
 		bls.s	.nocap			; if not, branch
 		spl	d1			; if positive (above $7F), set to $FF. Otherwise, set to $00

@@ -301,6 +301,9 @@ dPlaySnd_Music:
 		or.b	#1<<mfbNoPAL,mFlags.w	; disable PAL fix
 
 .noPAL
+		moveq	#1<<cfbWater,d3		; prepare extra flags
+		and.w	d4,d3			; and with loaded flags
+
 		move.b	(a2),d0			; load the PSG channel count to d0
 		ext.w	d0			; extend to word (later, its read from stack)
 		move.w	d0,-(sp)		; store in stack
@@ -310,9 +313,9 @@ dPlaySnd_Music:
 		moveq	#cSize,d6		; prepare channel size to d6
 		moveq	#1,d5			; prepare duration of 0 frames to d5
 
-		moveq	#(1<<cfbRun)|(1<<cfbVol),d2; prepare running tracker and volume flags into d2
 		moveq	#$C0,d1			; prepare panning value of centre to d1
-		move.w	#$100,d3		; prepare default DAC frequency to d3
+		moveq	#(1<<cfbRun)|(1<<cfbVol),d2; prepare running tracker and volume flags into d2
+		or.b	d3,d2			; or extra flags to d2
 ; ---------------------------------------------------------------------------
 
 		lea	mDAC1.w,a1		; start from DAC1 channel
@@ -326,7 +329,7 @@ dPlaySnd_Music:
 		move.b	d6,cStack(a1)		; reset channel stack pointer
 		move.b	d1,cPanning(a1)		; reset panning to centre
 		move.b	d5,cDuration(a1)	; reset channel duration
-		move.w	d3,cFreq(a1)		; reset channel base frequency
+		move.w	#$100,cFreq(a1)		; reset channel base frequency
 
 		move.l	a2,a3			; load music header position to a3
 		add.w	(a2)+,a3		; add tracker offset to a3
@@ -354,6 +357,7 @@ dPlaySnd_Music:
 
 		ext.w	d0			; convert byte to word (because of dbf)
 		moveq	#(1<<cfbRun)|(1<<cfbRest),d2; prepare running tracker and channel rest flags to d2
+		or.b	d3,d2			; or extra flags to d2
 
 .loopFM
 		move.b	d2,(a1)			; save channel flags
@@ -389,10 +393,11 @@ dPlaySnd_Music:
 		bmi.s	.finish			; if no PSG channels are loaded, branch
 	endif
 
-		moveq	#(1<<cfbRun)|(1<<cfbVol)|(1<<cfbRest),d2; prepare running tracker, resting and volume flags into d2
 		moveq	#2,d5			; prepare duration of 1 frames to d5
 		lea	dPSGtypeVals(pc),a4	; prepare PSG type value list into a4
 		lea	mPSG1.w,a1		; start from PSG1 channel
+		moveq	#(1<<cfbRun)|(1<<cfbVol)|(1<<cfbRest),d2; prepare running tracker, resting and volume flags into d2
+		or.b	d3,d2			; or extra flags to d2
 
 .loopPSG
 		move.b	d2,(a1)			; save channel flags
@@ -618,8 +623,11 @@ dPlaySnd_SFX:
 ; ---------------------------------------------------------------------------
 
 .clearCh
-		move.b	cSoundID(a1),d3		; load sound effect ID to d3
-		cmp.b	mContLast.w,d3		; check if this is the continuous sfx
+		move.b	mContLast.w,d3		; load continuous sound effect ID to d3
+		cmp.b	d6,d3			; check if the current sfx is continuous
+		beq.s	.skipcont		; if yes, we don't want to clear it
+
+		cmp.b	cSoundID(a1),d3		; check if the channel was continuous sfx
 		bne.s	.skipcont		; branch if nahh
 		clr.b	mContLast.w		; reset continuous sfx
 		clr.b	mContCtr.w		; stop any other channels asap
@@ -655,6 +663,7 @@ dPlaySnd_SFX:
 		moveq	#$C0,d3			; set panning to centre
 		move.b	d3,cPanning(a1)		; save to channel memory too
 
+		swap	d6			; store sound ID
 	CheckCue				; check that YM cue is valid
 	InitChYM				; prepare to write to channel
 	stopZ80
@@ -665,6 +674,7 @@ dPlaySnd_SFX:
 		cmp.w	#mSFXDAC1,a1		; check if this channel is a DAC channel
 		bne.s	.fm			; if not, branch
 		move.w	#$100,cFreq(a1)		; DAC default frequency is $100, NOT $000
+		swap	d6			; restore sound ID
 
 .loop
 		addq.w	#1,d1			; set channel as loaded
@@ -691,6 +701,7 @@ dPlaySnd_SFX:
 
 	;	st	(a0)			; write end marker
 	startZ80
+		swap	d6			; restore sound ID
 		dbf	d0,.loopSFX		; repeat for each requested channel
 		rts
 ; ===========================================================================

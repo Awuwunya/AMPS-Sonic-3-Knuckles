@@ -121,6 +121,7 @@ cfbHold		ds.b 1		; set if note is being held
 cfbMod		ds.b 1		; set if modulation is enabled
 cfbCond		ds.b 1		; set if condition is false
 cfbVol		ds.b 1		; set if channel should update volume
+cfbWater	ds.b 1		; set if underwater mode is disabled
 cfbRun =	$07		; set if channel is running a tracker
 ; ===========================================================================
 ; ---------------------------------------------------------------------------

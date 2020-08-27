@@ -118,6 +118,8 @@ dUpdateVolFM2:
 	if FEATURE_UNDERWATER
 		clr.w	d6			; clear d6 (so no underwater by default)
 
+		btst	#cfbWater,(a1)		; check if underwater mode is disabled
+		bne.s	.uwdone			; if yes, skip
 		btst	#mfbWater,mFlags.w	; check if underwater mode is enabled
 		beq.s	.uwdone			; if not, skip
 		move.b	(a4),d4			; load algorithm and feedback to d4

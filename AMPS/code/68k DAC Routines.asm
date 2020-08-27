@@ -189,6 +189,8 @@ dUpdateFreqDAC3:
 	endif
 
 	if FEATURE_UNDERWATER
+		btst	#cfbWater,(a1)		; check if underwater mode is disabled
+		bne.s	.uwdone			; if yes, skip
 		btst	#mfbWater,mFlags.w	; check if underwater mode is enabled
 		beq.s	.uwdone			; if not, skip
 		moveq	#$C,d3			; prepare frequency displacement to d3
@@ -339,12 +341,15 @@ dUpdateVolDAC2:
 		bne.s	locret_VolDAC		; if yes, do not update
 
 	if FEATURE_UNDERWATER
+		btst	#cfbWater,(a1)		; check if underwater mode is disabled
+		bne.s	.uwdone			; if yes, skip
 		btst	#mfbWater,mFlags.w	; check if underwater mode is enabled
 		sne	d2			; if yes, set d2
 		and.b	#4,d2			; volume offset is either 0 or 4
 		add.b	d2,d1			; add to volume
 	endif
 
+.uwdone
 		cmp.w	#$80,d1			; check if volume is out of range
 		bls.s	.nocap			; if not, branch
 		spl	d1			; if positive (above $7F), set to $FF. Otherwise, set to $00

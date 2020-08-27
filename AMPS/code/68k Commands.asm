@@ -458,8 +458,13 @@ dcsFreqNote:
 ; ---------------------------------------------------------------------------
 
 dcCont:
+		move.b	cSoundID(a1),d3		; load sound effect ID to d3
+		cmp.b	mContLast.w,d3		; check if this is the continuous sfx
+		bne.s	.skip			; if not, then don't keep repeating
 		subq.b	#1,mContCtr.w		; decrease continous loop counter
 		bpl.s	dcJump			; if positive, jump to routine
+
+.skip
 		clr.b	mContLast.w		; clear continous SFX ID
 		addq.w	#2,a2			; skip over jump offset
 		rts
@@ -856,6 +861,8 @@ dUpdateVoiceFM:
 	if FEATURE_UNDERWATER
 		clr.w	d6			; no underwater 4 u
 
+		btst	#cfbWater,(a1)		; check if underwater mode is disabled
+		bne.s	.uwdone			; if yes, skip
 		btst	#mfbWater,mFlags.w	; check if underwater mode is enabled
 		beq.s	.uwdone			; if not, skip
 		lea	dUnderwaterTbl(pc),a2	; get underwater table to a2

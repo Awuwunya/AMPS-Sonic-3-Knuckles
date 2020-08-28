@@ -264,11 +264,6 @@ dModulate	macro
 
 dGenLoops	macro	mode,jump,loop,type
 	if type>=0
-		if FEATURE_DACFMVOLENV=0
-			bclr	#cfbVol,(a1)	; check if volume update is needed and clear bit
-			beq.s	.noupdatevol	; if not, skip
-		endif
-
 		if type<2
 			jsr	dUpdateVolFM(pc); update FM volume
 		endif
@@ -410,10 +405,7 @@ dProcNote	macro	sfx, chan
 	if sfx=0
 		move.b	cGateMain(a1),cGateCur(a1); copy gate value
 	endif
-
-	if FEATURE_DACFMVOLENV|(chan=1)
-		clr.b	cEnvPos(a1)		; clear envelope position if PSG channel or FEATURE_DACFMVOLENV enabled
-	endif
+		clr.b	cEnvPos(a1)		; clear envelope position
 
 	if FEATURE_MODENV
 		clr.b	cModEnvPos(a1)		; clear modulation envelope position

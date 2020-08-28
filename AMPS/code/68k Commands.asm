@@ -642,10 +642,6 @@ dcSpecFM3:
 ; ---------------------------------------------------------------------------
 
 dcVolEnv:
-	if (FEATURE_DACFMVOLENV=0)&(safe=1)
-		AMPS_Debug_dcVolEnv		; display an error if an invalid channel attempts to load a volume envelope
-	endif
-
 		move.b	(a2)+,cVolEnv(a1)	; load the volume envelope ID
 		rts
 ; ===========================================================================
@@ -762,14 +758,9 @@ dcVoice:
 		move.b	(a2)+,d4		; load voice/sample/volume envelope from tracker to d4
 		move.b	d4,cVoice(a1)		; save to channel
 
-	if FEATURE_DACFMVOLENV
-		if safe=1
-			AMPS_Debug_dcVoiceEnv	; warn user if DAC & FM volume envelopes are enabled. This behaviour can be removed
-		endif				; for better integration of FM/DAC tracker code with PSG channels.
-	else
-		tst.b	cType(a1)		; check if this is a PSG channel
-		bmi.s	locret_Backup		; if is, skip
-	endif
+	if safe=1
+		AMPS_Debug_dcVoiceEnv		; warn user if DAC & FM volume envelopes are enabled. This behaviour can be removed
+	endif					; for better integration of FM/DAC tracker code with PSG channels.
 
 		btst	#ctbDAC,cType(a1)	; check if this is a DAC channel
 		bne.s	locret_Backup		; if is, skip

@@ -328,21 +328,12 @@ dUpdateAllAMPS:
 
 .checkspeed
 		jsr	dAMPSdoSFX(pc)		; run SFX before anything
-
 		btst	#mfbSpeed,mFlags.w	; check speed shoes flag
 		beq.s	.chkregion		; if not enabled, branch
 
-	if TEMPO_ALGORITHM		; Counter method
-		subq.b	#1,mSpeedAcc.w		; sub 1 from counter
-		bne.s	.chkregion		; if nonzero, branch
-		move.b	mSpeed.w,mSpeedAcc.w	; copy tempo again
-
-	else				; Overflow method
 		move.b	mSpeed.w,d3		; get tempo to d3
 		add.b	d3,mSpeedAcc.w		; add to accumulator
 		bcc.s	.chkregion		; if carry clear, branch
-	endif
-
 		bset	#mfbRunTwice,mFlags.w	; enable run twice flag
 ; ---------------------------------------------------------------------------
 ; Since PAL Mega Drive's run slower than NTSC, if we want the music to
@@ -380,16 +371,9 @@ dUpdateAllAMPS:
 ; better. You may choose this setting in the macro.asm file.
 ; ---------------------------------------------------------------------------
 
-	if TEMPO_ALGORITHM		; Counter method
-		subq.b	#1,mTempoAcc.w		; sub 1 from counter
-		bne.s	dAMPSdoDAC		; if nonzero, branch
-		move.b	mTempo.w,mTempoAcc.w	; copy tempo again
-
-	else				; Overflow method
 		move.b	mTempo.w,d3		; get tempo to d3
 		add.b	d3,mTempoAcc.w		; add to accumulator
 		bcc.s	dAMPSdoDAC		; if carry clear, branch
-	endif
 
 		bclr	#mfbRunTwice,mFlags.w	; clear run twice flag
 		bne.s	dAMPSdoDAC		; if was set before, save a bit of time

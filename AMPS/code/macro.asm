@@ -23,19 +23,13 @@ FEATURE_SFX_MASTERVOL =	0	; set to 1 to make SFX be affected by master volumes
 FEATURE_MODULATION =	1	; set to 1 to enable software modulation effect
 FEATURE_PORTAMENTO =	0	; set to 1 to enable portamento effect
 FEATURE_MODENV =	1	; set to 1 to enable modulation envelopes
-FEATURE_DACFMVOLENV =	1	; set to 1 to enable volume envelopes for FM & DAC channels
 FEATURE_UNDERWATER =	1	; set to 1 to enable underwater mode flag
 FEATURE_BACKUP =	1	; set to 1 to enable back-up channels. Used for the 1-up sound in Sonic 1, 2 and 3K
 FEATURE_BACKUPNOSFX =	1	; set to 1 to disable SFX while a song is backed up. Used for the 1-up sound
 FEATURE_FM6 =		1	; set to 1 to enable FM6 to be used in music
+FEATURE_QUEUESIZE =		4	; number of sound queue slots for the driver
 FEATURE_SOUNDTEST =	0	; set to 1 to enable changes which make AMPS compatible with custom sound test
 ; ---------------------------------------------------------------------------
-
-; Select the tempo algorithm
-; 0 = Overflow method
-; 1 = Counter method
-
-TEMPO_ALGORITHM =	0
 
 ; if safe mode is enabled (1), then the driver will attempt to find any issues
 ; if Vladik's error debugger is installed, then the error will be displayed
@@ -195,20 +189,20 @@ dPSG =		$C00011		; quick reference to PSG port
 mFlags		ds.b 1		; various driver flags, see below
 mCtrPal		ds.b 1		; frame counter fo 50hz fix
 mComm		ds.b 8		; communications bytes
+mMasterVolPSG	ds.b 1		; master volume for PSG channels
+mMasterVolDAC	ds.b 1		; master volume for DAC channels
 mMasterVolFM =	*		; master volume for FM channels
 mFadeAddr	ds.l 1		; fading program address
 mSpeed		ds.b 1		; music speed shoes tempo
 mSpeedAcc	ds.b 1		; music speed shoes tempo accumulator
 mTempo		ds.b 1		; music normal tempo
 mTempoAcc	ds.b 1		; music normal tempo accumulator
-mQueue		ds.b 3		; sound queue
-mMasterVolPSG	ds.b 1		; master volume for PSG channels
 mVctMus		ds.l 1		; address of voice table for music
-mMasterVolDAC	ds.b 1		; master volume for DAC channels
 mSpindash	ds.b 1		; spindash rev counter
 mContCtr	ds.b 1		; continous sfx loop counter
 mContLast	ds.b 1		; last continous sfx played
 mLastCue	ds.b 1		; last YM Cue the sound driver was accessing
+mQueue		ds.b FEATURE_QUEUESIZE; sound queue
 	if 1&(*)
 		ds.b 1		; even's are broke in 64-bit values?
 	endif			; align data

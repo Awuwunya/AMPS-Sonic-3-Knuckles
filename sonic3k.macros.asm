@@ -241,11 +241,11 @@ palscriptrun	macro header
 
 ; Macro for playing a command
 command		macro id
-	move.b #id,mQueue+1.w
+	move.b #id,mQueue.w
     endm
 ; Macro for playing music
 music		macro id
-	move.b #id,mQueue.w
+	move.b #id,mQueue+1.w
     endm
 
 ; Macro for playing sound effect

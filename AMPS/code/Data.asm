@@ -29,10 +29,6 @@
 		dc.b "MO"		; modulation enabled
 	endif
 
-	if FEATURE_DACFMVOLENV
-		dc.b "VE"		; FM & DAC volume envelope enabled
-	endif
-
 	if FEATURE_MODENV
 		dc.b "ME"		; modulation envelope enabled
 	endif

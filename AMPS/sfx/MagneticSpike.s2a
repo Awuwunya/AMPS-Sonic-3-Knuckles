@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$70
 	sHeaderCh	$01
-	sHeaderSFX	$80, ctFM3, .FM3, $13, $09
+	sHeaderSFX	(1<<cfbRun), ctFM3, .FM3, $13, $09
 
 .FM3:
 	sVoice		pMagneticSpike

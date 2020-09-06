@@ -109,8 +109,8 @@ cSize =		*		; size of each music track
 
 cfbInt =	$00		; set if interrupted by SFX. Music only. Must be bit 0
 cfbHold =	$01		; set if note is being held. Must be bit 1
-cfbMode =	$02		; set if in pitch mode, clear if in sample mode. DAC only. Must be bit 2
 cfbRest =	$02		; set if channel is resting. FM and PSG only. Must be bit 2
+cfbMode =	$02		; set if in pitch mode, clear if in sample mode. DAC only. Must be bit 2
 	phase cfbRest+1
 cfbMod		ds.b 1		; set if modulation is enabled
 cfbCond		ds.b 1		; set if condition is false

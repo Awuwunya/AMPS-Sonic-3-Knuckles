@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$6D
 	sHeaderCh	$01
-	sHeaderSFX	$80, ctFM3, .FM3, $F0, $0D
+	sHeaderSFX	(1<<cfbRun), ctFM3, .FM3, $F0, $0D
 
 .FM3:
 	sVoice		pFanSmall

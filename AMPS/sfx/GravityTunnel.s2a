@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$6D
 	sHeaderCh	$01
-	sHeaderSFX	$80, ctFM3, .FM3, $04, $18
+	sHeaderSFX	(1<<cfbRun), ctFM3, .FM3, $04, $18
 
 .FM3:
 	sVoice		pGravityTunnel

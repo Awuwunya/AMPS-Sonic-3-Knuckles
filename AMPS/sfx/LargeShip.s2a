@@ -2,8 +2,8 @@
 	sHeaderInitSFX
 	sHeaderPrio	$6D
 	sHeaderCh	$02
-	sHeaderSFX	$80, ctFM3, .FM3, $00, $00
-	sHeaderSFX	$80, ctFM4, .FM4, $02, $00
+	sHeaderSFX	(1<<cfbRun), ctFM3, .FM3, $00, $00
+	sHeaderSFX	(1<<cfbRun), ctFM4, .FM4, $02, $00
 
 .FM4:
 	ssDetune	$90

@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$7D
 	sHeaderCh	$01
-	sHeaderSFX	$80, ctFM5, .FM5, $0A, $00
+	sHeaderSFX	(1<<cfbRun), ctFM5, .FM5, $0A, $00
 
 .FM5:
 	sVoice		pElectricShield

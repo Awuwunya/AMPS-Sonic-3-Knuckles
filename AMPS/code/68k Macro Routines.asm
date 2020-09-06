@@ -464,10 +464,16 @@ dTrackNoteDAC	macro
 ; Macro for doing keying-on FM channel
 ; ---------------------------------------------------------------------------
 
-dKeyOnFM	macro
-		move	(a1),ccr		; load flags into ccr
-		bls.s	.k			; branch if the channel interrupted by SFX or if channel is resting (cfbInt | cfbRest)
-		bvs.s	.k			; branch if note is held (cfbHold)
+dKeyOnFM	macro	sfx
+	if "sfx"==""
+		btst	#cfbInt,(a1)		; check if overridden by sfx
+		bne.s	.k			; if so, do not note on
+	endif
+
+		btst	#cfbHold,(a1)		; check if note is held
+		bne.s	.k			; if so, do not note on
+		btst	#cfbRest,(a1)		; check if channel is resting
+		bne.s	.k			; if so, do not note on
 
 		moveq	#$F0,d3			; turn all FM operators on
 		or.b	cType(a1),d3		; OR channel type bits to d3

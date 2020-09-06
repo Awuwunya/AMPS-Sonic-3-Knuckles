@@ -2,8 +2,8 @@
 	sHeaderInitSFX
 	sHeaderPrio	$6D
 	sHeaderCh	$02
-	sHeaderSFX	$80, ctFM3, .FM3, $00, $06
-	sHeaderSFX	$80, ctFM4, .FM4, $00, $06
+	sHeaderSFX	(1<<cfbRun), ctFM3, .FM3, $00, $06
+	sHeaderSFX	(1<<cfbRun), ctFM4, .FM4, $00, $06
 
 	; bug! Voice is never loaded for FM3 before notes are played
 	; this will result in bugs.

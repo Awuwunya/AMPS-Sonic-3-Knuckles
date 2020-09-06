@@ -2,9 +2,9 @@
 	sHeaderInitSFX
 	sHeaderPrio	$7D
 	sHeaderCh	$03
-	sHeaderSFX	$80, ctFM3, .FM3, $F5, $08
-	sHeaderSFX	$80, ctFM4, .FM4, $00, $00
-	sHeaderSFX	$80, ctFM5, .FM5, $00, $00
+	sHeaderSFX	(1<<cfbRun), ctFM3, .FM3, $F5, $08
+	sHeaderSFX	(1<<cfbRun), ctFM4, .FM4, $00, $00
+	sHeaderSFX	(1<<cfbRun), ctFM5, .FM5, $00, $00
 
 .FM5:
 	sVoice		pRegister1

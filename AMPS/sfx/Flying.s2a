@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$78
 	sHeaderCh	$01
-	sHeaderSFX	$80, ctFM4, .FM4, $0A, $0B
+	sHeaderSFX	(1<<cfbRun), ctFM4, .FM4, $0A, $0B
 
 .FM4:
 	sVoice		pFlying

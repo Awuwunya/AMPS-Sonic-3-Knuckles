@@ -2,4 +2,4 @@
 	sHeaderInitSFX
 	sHeaderPrio	$70
 	sHeaderCh	$01
-	sHeaderSFX	$80, ctFM3, sfxSlideSkid_FM3, $0A, $18
+	sHeaderSFX	(1<<cfbRun), ctFM3, sfxSlideSkid_FM3, $0A, $18

@@ -2,8 +2,8 @@
 	sHeaderInitSFX
 	sHeaderPrio	$6D
 	sHeaderCh	$02
-	sHeaderSFX	$80, ctFM3, .FM3, $00, $10
-	sHeaderSFX	$80, ctFM4, .FM4, $00, $0C
+	sHeaderSFX	(1<<cfbRun), ctFM3, .FM3, $00, $10
+	sHeaderSFX	(1<<cfbRun), ctFM4, .FM4, $00, $0C
 
 .FM3:
 	dc.b nRst, $04

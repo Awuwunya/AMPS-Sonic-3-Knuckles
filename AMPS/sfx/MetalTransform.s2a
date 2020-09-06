@@ -2,8 +2,8 @@
 	sHeaderInitSFX
 	sHeaderPrio	$70
 	sHeaderCh	$02
-	sHeaderSFX	$A1, ctPSG1, .PSG1, $0F, $18
-	sHeaderSFX	$A1, ctPSG2, .PSG2, $11, $20
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbVol)|(1<<cfbRest), ctPSG1, .PSG1, $0F, $18
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbVol)|(1<<cfbRest), ctPSG2, .PSG2, $11, $20
 
 .PSG1:
 	dc.b nRst, $03

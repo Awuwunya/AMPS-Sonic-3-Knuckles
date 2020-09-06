@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$70
 	sHeaderCh	$01
-	sHeaderSFX	$A1, ctPSG3, sfxWing_PSG3, $E1, $28
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbVol)|(1<<cfbRest), ctPSG3, sfxWing_PSG3, $E1, $28
 
 sfxWing_PSG3:
 	sNoisePSG	snWhitePSG3

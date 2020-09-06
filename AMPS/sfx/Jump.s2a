@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$7A
 	sHeaderCh	$01
-	sHeaderSFX	$A1, ctPSG1, .PSG1, $00, $00
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbVol)|(1<<cfbRest), ctPSG1, .PSG1, $00, $00
 
 .PSG1:
 	sVolEnv		v0D

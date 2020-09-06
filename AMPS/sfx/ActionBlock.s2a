@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$70
 	sHeaderCh	$01
-	sHeaderSFX	$A1, ctPSG2, .PSG2, $0C, $00
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbVol)|(1<<cfbRest), ctPSG2, .PSG2, $0C, $00
 
 .PSG2:
 	sModAMPS	$00, $01, $E6, $35

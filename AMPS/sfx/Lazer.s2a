@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$70
 	sHeaderCh	$01
-	sHeaderSFX	$C0, ctFM5, .FM5, $00, $03
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbWater), ctFM5, .FM5, $00, $03
 
 .FM5:
 	sVoice		pLazer

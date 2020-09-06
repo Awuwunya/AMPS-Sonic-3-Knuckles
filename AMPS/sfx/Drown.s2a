@@ -2,8 +2,8 @@
 	sHeaderInitSFX
 	sHeaderPrio	$7D
 	sHeaderCh	$02
-	sHeaderSFX	$C0, ctFM4, .FM4, $0C, $04
-	sHeaderSFX	$C0, ctFM5, .FM5, $0E, $02
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbWater), ctFM4, .FM4, $0C, $04
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbWater), ctFM5, .FM5, $0E, $02
 
 .FM5
 	sSpinReset

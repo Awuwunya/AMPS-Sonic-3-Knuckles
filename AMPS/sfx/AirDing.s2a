@@ -2,7 +2,7 @@
 	sHeaderInitSFX
 	sHeaderPrio	$7D
 	sHeaderCh	$01
-	sHeaderSFX	$C0, ctFM5, .FM5, $0C, $08
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbWater), ctFM5, .FM5, $0C, $08
 
 .FM5:
 	sVoice		pContinue

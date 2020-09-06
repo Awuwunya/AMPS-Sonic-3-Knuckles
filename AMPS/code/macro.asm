@@ -253,6 +253,7 @@ mBackSpeedAcc	ds.b 1		; back-up music speed shoes tempo accumulator
 mBackTempo	ds.b 1		; back-up music normal tempo
 mBackTempoAcc	ds.b 1		; back-up music normal tempo accumulator
 mBackVctMus	ds.l 1		; back-up address of voice table for music
+mBackFlags	ds.b 1		; back-up various driver flags, see below
 	endif
 ; ---------------------------------------------------------------------------
 

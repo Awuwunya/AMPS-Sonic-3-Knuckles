@@ -665,8 +665,12 @@ dcModEnv:
 dcBackup:
 	if FEATURE_BACKUP
 		addq.l	#4,sp			; stop the other channels from playing
-		btst	#mfbBacked,mFlags.w	; check if there is a backed up track
+		bclr	#mfbBacked,mFlags.w	; check if there is a backed up track
 		beq.w	dPlaySnd_Stop		; if not, just stop all music instead
+
+		moveq	#(1<<mfbSwap)|(1<<mfbSpeed)|(1<<mfbWater),d0; load flags mask
+		and.b	mFlags.w,d0		; AND with current flags
+		move.w	d0,-(sp)		; store into stack for now
 		jsr	dPlaySnd_Stop(pc)	; gotta do it anyway tho but continue below
 ; ---------------------------------------------------------------------------
 ; The reason we do fade in right here instead of later, is so we can update
@@ -678,6 +682,11 @@ dcBackup:
 
 		move.l	mBackSpeed.w,mSpeed.w	; restore tempo settings
 		move.l	mBackVctMus.w,mVctMus.w	; restore voice table address
+
+		moveq	#(1<<mfbNoPAL)|(1<<mfbExec)|(1<<mfbRunTwice),d0; load flags mask
+		and.b	mBackFlags.w,d0		; AND backup flags to d0
+		or.w	(sp)+,d0		; OR flags from original flags
+		move.b	d0,mFlags.w		; save into flags again
 
 		lea	mBackUpLoc.w,a4		; load source address to a4
 		lea	mBackUpArea.w,a3	; load destination address to a3

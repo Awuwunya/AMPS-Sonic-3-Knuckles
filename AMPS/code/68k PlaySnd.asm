@@ -248,6 +248,7 @@ dPlaySnd_Music:
 
 		move.l	mSpeed.w,mBackSpeed.w	; backup tempo settings
 		move.l	mVctMus.w,mBackVctMus.w	; backup voice table address
+		move.b	mFlags.w,mBackFlags.w	; backup flags
 
 		lea	mBackUpArea.w,a4	; load source address to a4
 		lea	mBackUpLoc.w,a3		; load destination address to a3

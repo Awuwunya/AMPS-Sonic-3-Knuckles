@@ -57,10 +57,10 @@ MusicIndex:
 	ptrMusic KnucklesP, $20, CompetitionMenuP, $20, CreditsP, $20, Unknown, $20
 
 	; Sonic 3D OST
-	ptrMusic GGZ1, $20, GGZ2, $20, RRZ1, $20, RRZ2, $20, VVZ1, $20, VVZ2, $20
-	ptrMusic SSZ1, $20, SSZ2, $20, DDZ1, $20, DDZ2, $20, GGX1, $20, GGX2, $20
-	ptrMusic PPZ1, $20, PPZ2, $20, Boss1, $20, Boss2, $20, Boss4, $20, FinalBossD, $20
-	ptrMusic InvincibilityD, $20, Intro, $00, MenuD, $20, EndingD, $00, CreditsD, $00
+	ptrMusic GGZ1, $20, GGZ2, $20, RRZ1, $20, RRZ2, $20, VVZ1, $20, VVZ2, $20, SSZ1, $20
+	ptrMusic SSZ2, $20, DDZ1, $20, DDZ2, $20, GGX1, $20, GGX2, $20, PPZ1, $20, PPZ2, $20
+	ptrMusic Boss1, $20, Boss2, $20, Boss4, $20, FinalBossD, $20, InvincibilityD, $20
+	ptrMusic SpecialStage, $20, Intro, $00, MenuD, $20, EndingD, $00, CreditsD, $00
 
 	; Sonic 3 OST
 	ptrMusic AIZ1, $20, AIZ2, $20, HCZ1, $20, HCZ2, $20, MGZ1, $20, MGZ2, $20

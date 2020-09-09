@@ -377,7 +377,7 @@ GreenGrove2_Call4:
 	dc.b nE5, $30
 	sModAMPS	$06, $01, $03, $05
 	dc.b $0C, nA5, nAb5, nG5
-	sModAMPS	$17, $01, $09, $07
+	sModAMPS	$00, $01, $03, $07
 	dc.b sHold, nG5, $60
 	sModAMPS	$06, $01, $03, $05
 	sCall		GreenGrove2_Call5

@@ -169,6 +169,7 @@ RustyRain1_FM5:
 	dc.b nRst, $10
 	sModAMPS	$00, $01, $01, $06
 	ssDetune	$01
+	sVoice		$03
 	sJump		RustyRain1_Loop1
 
 RustyRain1_FM1:

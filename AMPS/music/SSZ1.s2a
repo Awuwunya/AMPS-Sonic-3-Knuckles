@@ -192,7 +192,7 @@ SpringStadium1_Loop3:
 	dc.b $18, nA5, $30, nFs5, $10, nD5, $08, sHold
 	dc.b $24, nA5, $04, nB5, nC6, nD6, $18, nA5
 	dc.b nC6, $28, nB5, $04, nC6, nB5, $18, nBb5
-	dc.b sHold, nB5, $60, nRst, $18, nB5, $30, nAb5
+	dc.b nB5, $60, nRst, $18, nB5, $30, nAb5
 	dc.b $10, nE5, $08, sHold, $24, nB5, $04, nC6
 	dc.b nD6, nE6, $18, nB5, nC6, $06, nRst, $12
 	dc.b nD6, $06, nRst, $12, nC6, $10, nB5, $08
@@ -292,7 +292,7 @@ SpringStadium1_Loop4:
 	dc.b nRst, $18, nFs4, $30, nD4, $10, nA3, $08
 	dc.b sHold, $24, nFs4, $04, nG4, nA4, nA4, $18
 	dc.b nFs4, nA4, $28, nG4, $04, nA4, nG4, $18
-	dc.b nFs4, sHold, nG4, $60, nRst, $18, nAb4, $30
+	dc.b nFs4, nG4, $60, nRst, $18, nAb4, $30
 	dc.b nE4, $10, nB3, $08, sHold, $24, nAb4, $04
 	dc.b nA4, nB4, nB4, $18, nAb4, nA4, $06, nRst
 	dc.b $12, nB4, $06, nRst, $12, nA4, $10, nAb4

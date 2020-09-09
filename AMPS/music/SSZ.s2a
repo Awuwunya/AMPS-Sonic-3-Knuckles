@@ -241,7 +241,7 @@ SkySanctuary_Loop11:
 	saVol		$FF
 	dc.b nG5, $24, nEb6, nD6, $07, nRst, $05, nD6
 	dc.b $18, nG5, $54, nAb5, $24, nEb6, nD6, $07
-	dc.b nRst, $05, $18, nF6, $24, nEb6, $18, nD6
+	dc.b nRst, $05, nD6, $18, nF6, $24, nEb6, $18, nD6
 	dc.b nG5, $24, nEb6, nD6, $07, nRst, $05, nD6
 	dc.b $18, nG5, $54, nAb5, $24, nC6, nEb6, $18
 	dc.b nG6, nF6, $0C, nEb6, $18, nF6, $24, nC6
@@ -251,8 +251,8 @@ SkySanctuary_Loop11:
 	dc.b nC6, $54, $06, nE6, nF6, $24, nE6, $18
 	dc.b nC6, $24
 	saVol		$FF
-	dc.b nG6, $0C, nC6, $07, nRst, $05, $24, nC6
-	dc.b $0C, nG6, nC6, $07, nRst, $05, $0C, nC6
+	dc.b nG6, $0C, nC6, $07, nRst, $05, nC6, $24, nC6
+	dc.b $0C, nG6, nC6, $07, nRst, $05, nC6, $0C, nC6
 	dc.b nRst, nC6, nG6, nC6, nRst, nC6
 	saVol		$FF
 	dc.b nBb6, $24, nAb6, nG6, nF6, nEb6, $18, nF6

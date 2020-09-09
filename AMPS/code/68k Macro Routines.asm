@@ -465,15 +465,9 @@ dTrackNoteDAC	macro
 ; ---------------------------------------------------------------------------
 
 dKeyOnFM	macro	sfx
-	if "sfx"==""
-		btst	#cfbInt,(a1)		; check if overridden by sfx
-		bne.s	.k			; if so, do not note on
-	endif
-
-		btst	#cfbHold,(a1)		; check if note is held
-		bne.s	.k			; if so, do not note on
-		btst	#cfbRest,(a1)		; check if channel is resting
-		bne.s	.k			; if so, do not note on
+		moveq	#(1<<cfbInt)|(1<<cfbHold)|(1<<cfbRest),d3; check if overridden, note held, or resting
+		and.b	(a1),d3			; AND flags with d3
+		bne.s	.k			; if any of those are set, branch
 
 		moveq	#$F0,d3			; turn all FM operators on
 		or.b	cType(a1),d3		; OR channel type bits to d3
@@ -518,7 +512,6 @@ dGetFreqPSG	macro
 dStopChannel	macro	stop
 		tst.b	cType(a1)		; check if this was a PSG channel
 		bmi.s	.mutePSG		; if yes, mute it
-
 		btst	#ctbDAC,cType(a1)	; check if this was a DAC channel
 		bne.s	.muteDAC		; if we are, mute that
 

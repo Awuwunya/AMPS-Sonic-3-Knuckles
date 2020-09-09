@@ -227,7 +227,7 @@ dAMPSnextFMSFX:
 
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	dAMPSdoPSGSFX, dAMPSnextFMSFX, 1; run modulation + portamento code
-		bsr.w	dUpdateFreqFM3		; send FM frequency to hardware
+		bsr.w	dUpdateFreqFM2		; send FM frequency to hardware
 		jsr	dUpdateVolFM_SFX(pc)	; update FM volume
 
 .next
@@ -238,7 +238,7 @@ dAMPSnextFMSFX:
 .update
 		and.b	#$FF-(1<<cfbHold)-(1<<cfbRest),(a1); clear hold and rest flags
 	dDoTracker				; process tracker
-		jsr	dKeyOffFM2(pc)		; send key-off command to YM
+		jsr	dKeyOffFM(pc)		; send key-off command to YM
 
 		tst.b	d1			; check if note is being played
 		bpl.s	.timer			; if not, it must be a timer. Branch
@@ -342,16 +342,13 @@ dUpdateFreqFM:
 ; ---------------------------------------------------------------------------
 
 dUpdateFreqFM2:
-		btst	#cfbInt,(a1)		; is the channel interrupted by SFX?
-		bne.s	locret_UpdFreqFM	; if is, do not update frequency
-
-dUpdateFreqFM3:
 	if FEATURE_SOUNDTEST
 		move.w	d2,cChipFreq(a1)	; save frequency to chip
 	endif
 
-		btst	#cfbRest,(a1)		; is this channel resting
-		bne.s	locret_UpdFreqFM	; if is, skip
+		moveq	#(1<<cfbInt)|(1<<cfbRest),d3; check for if channel is interrupted or resting
+		and.b	(a1),d3			; and flags with d6
+		bne.s	locret_UpdFreqFM	; if either flag set, branch
 
 		move.w	d2,d3			; copy frequency to d3
 		lsr.w	#8,d3			; shift upper byte into lower byte
@@ -410,12 +407,10 @@ locret_GetFreqFM:
 ; ---------------------------------------------------------------------------
 
 dKeyOffFM:
-		btst	#cfbInt,(a1)		; check if overridden by sfx
-		bne.s	locret_UpdFreqFM	; if so, do not note off
+		moveq	#(1<<cfbInt)|(1<<cfbHold),d3; check for if channel is interrupted or note is held
+		and.b	(a1),d3			; and flags with d3
+		bne.s	.rts			; if either flag set, branch
 
-dKeyOffFM2:
-		btst	#cfbHold,(a1)		; check if note is held
-		bne.s	.rts			; if so, do not note off
 		move.b	cType(a1),d3		; load channel type value to d3
 		moveq	#$28,d4			; load key on/off to d4
 

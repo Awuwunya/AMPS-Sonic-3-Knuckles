@@ -1,0 +1,688 @@
+SpringStadium1_Header:
+	sHeaderInit						; Z80 offset is $D739
+	sHeaderTempo	$01, $00
+	sHeaderCh	$05, $03
+	sHeaderDAC	SpringStadium1_DAC1
+	sHeaderDAC	SpringStadium1_DAC2
+	sHeaderFM	SpringStadium1_FM1, $00, $0E
+	sHeaderFM	SpringStadium1_FM2, $E8, $13
+	sHeaderFM	SpringStadium1_FM3, $F4, $15
+	sHeaderFM	SpringStadium1_FM4, $00, $16
+	sHeaderFM	SpringStadium1_FM5, $00, $16
+	sHeaderPSG	SpringStadium1_PSG1, $DC, $38, $00, v11
+	sHeaderPSG	SpringStadium1_PSG2, $DC, $58, $00, v11
+	sHeaderPSG	SpringStadium1_PSG3, $00, $08, $00, vNone
+
+	; Patch $00
+	; $3A
+	; $20, $60, $23, $01,	$1E, $1F, $1F, $1F
+	; $0A, $0B, $0A, $0A,	$05, $0A, $07, $08
+	; $A4, $96, $85, $78,	$21, $28, $25, $80
+	spAlgorithm	$02
+	spFeedback	$07
+	spDetune	$02, $02, $06, $00
+	spMultiple	$00, $03, $00, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1E, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0A, $0A, $0B, $0A
+	spSustainLv	$0A, $08, $09, $07
+	spDecayRt	$05, $07, $0A, $08
+	spReleaseRt	$04, $05, $06, $08
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$21, $25, $28, $00
+
+	; Patch $01
+	; $2C
+	; $61, $03, $01, $33,	$5F, $94, $5F, $94
+	; $05, $05, $05, $07,	$02, $02, $02, $02
+	; $1F, $6F, $1F, $AF,	$1E, $80, $1E, $80
+	spAlgorithm	$04
+	spFeedback	$05
+	spDetune	$06, $00, $00, $03
+	spMultiple	$01, $01, $03, $03
+	spRateScale	$01, $01, $02, $02
+	spAttackRt	$1F, $1F, $14, $14
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$05, $05, $05, $07
+	spSustainLv	$01, $01, $06, $0A
+	spDecayRt	$02, $02, $02, $02
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1E, $1E, $00, $00
+
+	; Patch $02
+	; $3A
+	; $32, $32, $56, $42,	$8D, $15, $4F, $52
+	; $06, $07, $08, $04,	$02, $00, $00, $00
+	; $18, $28, $18, $28,	$19, $2A, $20, $80
+	spAlgorithm	$02
+	spFeedback	$07
+	spDetune	$03, $05, $03, $04
+	spMultiple	$02, $06, $02, $02
+	spRateScale	$02, $01, $00, $01
+	spAttackRt	$0D, $0F, $15, $12
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$06, $08, $07, $04
+	spSustainLv	$01, $01, $02, $02
+	spDecayRt	$02, $00, $00, $00
+	spReleaseRt	$08, $08, $08, $08
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$19, $20, $2A, $00
+
+	; Patch $03
+	; $04
+	; $57, $02, $70, $50,	$1F, $1F, $1F, $1F
+	; $00, $00, $00, $00,	$06, $0A, $00, $0A
+	; $00, $0F, $00, $0F,	$1A, $80, $10, $80
+	spAlgorithm	$04
+	spFeedback	$00
+	spDetune	$05, $07, $00, $05
+	spMultiple	$07, $00, $02, $00
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$00, $00, $00, $00
+	spSustainLv	$00, $00, $00, $00
+	spDecayRt	$06, $00, $0A, $0A
+	spReleaseRt	$00, $00, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1A, $10, $00, $00
+
+SpringStadium1_FM1:
+	sVoice		$00
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+
+SpringStadium1_Loop1:
+	dc.b nC4, $10, $08
+	sLoop		$00, $04, SpringStadium1_Loop1
+	dc.b nC4, $08, $08, $08, $08, $08, $08, nC4
+	dc.b nA3, nG3, nE3, nD3, nC3
+
+SpringStadium1_Loop2:
+	dc.b nC3, $18, nC3, nG3, nA3, $10, nG3, $08
+	dc.b nC3, $18, nC3, nG3, nC3, nE2, nE2, nB2
+	dc.b nCs3, $10, nB2, $08, nE2, $18, nE2, nB2
+	dc.b nE2, nF2, nF2, nC3, nD3, $10, nC3, $08
+	dc.b nF2, $18, nF2, nC3, nF2, nF2, nF2, nAb2
+	dc.b $10, nG2, $18, nF2, $08, sHold, $10, $08
+	dc.b nG2, $18, nAb2, nBb2
+	sLoop		$00, $02, SpringStadium1_Loop2
+	dc.b nC3, nC3, nG3, nA3, $10, nG3, $08, nE2
+	dc.b $18, nE2, nB2, nE2, nF2, nF2, nC3, nD3
+	dc.b $10, nC3, $08, nAb2, $18, nAb2, nEb3, nAb2
+	dc.b nC3, nC3, nG3, nA3, $10, nG3, $08, nRst
+	dc.b $10, nD3, $08, nG2, $18, nA2, nB2, $10
+	dc.b nC3, $08, sHold, $18, nE3, nF3, nFs3, $10
+	dc.b nG3, $08, nRst, $10, nG3, $08, nG2, $18
+	dc.b nB2, nD3, nE3, nE3, nFs3, nFs3, $10, nAb3
+	dc.b $08, nRst, $10, nAb3, $08, nE3, $18, nFs3
+	dc.b nAb3, nA3, $06, nRst, $12, nA3, $18, nG3
+	dc.b $06, nRst, $12, nG3, $10, nF3, $08, sHold
+	dc.b $06, nRst, $12, nF3, $18, nE3, $06, nRst
+	dc.b $12, nE3, $18, nD3, nD3, nE3, nE3, $10
+	dc.b nFs3, $08, nRst, $10, nFs3, $08, nD3, $18
+	dc.b nE3, nFs3, nG3, $06, nRst, $12, nG3, $18
+	dc.b nF3, $06, nRst, $12, nF3, $18, nE3, $06
+	dc.b nRst, $12, nE3, $18, nD3, nEb3, nE3, nE3
+	dc.b nFs3, nFs3, $10, nAb3, $08, nRst, $10, nAb3
+	dc.b $08, nE3, $18, nFs3, nAb3, nA3, $06, nRst
+	dc.b $12, nA3, $18, nAb3, $06, nRst, $12, nAb3
+	dc.b $18, sHold, $08, nG3, $10, $18, nFs3, nFs3
+	dc.b nF3, nF3, nF3, nE3, $10, nF3, $08, nRst
+	dc.b $10, nF3, $08, nE3, $18, nF3, nFs3, nG3
+	dc.b $06, nRst, $12, nG3, $18, nF3, $06, nRst
+	dc.b $12, nF3, $18, nE3, $06, nRst, $12, nE3
+	dc.b $18, nD3, $10, nE3, $08, nD3, $10, nB2
+	dc.b $08, nC3, $18, nC3, nG2, nA2, $10, nG2
+	dc.b $08, nE2, $18, nFs2, nAb2, nE2, nA2, nA2
+	dc.b nAb2, nAb2, nG2, nG2, nFs2, nFs2, nF2, nA2
+	dc.b nC3, nF3, nEb3, nC3, nBb2, nAb2, nG2, nG2
+	dc.b nF2, $10, $18, nFs2, $08, nG2, $10, nG3
+	dc.b $08, nF3, $18, nE3, nD3, nC3, nC3, nG2
+	dc.b nC3, nE2, nFs2, nAb2, nE2, nA2, nA2, $10
+	dc.b nAb2, $20, $10, nG2, $08, sHold, $18, nG2
+	dc.b nFs2, nFs2, nF2, nA2, nB2, nC3, nAb2, $30
+	dc.b nBb2
+	sJump		SpringStadium1_Loop2
+
+SpringStadium1_PSG1:
+	dc.b nRst, $05
+	sJump		SpringStadium1_Jump1
+
+SpringStadium1_PSG2:
+	dc.b nRst, $08
+	sJump		SpringStadium1_Jump1
+
+SpringStadium1_FM2:
+	sVoice		$02
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+
+SpringStadium1_Jump1:
+	dc.b nA5, $48, $10, nBb5, $08, sHold, $30, nA5
+
+SpringStadium1_Loop3:
+	dc.b nG5, $30, nE5, $10, nF5, $08, nRst, $10
+	dc.b nG5, $08, nRst, $10, nC6, $08, nRst, $10
+	dc.b nC6, $08, nB5, $18, nG5, nAb5, $08, nRst
+	dc.b $10, nAb5, $08, nRst, $10, nE5, nFs5, $08
+	dc.b nRst, $10, nAb5, $08, nRst, $10, nB5, $08
+	dc.b nRst, $10, nA5, $02, nB5, $16, nA5, $08
+	dc.b nAb5, $18, nA5, $30, nF5, $10, nG5, $08
+	dc.b nRst, $10, nA5, $08, nRst, $10, nC6, $08
+	dc.b nRst, $10, nF6, $08, nE6, $18, nD6, nAb5
+	dc.b $08, nRst, $10, nAb5, $08, nRst, $10, nF5
+	dc.b nG5, $08, nRst, $10, nAb5, $08, sHold, $60
+	sLoop		$00, $02, SpringStadium1_Loop3
+	dc.b nG5, $30, nE5, $10, nF5, $08, nRst, $10
+	dc.b nAb5, $08, nRst, $10, nB5, $08, nRst, $10
+	dc.b nA5, $02, nB5, $16, nA5, $08, nAb5, $18
+	dc.b nA5, $30, nF5, $10, nG5, $08, nRst, $10
+	dc.b nAb5, $08, nRst, $10, nC6, $08, nRst, $10
+	dc.b nE6, $02, nF6, $16, nE6, $08, nD6, $18
+	dc.b nE6, $28, nC6, $20, nG5, $18, nRst, $10
+	dc.b nB5, $20, nC6, $08, nRst, $10, nD6, nC6
+	dc.b $08, sHold, $60, sHold, nC6, nRst, $18, nB5
+	dc.b $30, nAb5, $10, nE5, $08, sHold, $28, nB5
+	dc.b $04, nC6, nD6, $18, nB5, nC6, $06, nRst
+	dc.b $12, nD6, $06, nRst, $12, nC6, $10, nB5
+	dc.b $08, nRst, $10, nA5, $08, sHold, $60, nRst
+	dc.b $18, nA5, $30, nFs5, $10, nD5, $08, sHold
+	dc.b $24, nA5, $04, nB5, nC6, nD6, $18, nA5
+	dc.b nC6, $28, nB5, $04, nC6, nB5, $18, nBb5
+	dc.b sHold, nB5, $60, nRst, $18, nB5, $30, nAb5
+	dc.b $10, nE5, $08, sHold, $24, nB5, $04, nC6
+	dc.b nD6, nE6, $18, nB5, nC6, $06, nRst, $12
+	dc.b nD6, $06, nRst, $12, nC6, $10, nB5, $08
+	dc.b nRst, $10, nC6, $08, sHold, $10, $08, nB5
+	dc.b $18, nA5, nG5, nA5, $30, $10, nB5, $08
+	dc.b nC6, $10, nF6, $08, sHold, $10, $08, nE6
+	dc.b $18, nF6, nFs6, nG6, $10, nD6, $0C, nRst
+	dc.b nB5, nRst, nA5, nRst, nAb5, $08, nG5, $60
+	dc.b nG5, $10, nC5, $08, nE5, $10, nF5, $08
+	dc.b nG5, $10, nFs5, $08, nG5, $10, nC6, $08
+	dc.b nB5, $10, nC6, $08, nB5, $10, nA5, $08
+	dc.b nRst, $10, nAb5, $18, nE5, $08, nA5, $10
+	dc.b nC5, $08, nE5, $10, nAb5, $08, nA5, $10
+	dc.b nAb5, $08, nA5, $10, nB5, $08, nC6, $10
+	dc.b nD6, $08, nC6, $10, nB5, $08, nC6, $10
+	dc.b nB5, $08, nA5, $10, nG5, $08, nA5, nC5
+	dc.b nF5, nC6, nA5, nF5, nF6, nC6, nA5, nC6
+	dc.b nA5, nF5, nAb5, nC5, nEb5, nC6, nAb5, nEb5
+	dc.b nEb6, nC6, nAb5, nC6, nAb5, nEb5, nG5, $10
+	dc.b nD5, $08, nG5, $10, nB5, $18, nA5, nAb5
+	dc.b $08, nG5, $60, $10, nC5, $08, nE5, $10
+	dc.b nF5, $08, nG5, $10, nFs5, $08, nG5, $10
+	dc.b nC6, $08, nB5, $10, nC6, $08, nB5, $10
+	dc.b nA5, $08, nRst, $10, nAb5, $18, nE5, $08
+	dc.b nA5, $10, nAb5, $08, nA5, $10, nB5, $18
+	dc.b nA5, $08, nB5, $10, nC6, $08, sHold, $10
+	dc.b nD6, $08, nC6, $10, nB5, $08, nC6, $10
+	dc.b nB5, $08, nA5, $10, nG5, $08, nA5, nAb5
+	dc.b nA5, nC6, $10, nF6, $18, nE6, $08, nD6
+	dc.b $10, nC6, $08, nEb6, $30, nD6
+	sJump		SpringStadium1_Loop3
+
+SpringStadium1_FM3:
+	sVoice		$02
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+	dc.b nF4, $48, $10, $38, nF4, $30
+
+SpringStadium1_Loop4:
+	dc.b nE4, $30, nC4, $10, $08, nRst, $10, nE4
+	dc.b $08, nRst, $10, nG4, $08, nRst, $10, nG4
+	dc.b $08, $18, nE4, nE4, $08, nRst, $10, nE4
+	dc.b $08, nRst, $10, nB3, nB3, $08, nRst, $10
+	dc.b nE4, $08, nRst, $10, nAb4, $08, nRst, $10
+	dc.b nE4, $02, $16, $08, $18, nF4, $30, nC4
+	dc.b $10, $08, nRst, $10, nF4, $08, nRst, $10
+	dc.b nA4, $08, nRst, $10, nC5, $08, $18, nA4
+	dc.b nF4, $08, nRst, $10, nF4, $08, nRst, $10
+	dc.b nC4, nC4, $08, nRst, $10, nF4, $08
+	sVoice		$03
+	saTranspose	$0C
+	savol		$02
+	sPan		spRight
+	dc.b nC7, $08, nAb6, nF6
+	sPan		spCenter
+	dc.b nC6, nF6, nC6
+	sPan		spRight
+	dc.b nAb5, nF5, nAb5
+	sPan		spCenter
+	dc.b nF5, nC5, nAb4
+	sVoice		$02
+	saTranspose	$F4
+	savol		$FE
+	sLoop		$00, $02, SpringStadium1_Loop4
+	dc.b nE4, $30, nC4, $10, $08, nRst, $10, nE4
+	dc.b $08, nRst, $10, nAb4, $08, nRst, $10, nE4
+	dc.b $02, $16, $08, $18, nF4, $30, nC4, $10
+	dc.b $08, nRst, $10, nF4, $08, nRst, $10, nAb4
+	dc.b $08, nRst, $10, nC5, $02, $16, $08, nAb4
+	dc.b $18
+	sVoice		$03
+	saTranspose	$0C
+	dc.b nRst, $18
+	savol		$02
+	sPan		spRight
+	dc.b nC6
+	sPan		spLeft
+	dc.b nB5
+	sPan		spCenter
+	dc.b nA5
+	sPan		spRight
+	dc.b nG5
+	sPan		spCenter
+	dc.b nF5
+	sPan		spLeft
+	dc.b nE5
+	sPan		spCenter
+	dc.b nD5, $10
+	sVoice		$02
+	saTranspose	$F4
+	savol		$FE
+	dc.b nG4, $08, sHold, $60, sHold, nG4, nRst, $18
+	dc.b nAb4, $30, nE4, $10, nB3, $08, sHold, $28
+	dc.b nAb4, $04, nA4, nB4, $18, nAb4, nA4, $06
+	dc.b nRst, $12, nB4, $06, nRst, $12, nA4, $10
+	dc.b nG4, $08, nRst, $10, nE4, $08, sHold, $60
+	dc.b nRst, $18, nFs4, $30, nD4, $10, nA3, $08
+	dc.b sHold, $24, nFs4, $04, nG4, nA4, nA4, $18
+	dc.b nFs4, nA4, $28, nG4, $04, nA4, nG4, $18
+	dc.b nFs4, sHold, nG4, $60, nRst, $18, nAb4, $30
+	dc.b nE4, $10, nB3, $08, sHold, $24, nAb4, $04
+	dc.b nA4, nB4, nB4, $18, nAb4, nA4, $06, nRst
+	dc.b $12, nB4, $06, nRst, $12, nA4, $10, nAb4
+	dc.b $08, nRst, $10, nA4, $08, sHold, $10, $08
+	dc.b nG4, $18, nFs4, nE4, nF4, $30, $10, nG4
+	dc.b $08, nA4, $10, nC5, $08, sHold, $10, $08
+	dc.b nB4, $18, nC5, nC5, nD5, $10, nB4, $0C
+	dc.b nRst, nG4, nRst, nD4, nRst, nC4, $08, nB3
+	dc.b $60, nE4, $10, nG3, $08, nC4, $10, nD4
+	dc.b $08, nE4, $10, nEb4, $08, nE4, $10, nG4
+	dc.b $08, nAb4, $10, nA4, $08, nAb4, $10, nE4
+	dc.b $08, nRst, $10, nE4, $18, nB3, $08, nE4
+	dc.b $10, nA3, $08, nC4, $10, nEb4, $08, nE4
+	dc.b $10, nEb4, $08, nE4, $10, nAb4, $08, nA4
+	dc.b $10, nB4, $08, nA4, $10, nG4, $08, nA4
+	dc.b $10, nG4, $08, nE4, $10, nC4, $08, nF4
+	dc.b nA3, nC4, nA4, nF4, nC4, nC5, nA4, nF4
+	dc.b nA4, nF4, nC4, nEb4, nAb3, nC4, nAb4, nEb4
+	dc.b nC4, nC5, nAb4, nEb4, nAb4, nEb4, nC4, nD4
+	dc.b $10, nB3, $08, nD4, $10, nG4, $18, nE4
+	dc.b nEb4, $08, nD4, $60, nE4, $10, nG3, $08
+	dc.b nC4, $10, nD4, $08, nE4, $10, nEb4, $08
+	dc.b nE4, $10, nG4, $08, nAb4, $10, nA4, $08
+	dc.b nAb4, $10, nE4, $08, nRst, $10, nE4, $18
+	dc.b nB3, $08, nE4, $10, nEb4, $08, nE4, $10
+	dc.b nAb4, $18, nE4, $08, nAb4, $10, nA4, $08
+	dc.b sHold, $10, $08, $10, nAb4, $08, nA4, $10
+	dc.b nAb4, $08, nE4, $10, $08, nF4, nE4, nF4
+	dc.b nA4, $10, nC5, $18, $08, nA4, $10, nG4
+	dc.b $08, nC5, $30, nBb4
+	sJump		SpringStadium1_Loop4
+
+SpringStadium1_FM4:
+	sModAMPS	$06, $01, $03, $05
+	sPan		spLeft
+	sVoice		$02
+	saTranspose	$E8
+	dc.b nC5, $48, $10, nD5, $08, sHold, $30, nC5
+	saTranspose	$18
+
+SpringStadium1_Loop5:
+	sVoice		$01
+	dc.b nRst, $18, nC4, $08, nRst, $10, nC4, $30
+	dc.b nRst, $10, nC4, $08, nRst, $10, nC4, $08
+	dc.b $30, nRst, $18, nB3, $08, nRst, $10, nB3
+	dc.b $30, nRst, $10, nB3, $08, nRst, $10, nE4
+	dc.b $08, nRst, $10, nAb4, $08, nRst, $10, nE4
+	dc.b $08, nRst, $18, nC4, $08, nRst, $10, nC4
+	dc.b $30, nRst, $10, nC4, $08, nRst, $10, nC4
+	dc.b $08, $30, nRst, $18, nC4, $08, nRst, $10
+	dc.b nC4, $30, nC5, $18, nF5, nE5, nD5
+	sLoop		$00, $02, SpringStadium1_Loop5
+	sVoice		$01
+	dc.b nC4, $10, nE4, $50, nE4, $10, nAb4, $50
+	dc.b nF4, $10, nA4, $50, nF4, $10, nAb4, $50
+	dc.b nG4, $18, nC5, nB4, nA4, nRst, $10, nG4
+	dc.b $20, nA4, $18, nB4, $10, nG4, $08, sHold
+	dc.b $60, sHold, nG4, nRst, $18, nAb4, $08, nRst
+	dc.b $10, nE4, $28, nB3, $08, nRst, $10, nB3
+	dc.b $08, nE4, $18, nAb4, nB4, nRst, nA4, $08
+	dc.b nRst, $10, nE4, $28, nC5, $08, nRst, $10
+	dc.b nC5, $08, nB4, $18, nA4, nE4, nRst, nFs4
+	dc.b $08, nRst, $10, nD4, $28, nA3, $08, nRst
+	dc.b $10, nA3, $08, nD4, $18, nFs4, nA4, nRst
+	dc.b nG4, $08, nRst, $10, nD4, $28, nB4, $08
+	dc.b nRst, $10, nB4, $08, nA4, $18, nD4, nEb4
+	dc.b nRst, nAb4, $08, nRst, $10, nE4, $28, nB3
+	dc.b $08, sHold, nB3, nE4, nAb4, nE4, nAb4, nB4
+	dc.b nAb4, nB4, nE5, nB4, nE5, nAb5, nA4, $18
+	dc.b nC5, $10, nA4, $08, nAb4, $18, nC5, $10
+	dc.b nAb4, $08, sHold, nAb4, nG4, $10, nC5, nG4
+	dc.b $08, nFs4, $18, nC5, $10, nFs4, $08, nC4
+	dc.b $10, nF4, $08, nA4, $10, nF4, $08, nA4
+	dc.b nC5, nF5, nA5, nF5, nC5, nF5, $10, nC5
+	dc.b $08, nAb4, $10, nC5, $08, nAb5, nF5, nC5
+	dc.b nAb4, nF4, nC4, nD4, $10, nG4, $18, nD4
+	dc.b nG4, $08, nA4, $10, nBb4, $08, nB4, $0C
+	dc.b nRst, $24, nD5, $30, nG4, $08, nRst, $10
+	dc.b nE4, $08, nRst, $10, nC5, nG4, $08, nRst
+	dc.b $10, nAb4, $08, nRst, $10, nAb4, $08, nRst
+	dc.b $10, nA4, $08, nAb4, $18, nE4, nA4, nC5
+	dc.b $10, nA4, $08, nAb4, $18, nC5, $10, nAb4
+	dc.b $08, sHold, nAb4, nG4, $10, nC5, nG4, $08
+	dc.b nFs4, $18, nC5, $10, nFs4, $08, nC4, $10
+	dc.b nF4, $08, nA4, $10, nF4, $08, nA4, nC5
+	dc.b nF5, nA5, nF5, nC5, nEb5, $10, nC5, $08
+	dc.b nAb4, $10, nAb5, $08, nEb5, nC5, nAb4, nEb4
+	dc.b nC4, nAb3, nD4, $10, nG4, $18, nD4, nG4
+	dc.b $08, nA4, $10, nBb4, $08, nB4, $10, nG4
+	dc.b $18, nD5, nD5, $08, nC5, $10, nB4, $08
+	dc.b nG4, nRst, $10, nE4, $08, nRst, $10, nC5
+	dc.b nG4, $08, nRst, $10, nAb4, $08, nRst, $10
+	dc.b nAb4, $08, nRst, $10, nA4, $08, nAb4, $18
+	dc.b nE4, nA4, $10, nC5, $08, nA4, $10, nAb4
+	dc.b $18, nC5, $08, nAb4, $10, nG4, $08, sHold
+	dc.b $10, nC5, $08, nG4, $10, nFs4, nC5, nFs4
+	dc.b $18, nC4, $10, nF4, $08, nA4, $10, nF4
+	dc.b $08, nA4, nC5, nF5, nA5, nF5, nC5
+	sVoice		$02
+	saTranspose	$E8
+	dc.b nAb5, $30, nF5
+	saTranspose	$18
+	sJump		SpringStadium1_Loop5
+
+SpringStadium1_FM5:
+	sModAMPS	$06, $01, $03, $05
+	sPan		spRight
+	sVoice		$02
+	saTranspose	$E8
+	dc.b nC5, $48, $10, nD5, $08, sHold, $30, nC5
+	saTranspose	$18
+
+SpringStadium1_Loop6:
+	sVoice		$01
+	dc.b nRst, $18, nE4, $08, nRst, $10, nE4, $30
+	dc.b nRst, $10, nE4, $08, nRst, $10, nE4, $08
+	dc.b $30, nRst, $18, nE4, $08, nRst, $10, nE4
+	dc.b $30, nRst, $10, nE4, $08, nRst, $10, nAb4
+	dc.b $08, nRst, $10, nB4, $08, nRst, $10, nAb4
+	dc.b $08, nRst, $18, nF4, $08, nRst, $10, nF4
+	dc.b $30, nRst, $10, nF4, $08, nRst, $10, nF4
+	dc.b $08, $30, nRst, $18, nF4, $08, nRst, $10
+	dc.b nF4, $30, nF5, $18, nAb5, nG5, nF5
+	sLoop		$00, $02, SpringStadium1_Loop6
+	sVoice		$01
+	dc.b nRst, nG4, $10, nC5, $38, nRst, $18, nB4
+	dc.b $10, nE5, $38, nRst, $18, nC5, $10, nF5
+	dc.b $38, nRst, $18, nC5, $10, nF5, $38, nC5
+	dc.b $18, nE5, nD5, nC5, nRst, $10, nB4, $20
+	dc.b nC5, $18, nD5, $10, nC5, $08, sHold, $60
+	dc.b sHold, nC5, nRst, $18, nB4, $08, nRst, $10
+	dc.b nAb4, $28, nE4, $08, nRst, $10, nE4, $08
+	dc.b nAb4, $18, nB4, nD5, nRst, nC5, $08, nRst
+	dc.b $10, nA4, $28, nE5, $08, nRst, $10, nE5
+	dc.b $08, nD5, $18, nC5, nA4, nRst, nA4, $08
+	dc.b nRst, $10, nFs4, $28, nD4, $08, nRst, $10
+	dc.b nD4, $08, nFs4, $18, nA4, nC5, nRst, nB4
+	dc.b $08, nRst, $10, nG4, $28, nD5, $08, nRst
+	dc.b $10, nD5, $08, nC5, $18, nG4, nFs4, nRst
+	dc.b nB4, $08, nRst, $10, nAb4, $28, nE4, $08
+	dc.b sHold, nE4, nAb4, nB4, nAb4, nB4, nE5, nB4
+	dc.b nE5, nAb5, nE5, nAb5, nB5, nA4, $18, nE5
+	dc.b $10, nA4, $08, nAb4, $18, nE5, $10, nAb4
+	dc.b $08, sHold, nAb4, nG4, $10, nE5, nG4, $08
+	dc.b nFs4, $18, nE5, $10, nFs4, $08, nF4, $10
+	dc.b nA4, $08, nC5, $10, nA4, $08, nC5, nF5
+	dc.b nA5, nC6, nA5, nF5, nAb5, $10, nF5, $08
+	dc.b nC5, $10, nF5, $08, nC6, nAb5, nF5, nC5
+	dc.b nAb4, nF4, nG4, $10, nB4, $18, nG4, nB4
+	dc.b $08, nC5, $10, nCs5, $08, nD5, $0C, nRst
+	dc.b $24, nF5, $30, nC5, $08, nRst, $10, nG4
+	dc.b $08, nRst, $10, nE5, nC5, $08, nRst, $10
+	dc.b nB4, $08, nRst, $10, nB4, $08, nRst, $10
+	dc.b nC5, $08, nB4, $18, nAb4, nA4, nE5, $10
+	dc.b nA4, $08, nAb4, $18, nE5, $10, nAb4, $08
+	dc.b sHold, nAb4, nG4, $10, nE5, nG4, $08, nFs4
+	dc.b $18, nE5, $10, nFs4, $08, nF4, $10, nA4
+	dc.b $08, nC5, $10, nA4, $08, nC5, nF5, nA5
+	dc.b nC6, nA5, nF5, nAb5, $10, nEb5, $08, nC5
+	dc.b $10, nC6, $08, nAb5, nEb5, nC5, nAb4, nEb4
+	dc.b nC4, nG4, $10, nB4, $18, nG4, nB4, $08
+	dc.b nC5, $10, nCs5, $08, nD5, $10, nB4, $18
+	dc.b nG5, nF5, $08, nE5, $10, nD5, $08, nC5
+	dc.b nRst, $10, nG4, $08, nRst, $10, nE5, nC5
+	dc.b $08, nRst, $10, nB4, $08, nRst, $10, nB4
+	dc.b $08, nRst, $10, nC5, $08, nB4, $18, nAb4
+	dc.b nA4, $10, nE5, $08, nA4, $10, nAb4, $18
+	dc.b nE5, $08, nAb4, $10, nG4, $08, sHold, $10
+	dc.b nE5, $08, nG4, $10, nFs4, nE5, nFs4, $18
+	dc.b nF4, $10, nA4, $08, nC5, $10, nA4, $08
+	dc.b nC5, nF5, nA5, nC6, nA5, nF5
+	sVoice		$02
+	saTranspose	$E8
+	dc.b nAb5, $30, nF5
+	saTranspose	$18
+	sJump		SpringStadium1_Loop6
+
+SpringStadium1_PSG3:
+	sNoisePSG	$E7
+	sVolEnv		v0F
+	dc.b nHiHat, $08, $08, $08
+	sVolEnv		v12
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $08, $08, $08
+	sVolEnv		v12
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $08, $08, $08, nRst, $48
+
+SpringStadium1_Loop8:
+	sCall		SpringStadium1_Call1
+
+SpringStadium1_Loop7:
+	sCall		SpringStadium1_Call2
+	sLoop		$00, $07, SpringStadium1_Loop7
+	sLoop		$01, $02, SpringStadium1_Loop8
+
+SpringStadium1_Loop9:
+	sCall		SpringStadium1_Call1
+	sLoop		$00, $07, SpringStadium1_Loop9
+	sVolEnv		v0F
+	dc.b nHiHat, $10, $08, $10, $08, nRst, $30
+
+SpringStadium1_Loop10:
+	sVolEnv		v12
+	dc.b nHiHat, $18
+	sVolEnv		v0F
+	dc.b $10
+	sVolEnv		v12
+	saVol		$08
+	dc.b $08
+	saVol		-$08
+	sVolEnv		v12
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $10
+	sVolEnv		v12
+	saVol		$08
+	dc.b $08
+	saVol		-$08
+	sLoop		$00, $07, SpringStadium1_Loop10
+	sVolEnv		v12
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $10
+	sVolEnv		v12
+	saVol		$08
+	dc.b $08
+	saVol		-$08
+	dc.b nRst, $30
+	sLoop		$01, $02, SpringStadium1_Loop10
+	sCall		SpringStadium1_Call1
+	sCall		SpringStadium1_Call2
+	sCall		SpringStadium1_Call1
+	sVolEnv		v0F
+	dc.b nHiHat, $10, $08, $10, $08
+	sVolEnv		v12
+	dc.b $10, $10, nRst, $10
+
+SpringStadium1_Loop11:
+	sCall		SpringStadium1_Call1
+	sLoop		$00, $03, SpringStadium1_Loop11
+	sVolEnv		v12
+	dc.b nHiHat, $18
+	sVolEnv		v0F
+	saVol		$10
+	dc.b $18
+	saVol		-$08
+	dc.b $18
+	saVol		-$08
+	dc.b $18
+	sCall		SpringStadium1_Call1
+	sCall		SpringStadium1_Call2
+	sVolEnv		v0F
+	dc.b nHiHat, $2A, $30, $1E
+	sVolEnv		v12
+	saVol		$08
+	dc.b $18
+	saVol		-$08
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $18
+	sCall		SpringStadium1_Call1
+	sVolEnv		v12
+	saVol		$08
+	dc.b nHiHat, $18, $18
+	saVol		-$08
+	dc.b $18, $18
+	sJump		SpringStadium1_Loop8
+
+SpringStadium1_Call1:
+	sVolEnv		v12
+	dc.b nHiHat, $18
+	sVolEnv		v0F
+	dc.b $10, $08
+	saVol		$08
+	dc.b $10, $08
+	saVol		-$08
+	dc.b $10, $08
+	sRet
+
+SpringStadium1_Call2:
+	sVolEnv		v0F
+	saVol		$08
+	dc.b nHiHat, $10, $08
+	saVol		-$08
+	dc.b $10, $08
+	saVol		$08
+	dc.b $10, $08
+	saVol		-$08
+	dc.b $10, $08
+	sRet
+
+SpringStadium1_DAC1:
+	sStop
+
+SpringStadium1_DAC2:
+	dc.b dKick, $18, dKick, dKick, dKick, dKick, dKickSnare, $10
+	dc.b dKickSnare, $08, dKickSnare, dKickSnare, dKickSnare, dKickSnare, dKickSnare, dKickSnare
+
+SpringStadium1_Loop12:
+	sCall		SpringStadium1_Call10
+	sLoop		$00, $06, SpringStadium1_Loop12
+	dc.b dKick, $18, dKickSnare, dKick, dKickSnare, $10, dKick, $18
+	dc.b dKick, $08, dKickSnare, $10, dKick, dKickSnare, dLowerTom, $18
+
+SpringStadium1_Loop13:
+	sCall		SpringStadium1_Call10
+	sLoop		$00, $08, SpringStadium1_Loop13
+
+SpringStadium1_Loop14:
+	sCall		SpringStadium1_Call10
+	sLoop		$00, $05, SpringStadium1_Loop14
+	dc.b dKick, $18, dKickSnare, dKick, $10, $08, dKickSnare, $10
+	dc.b dKick, $18, dKick, $08, dKickSnare, $18, dKick, dKickSnare
+	dc.b $10, dKick, $08
+	sCall		SpringStadium1_Call15
+	sCall		SpringStadium1_Call16
+	sCall		SpringStadium1_Call17
+	sCall		SpringStadium1_Call18
+	sCall		SpringStadium1_Call17
+	sCall		SpringStadium1_Call16
+	sCall		SpringStadium1_Call17
+	sCall		SpringStadium1_Call18
+	sCall		SpringStadium1_Call15
+	sCall		SpringStadium1_Call16
+	sCall		SpringStadium1_Call17
+	sCall		SpringStadium1_Call18
+	sCall		SpringStadium1_Call19
+	sCall		SpringStadium1_Call16
+	sCall		SpringStadium1_Call17
+	sCall		SpringStadium1_Call18
+	sCall		SpringStadium1_Call15
+	sCall		SpringStadium1_Call20
+	sCall		SpringStadium1_Call21
+	dc.b dKick, $10, $08, dKickSnare, $18, dKick, $10, $08
+	dc.b dKickSnare, $18, dKick, $10, $08, dKickSnare, $18
+	dc.b dKick, $10, $08, dKickSnare, $08, dKickSnare, dKickSnare
+	sCall		SpringStadium1_Call24
+	sCall		SpringStadium1_Call24
+	sCall		SpringStadium1_Call20
+	dc.b dKick, $10, dKickSnare, dKickSnare, $08, dKickSnare, dHighTom, dHighTom
+	dc.b dMidTom, dMidTom, dLowTom, dLowerTom
+	sCall		SpringStadium1_Call20
+	sCall		SpringStadium1_Call21
+	dc.b dKick, $10, dKick, $08, dKickSnare, $10, dKick, $18
+	dc.b dKick, $08, dKickSnare, $10, dKick, $18, $08
+	dc.b dKickSnare, $10, dKick, dKickSnare, dLowerTom, $18
+	sCall		SpringStadium1_Call24
+	dc.b dKickSnare, $08, dKickSnare, dKickSnare, dKickSnare, dKickSnare, dKickSnare, dHighTom
+	dc.b dHighTom, dMidTom, dMidTom, dLowTom, dLowerTom
+	sJump		SpringStadium1_Loop12
+
+SpringStadium1_Call10:
+	dc.b dKick, $18, dKickSnare, dKick, dKickSnare
+	sRet
+
+SpringStadium1_Call15:
+	dc.b nRst, $10, dKick, $08, dKickSnare, $18, dKick, $08
+	dc.b dKickSnare, dKickSnare, dKickSnare, dKickSnare, dKickSnare
+	sRet
+
+SpringStadium1_Call16:
+	dc.b dKick, $18, dKickSnare, $10, dKick, $08, dKick, $18
+	dc.b dKickSnare, $10, dKick, $08
+	sRet
+
+SpringStadium1_Call17:
+	dc.b nRst, $10, dKick, $08, dKickSnare, $18, dKick, dKickSnare
+	sRet
+
+SpringStadium1_Call18:
+	dc.b dKick, $18, dKickSnare, dKick, dKickSnare, $10, dKick, $08
+	sRet
+
+SpringStadium1_Call19:
+	dc.b nRst, $08, dKick, $10, dKickSnare, $18, dKick, dKickSnare
+	sRet
+
+SpringStadium1_Call20:
+	dc.b dKick, $18, dKickSnare, dKick, $10, $08, dKickSnare, $18
+	sRet
+
+SpringStadium1_Call21:
+	dc.b dKick, $10, $08, dKickSnare, $10, dKick, $18, dKick
+	dc.b $08, dKickSnare, $10, $08
+	sRet
+
+SpringStadium1_Call24:
+	dc.b dKick, $10, dKick, $08, dKickSnare, dKick, $10, dKick
+	dc.b dKick, $08, dKickSnare, dKick, $10
+	sRet

@@ -1,0 +1,456 @@
+MenuD_Header:
+	sHeaderInit						; Z80 offset is $9127
+	sHeaderTempo	$01, $30
+	sHeaderCh	$05, $03
+	sHeaderDAC	MenuD_DAC1
+	sHeaderDAC	MenuD_DAC2
+	sHeaderFM	MenuD_FM1, $0C, $10
+	sHeaderFM	MenuD_FM2, $00, $17
+	sHeaderFM	MenuD_FM3, $18, $20
+	sHeaderFM	MenuD_FM4, $00, $09
+	sHeaderFM	MenuD_FM5, $0C, $20
+	sHeaderPSG	MenuD_PSG1, $F4, $40, $00, v06
+	sHeaderPSG	MenuD_PSG2, $00, $40, $00, v04
+	sHeaderPSG	MenuD_PSG3, $00, $10, $00, v03
+
+	; Patch $00
+	; $3C
+	; $01, $00, $00, $00,	$1F, $1F, $15, $1F
+	; $11, $0D, $12, $05,	$07, $04, $09, $02
+	; $55, $3A, $25, $1A,	$1A, $80, $07, $80
+	spAlgorithm	$04
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$01, $00, $00, $00
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $15, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$11, $12, $0D, $05
+	spSustainLv	$05, $02, $03, $01
+	spDecayRt	$07, $09, $04, $02
+	spReleaseRt	$05, $05, $0A, $0A
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1A, $07, $00, $00
+
+	; Patch $01
+	; $3E
+	; $77, $71, $32, $31,	$1F, $1F, $1F, $1F
+	; $0D, $06, $00, $00,	$08, $06, $00, $00
+	; $15, $0A, $0A, $0A,	$1B, $80, $80, $80
+	spAlgorithm	$06
+	spFeedback	$07
+	spDetune	$07, $03, $07, $03
+	spMultiple	$07, $02, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0D, $00, $06, $00
+	spSustainLv	$01, $00, $00, $00
+	spDecayRt	$08, $00, $06, $00
+	spReleaseRt	$05, $0A, $0A, $0A
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1B, $00, $00, $00
+
+	; Patch $02
+	; $3E
+	; $77, $71, $32, $31,	$1F, $1F, $1F, $1F
+	; $0D, $06, $00, $00,	$08, $06, $00, $00
+	; $15, $0A, $0A, $0A,	$1B, $8F, $8F, $8F
+	spAlgorithm	$06
+	spFeedback	$07
+	spDetune	$07, $03, $07, $03
+	spMultiple	$07, $02, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0D, $00, $06, $00
+	spSustainLv	$01, $00, $00, $00
+	spDecayRt	$08, $00, $06, $00
+	spReleaseRt	$05, $0A, $0A, $0A
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1B, $0F, $0F, $0F
+
+	; Patch $03
+	; $34
+	; $70, $72, $31, $31,	$1F, $1F, $1F, $1F
+	; $10, $06, $06, $06,	$01, $06, $06, $06
+	; $35, $1A, $15, $1A,	$10, $83, $18, $83
+	spAlgorithm	$04
+	spFeedback	$06
+	spDetune	$07, $03, $07, $03
+	spMultiple	$00, $01, $02, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$10, $06, $06, $06
+	spSustainLv	$03, $01, $01, $01
+	spDecayRt	$01, $06, $06, $06
+	spReleaseRt	$05, $05, $0A, $0A
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$10, $18, $03, $03
+
+	; Patch $04
+	; $2E
+	; $75, $32, $73, $31,	$1F, $14, $14, $1F
+	; $0A, $0A, $0A, $00,	$00, $05, $02, $00
+	; $AF, $AF, $1F, $0F,	$19, $85, $80, $80
+	spAlgorithm	$06
+	spFeedback	$05
+	spDetune	$07, $07, $03, $03
+	spMultiple	$05, $03, $02, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $14, $14, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0A, $0A, $0A, $00
+	spSustainLv	$0A, $01, $0A, $00
+	spDecayRt	$00, $02, $05, $00
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$19, $00, $05, $00
+
+MenuD_FM1:
+	sVoice		$00
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+
+MenuD_Jump1:
+	sCall		MenuD_Call1
+	dc.b nG2, $06, nD2, nB1, nA1, nRst, nB1, nA1
+	dc.b nAb1, nG1, nG1, nRst, nG1, nA1, $0C, nB1
+	sCall		MenuD_Call1
+	dc.b nAb2, $12, $06, nEb2, $12, nAb2, $06, nRst
+	dc.b nAb2, nEb2, $0C, nAb2, nBb2
+	sJump		MenuD_Jump1
+
+MenuD_Call1:
+	dc.b nC2, $12, $06, nG1, $12, nC2, $06, nRst
+	dc.b nC2, nRst, nC2, nG1, $0C, nC2, nF2, $12
+	dc.b $06, nC2, $12, nF2, $06, nRst, nF2, nRst
+	dc.b nC2, nF2, $0C, nE2, nD2, $12, $06, nA1
+	dc.b $12, nD2, $06, nRst, nD2, nRst, nD2, nA1
+	dc.b $0C, nD2, nG2, $12, $06, nD2, $12, nG2
+	dc.b $06, nRst, nG2, nRst, nD2, nG2, $0C, nF2
+	dc.b nE2, $12, $06, nB1, $12, nE2, $06, nRst
+	dc.b nE2, nRst, nE2, nB1, $0C, nE2, nA2, $12
+	dc.b $06, nE2, $12, nA2, $06, nRst, nA2, nRst
+	dc.b nE2, nA2, $0C, nG2, nF2, $12, $06, nC2
+	dc.b $12, nF2, $06, nRst, nF2, nRst, nF2, nC2
+	dc.b $0C, nF2
+	sRet
+
+MenuD_FM4:
+	dc.b nRst, $02
+	sVoice		$02
+	sPan		spRight
+	ssDetune	$FE
+	sModAMPS	$06, $01, $03, $05
+	sJump		MenuD_Jump2
+
+MenuD_FM2:
+	sVoice		$01
+	sPan		spLeft
+	sModAMPS	$06, $01, $03, $05
+
+MenuD_Jump2:
+	sCall		MenuD_Call2
+	dc.b nA3, $18, $06, nB3, nC4, nF4, nRst, nF4
+	dc.b nE4, $0C, nF4, nFs4, nG4, $06, nG4, nG4
+	dc.b nG4, nRst, nG4, nG4, nG4, nG4, nRst, $2A
+	sCall		MenuD_Call2
+	dc.b nA3, $18, $06, nB3, nC4, nF4, nRst, nF4
+	dc.b nE4, $0C, nF4, $06, nE4, nD4, nC4, nAb3
+	dc.b $18, $06, nBb3, nC4, nF4, nRst, nF4, nE4
+	dc.b $0C, nF4, $06, nE4, nD4, nC4
+	sJump		MenuD_Jump2
+
+MenuD_Call2:
+	dc.b nG3, $18, nE3, $0C, nF3, $06, nG3, nRst
+	dc.b nE4, nRst, nD4, nC4, $0C, nG3, nB3, $18
+	dc.b nA3, $0C, nAb3, $06
+	sModAMPS	$0B, $01, $09, $07
+	dc.b nA3, $36
+	sModAMPS	$06, $01, $03, $05
+	dc.b nA3, $18, nFs3, $0C, nG3, $06, nA3, nRst
+	dc.b nFs4, nRst, nE4, nD4, $0C, nA3, nC4, $18
+	dc.b nB3, $0C, nBb3, $06
+	sModAMPS	$0B, $01, $09, $07
+	dc.b nB3, $36
+	sModAMPS	$06, $01, $03, $05
+	dc.b nB3, $18, nAb3, $0C, nA3, $06, nB3, nRst
+	dc.b nF4, nRst, nE4, nD4, $0C, nB3, nD4, $18
+	dc.b nC4, $0C, nB3, $06
+	sModAMPS	$0B, $01, $09, $07
+	dc.b nC4, $36
+	sModAMPS	$06, $01, $03, $05
+	sRet
+
+MenuD_FM3:
+	sVoice		$03
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+
+MenuD_Jump3:
+	sCall		MenuD_Call3
+	dc.b nF3, $18, $06, nG3, nA3, nC4, nRst, nC4
+	dc.b nB3, $0C, nC4, nCs4, nD4, $06, nD4, nB3
+	dc.b nA3, nRst, nB3, nA3, nAb3, nG3, nRst, $2A
+	sCall		MenuD_Call3
+	dc.b nF3, $18, $06, nG3, nA3, nC4, nRst, nC4
+	dc.b nC4, $0C, $06, nC4, nA3, nA3, nF3, $18
+	dc.b $06, nG3, nAb3, nAb3, nRst, nAb3, nAb3, $0C
+	dc.b nC4, $06, nC4, nAb3, nAb3
+	sJump		MenuD_Jump3
+
+MenuD_Call3:
+	dc.b nE3, $18, nC3, $0C, nD3, $06, nE3, nRst
+	dc.b nC4, $06, nRst, nB3, nG3, $0C, nE3, nG3
+	dc.b $18, nF3, $0C, nE3, $06
+	sModAMPS	$0B, $01, $09, $07
+	dc.b nF3, $36
+	sModAMPS	$06, $01, $03, $05
+	dc.b nFs3, $18, nD3, $0C, nE3, $06, nFs3, nRst
+	dc.b nD4, $06, nRst, nC4, nA3, $0C, nFs3, nA3
+	dc.b $18, nG3, $0C, nFs3, $06
+	sModAMPS	$0B, $01, $09, $07
+	dc.b nG3, $36
+	sModAMPS	$06, $01, $03, $05
+	dc.b nAb3, $18, nE3, $0C, nFs3, $06, nAb3, nRst
+	dc.b nD4, $06, nRst, nC4, nB3, $0C, nAb3, nB3
+	dc.b $18, nA3, $0C, nAb3, $06
+	sModAMPS	$0B, $01, $09, $07
+	dc.b nA3, $36
+	sModAMPS	$06, $01, $03, $05
+	sRet
+
+MenuD_FM5:
+	sVoice		$04
+	sModAMPS	$01, $01, $03, $05
+	sGate		$06
+
+MenuD_Jump4:
+	sCall		MenuD_Call4
+	sPan		spLeft
+	dc.b nG4, nF4, nE4
+	sPan		spCenter
+	dc.b nD4, nC4, nB3
+	sPan		spRight
+	dc.b nA3, nAb3, nG3
+	sPan		spCenter
+	dc.b nA3, nB3, nC4
+	sPan		spLeft
+	dc.b nD4, nE4
+	sPan		spRight
+	dc.b nF4, nG4
+	sCall		MenuD_Call4
+	sPan		spRight
+	dc.b nAb4, nFs4, nF4
+	sPan		spCenter
+	dc.b nEb4, nCs4, nC4
+	sPan		spRight
+	dc.b nBb3, nA3, nAb3
+	sPan		spCenter
+	dc.b nBb3, nC4, nCs4
+	sPan		spRight
+	dc.b nEb4, nF4
+	sPan		spLeft
+	dc.b nFs4, nAb4
+	sJump		MenuD_Jump4
+
+MenuD_Call4:
+	dc.b nRst, $06
+	sPan		spLeft
+	dc.b nG3, nE3, nE4
+	sPan		spRight
+	dc.b nC4, nG3, nG4
+	sPan		spCenter
+	dc.b nE4, nC4, nC5
+	sPan		spRight
+	dc.b nG4, nE4, nE4
+	sPan		spLeft
+	dc.b nD4, nC4, nB3, nRst
+	sPan		spRight
+	dc.b nA3, nF3, nF4
+	sPan		spLeft
+	dc.b nC4, nA3, nA4
+	sPan		spCenter
+	dc.b nF4, nC4, nC5
+	sPan		spLeft
+	dc.b nA4, nF4, nF4
+	sPan		spRight
+	dc.b nE4, nD4, nC4, nRst
+	sPan		spLeft
+	dc.b nA3, nFs3, nFs4
+	sPan		spRight
+	dc.b nD4, nA3, nA4
+	sPan		spCenter
+	dc.b nFs4, nD4, nD5
+	sPan		spRight
+	dc.b nA4, nFs4, nFs4
+	sPan		spLeft
+	dc.b nE4, nD4, nC4, nRst
+	sPan		spRight
+	dc.b nB3, nG3, nG4
+	sPan		spLeft
+	dc.b nD4, nB3, nB4
+	sPan		spCenter
+	dc.b nG4, nD4, nD5
+	sPan		spLeft
+	dc.b nB4, nG4, nG4
+	sPan		spRight
+	dc.b nF4, nE4, nD4, nRst
+	sPan		spLeft
+	dc.b nAb3, nE3, nE4
+	sPan		spRight
+	dc.b nB3, nAb3, nAb4
+	sPan		spCenter
+	dc.b nE4, nB3, nB4
+	sPan		spRight
+	dc.b nAb4, nE4, nE4
+	sPan		spLeft
+	dc.b nD4, nC4, nB3, nRst
+	sPan		spRight
+	dc.b nA3, nE3, nE4
+	sPan		spLeft
+	dc.b nC4, nA3, nA4
+	sPan		spCenter
+	dc.b nE4, nC4, nC5
+	sPan		spLeft
+	dc.b nA4, nE4, nE5
+	sPan		spRight
+	dc.b nC5, nA4, nE4, nRst
+	sPan		spLeft
+	dc.b nA3, nF3, nF4
+	sPan		spRight
+	dc.b nC4, nA3, nA4
+	sPan		spCenter
+	dc.b nF4, nC4, nC5
+	sPan		spRight
+	dc.b nA4, nF4, nF4
+	sPan		spLeft
+	dc.b nE4, nF4, nFs4
+	sRet
+
+MenuD_PSG1:
+	dc.b nRst, $06
+	sVolEnv		v11
+	sModAMPS	$02, $01, $01, $03
+
+MenuD_Jump5:
+	sCall		MenuD_Call5
+	dc.b nA3, $18, $06, nB3, nC4, nF4, nRst, nF4
+	dc.b nE4, $0C, nF4, nFs4, nG4, $06, nG4, nG4
+	dc.b nG4, nRst, nG4, nG4, nG4, nG4, nRst, $2A
+	sCall		MenuD_Call5
+	dc.b nA3, $18, $06, nB3, nC4, nF4, nRst, nF4
+	dc.b nE4, $0C, nF4, $06, nE4, nD4, nC4, nAb3
+	dc.b $18, $06, nBb3, nC4, nF4, nRst, nF4, nE4
+	dc.b $0C, nF4, $06, nE4, nD4, nC4
+	sJump		MenuD_Jump5
+
+MenuD_Call5:
+	dc.b nG3, $18, nE3, $0C, nF3, $06, nG3, nRst
+	dc.b nE4, nRst, nD4, nC4, $0C, nG3, nB3, $18
+	dc.b nA3, $0C, nAb3, $06
+	sModAMPS	$04, $01, $01, $05
+	dc.b nA3, $36
+	sModAMPS	$02, $01, $01, $03
+	dc.b nA3, $18, nFs3, $0C, nG3, $06, nA3, nRst
+	dc.b nFs4, nRst, nE4, nD4, $0C, nA3, nC4, $18
+	dc.b nB3, $0C, nBb3, $06
+	sModAMPS	$04, $01, $01, $05
+	dc.b nB3, $36
+	sModAMPS	$02, $01, $01, $03
+	dc.b nB3, $18, nAb3, $0C, nA3, $06, nB3, nRst
+	dc.b nF4, nRst, nE4, nD4, $0C, nB3, nD4, $18
+	dc.b nC4, $0C, nB3, $06
+	sModAMPS	$04, $01, $01, $05
+	dc.b nC4, $36
+	sModAMPS	$02, $01, $01, $03
+	sRet
+
+MenuD_PSG2:
+	dc.b nRst, $06
+	sVolEnv		v11
+	sModAMPS	$03, $01, $01, $04
+	sGate		$05
+
+MenuD_Jump6:
+	sCall		MenuD_Call6
+	dc.b nG4, nF4, nE4, nD4, nC4, nB3, nA3, nAb3
+	dc.b nG3, nA3, nB3, nC4, nD4, nE4, nF4, nG4
+	sCall		MenuD_Call6
+	dc.b nAb4, nFs4, nF4, nEb4, nCs4, nC4, nBb3, nA3
+	dc.b nAb3, nBb3, nC4, nCs4, nEb4, nF4, nFs4, nAb4
+	sJump		MenuD_Jump6
+
+MenuD_Call6:
+	dc.b nRst, $06, nG3, nE3, nE4, nC4, nG3, nG4
+	dc.b nE4, nC4, nC5, nG4, nE4, nE4, nD4, nC4
+	dc.b nB3, nRst, nA3, nF3, nF4, nC4, nA3, nA4
+	dc.b nF4, nC4, nC5, nA4, nF4, nF4, nE4, nD4
+	dc.b nC4, nRst, nA3, nFs3, nFs4, nD4, nA3, nA4
+	dc.b nFs4, nD4, nD5, nA4, nFs4, nFs4, nE4, nD4
+	dc.b nC4, nRst, nB3, nG3, nG4, nD4, nB3, nB4
+	dc.b nG4, nD4, nD5, nB4, nG4, nG4, nF4, nE4
+	dc.b nD4, nRst, nAb3, nE3, nE4, nB3, nAb3, nAb4
+	dc.b nE4, nB3, nB4, nAb4, nE4, nE4, nD4, nC4
+	dc.b nB3, nRst, nA3, nE3, nE4, nC4, nA3, nA4
+	dc.b nE4, nC4, nC5, nA4, nE4, nE5, nC5, nA4
+	dc.b nE4, nRst, nA3, nF3, nF4, nC4, nA3, nA4
+	dc.b nF4, nC4, nC5, nA4, nF4, nF4, nE4, nF4
+	dc.b nFs4
+	sRet
+
+MenuD_PSG3:
+	sNoisePSG	$E7
+
+MenuD_Loop1:
+	sCall		MenuD_Call7
+	sLoop		$00, $07, MenuD_Loop1
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $04, $04, $04, $06
+	sVolEnv		v12
+	dc.b $06
+	sVolEnv		v0F
+	dc.b $0C, $06
+	sVolEnv		v12
+	dc.b $06
+
+MenuD_Loop2:
+	sCall		MenuD_Call7
+	sLoop		$00, $08, MenuD_Loop2
+	sJump		MenuD_Loop1
+
+MenuD_Call7:
+	sVolEnv		v0F
+	dc.b nHiHat, $0C, $0C
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06
+	sVolEnv		v12
+	dc.b $0C, $12
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sRet
+
+MenuD_DAC1:
+	sStop
+
+MenuD_DAC2:
+	dc.b dKick, $12, $06, dSnare, dSnare, $0C, dKick, dKick
+	dc.b dKick, $06, $0C, dSnare
+	sLoop		$00, $07, MenuD_DAC2
+	dc.b dSnare, $06, dSnare, dSnare, dSnare, $0C, dSnare, $06, dSnare
+	dc.b dSnare, dSnare, dHighTom, $0C, $06, dMidTom, $0C, dLowTom
+	sJump		MenuD_DAC2

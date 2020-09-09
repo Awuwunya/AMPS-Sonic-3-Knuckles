@@ -16,7 +16,7 @@ dAMPSnextPSGSFX:
 
 	dCalcFreq				; calculate channel base frequency
 	dModPortaWait	.endm, -1, -1		; run modulation + portamento code
-		bsr.w	dUpdateFreqPSG3		; if frequency needs changing, do it
+		bsr.w	dUpdateFreqPSG2		; if frequency needs changing, do it
 
 .endm
 		jsr	dEnvelopePSG_SFX(pc)	; run envelope program
@@ -143,16 +143,13 @@ dUpdateFreqPSG:
 ; ---------------------------------------------------------------------------
 
 dUpdateFreqPSG2:
-		btst	#cfbInt,(a1)		; is channel interrupted by sfx?
-		bne.s	locret_UpdateFreqPSG	; if so, skip
-
-dUpdateFreqPSG3:
 	if FEATURE_SOUNDTEST
 		move.w	d2,cChipFreq(a1)	; save frequency to chip
 	endif
 
-		btst	#cfbRest,(a1)		; is this channel resting
-		bne.s	locret_UpdateFreqPSG	; if so, skip
+		moveq	#(1<<cfbInt)|(1<<cfbRest),d6; check for if channel is interrupted or resting
+		and.b	(a1),d6			; and flags with d6
+		bne.s	locret_UpdateFreqPSG	; if either flag set, branch
 
 		move.b	cType(a1),d6		; load channel type value to d6
 		cmpi.b	#ctPSG4,d6		; check if this channel is in PSG4 mode
@@ -246,10 +243,9 @@ dEnvelopePSG2:
 
 dUpdateVolPSG:
 		bclr	#cfbVol,(a1)		; clear volume update flag
-		btst	#cfbInt,(a1)		; is channel interrupted by sfx?
-		bne.s	locret_UpdVolPSG	; if is, do not update
-		btst	#cfbRest,(a1)		; is this channel resting
-		bne.s	locret_UpdVolPSG	; if is, do not update
+		moveq	#(1<<cfbInt)|(1<<cfbRest),d2; check for if channel is interrupted or resting
+		and.b	(a1),d2			; and flags with d2
+		bne.s	locret_UpdVolPSG	; if either flag set, branch
 
 		btst	#cfbHold,(a1)		; check if note is held
 		beq.s	.send			; if not, update volume

@@ -52,21 +52,31 @@
 __mus :=	MusOff
 
 MusicIndex:
+	; Sonic 3 Prototype OST
 	ptrMusic CNZ1P, $20, CNZ2P, $20, ICZ1P, $20, ICZ2P, $20, LBZ1P, $20, LBZ2P, $20
 	ptrMusic KnucklesP, $20, CompetitionMenuP, $20, CreditsP, $20, Unknown, $20
 
+	; Sonic 3D OST
+	ptrMusic GGZ1, $20, GGZ2, $20, RRZ1, $20, RRZ2, $20, VVZ1, $20, VVZ2, $20
+	ptrMusic SSZ1, $20, SSZ2, $20, DDZ1, $20, DDZ2, $20, GGX1, $20, GGX2, $20
+	ptrMusic PPZ1, $20, PPZ2, $20, Boss1, $20, Boss2, $20, Boss4, $20, FinalBossD, $20
+	ptrMusic InvincibilityD, $20, Intro, $00, MenuD, $20, EndingD, $00, CreditsD, $00
+
+	; Sonic 3 OST
 	ptrMusic AIZ1, $20, AIZ2, $20, HCZ1, $20, HCZ2, $20, MGZ1, $20, MGZ2, $20
 	ptrMusic CNZ1, $20, CNZ2, $20, ICZ1, $20, ICZ2, $20, LBZ1, $20, LBZ2, $20
+	ptrMusic Miniboss, $20, EndBoss, $20, FinalBoss, $20, Knuckles, $20
+	ptrMusic Invincibility, $20, ExtraLife, $00, TitleScreen, $00, Ending, $00
+	ptrMusic Credits, $00, DataSelect, $20, CompetitionMenu, $20, Drowning, $20
+	ptrMusic GotThroughAct, $00, GameOver, $00, Emerald, $00, Continue, $00
+	ptrMusic ALZ, $20, BPZ, $20, DPZ, $20, CGZ, $20, EMZ, $20, SpecialStage, $00
+	ptrMusic Gumball, $20, SlotMachine, $20, MagneticOrbs, $20
+
+	; Sonic & Knuckles OST
 	ptrMusic MHZ1, $20, MHZ2, $20, FBZ1, $20, FBZ2, $20, SOZ1, $20, SOZ2, $20
 	ptrMusic LRZ1, $20, HPZ,  $20, SSZ,  $20, DEZ1, $20, DEZ2, $20, DDZ,  $20
-	ptrMusic Miniboss, $20, MinibossK, $20, EndBoss, $20, FinalBoss, $20
-	ptrMusic Knuckles, $20, KnucklesK, $20, Invincibility, $20, InvincibilityK, $20
-	ptrMusic GotThroughAct, $00, Drowning, $20, GameOver, $00, Emerald, $00
-	ptrMusic ExtraLife, $00, ExtraLifeK, $00, TitleScreen, $00, TitleScreenK, $00
-	ptrMusic ALZ, $20, BPZ, $20, DPZ, $20, CGZ, $20, EMZ, $20, SpecialStage, $00
-	ptrMusic Gumball, $20, SlotMachine, $20, MagneticOrbs, $20, Continue, $00
-	ptrMusic DataSelect, $20, CompetitionMenu, $20, Ending, $00, EndingK, $00
-	ptrMusic Credits, $00, CreditsK, $00, SEGA, $00
+	ptrMusic MinibossK, $20, KnucklesK, $20, InvincibilityK, $20, ExtraLifeK, $00
+	ptrMusic TitleScreenK, $00, EndingK, $00, CreditsK, $00, SEGA, $00
 
 MusCount =	__mus-MusOff		; number of installed music tracks
 SFXoff =	__mus			; first SFX ID
@@ -74,6 +84,7 @@ __sfx :=	SFXoff
 ; ---------------------------------------------------------------------------
 
 SoundIndex:
+; Sonic 3 & Knuckles
 	ptrSFX	$01, RingRight
 	ptrSFX	0, RingLeft, RingLoss, Splash, Break, Jump, Roll, Dash, Skid
 	ptrSFX	0, AirDing, Bubble, Drown, SpikeHit, Death, Spindash, BossHit
@@ -104,11 +115,15 @@ SoundIndex:
 	ptrSFX	$80, LeafBlower, LavaFall, BossPanic, LargeShip, EggmanSiren
 	ptrSFX	$80, Rising, BossRotate, DeathEggRiseLoud, DeathEggRiseQuiet
 
-; unused sfx
-	ptrSFX	$80, SlideSkidLoud, UnknownSaw, UnknownSpin, UnknownZap
-	ptrSFX	0, UnknownShield, UnknownCharge, UnknownShift, UnknownPump
-	ptrSFX	0, UnknownPowerUp, UnknownPowerDown, UnknownRise, UnknownPlink
-	ptrSFX	0, UnknownOminous, UnknownRevving, UnknownFlutter
+; unused S3K sfx
+	ptrSFX	$80, SlideSkidLoud
+;	p-trSFX	$80, SlideSkidLoud, UnknownSaw, UnknownSpin, UnknownZap
+;	p-trSFX	0, UnknownShield, UnknownCharge, UnknownShift, UnknownPump
+;	p-trSFX	0, UnknownPowerUp, UnknownPowerDown, UnknownRise, UnknownPlink
+;	p-trSFX	0, UnknownOminous, UnknownRevving, UnknownFlutter
+
+; Sonic 3D sfx
+;	p-trSFX	0, FlickyCollect, FlickyChirp, FlickyHurt, UnknownCharge, UnknownShieldBroken
 
 SFXcount =	__sfx-SFXoff		; number of intalled sound effects
 SFXlast =	__sfx
@@ -201,6 +216,9 @@ SampleList:
 
 	sample $0100, EchoClapS3, Stop, HighEchoClapS3	; C5 - High Echoed Clap (Sonic 3)
 	sample $00C3, EchoClapS3, Stop, LowEchoClapS3	; C6 - Low Echoed Clap Hit (Sonic 3)
+
+	sample $0100, LowerKick, Stop			; 9B - Lower Kick (Sonic 3D)
+	sample $0100, BigOrchHit, Stop			; 9C - Orchestra Hit (Sonic 3D)
 	sample $0100, SEGA, Stop			; C7 - SEGA
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -408,12 +426,12 @@ SWF_Stop:	asdata $8000-(2*Z80E_Read*(MaxPitch/$100)), $80
 SWFR_Stop:	asdata Z80E_Read*(MaxPitch/$100), $00
 ; ---------------------------------------------------------------------------
 
-	incSWF	Snare, Tom, Kick, KickSnare, CrashCymbal, RideCymbal, MetalBlock, MutedWood
-	incSWF	CowBell, Clap, ElecTom, HeavyTom, Timpani, LooseSnare, VocalClick, VocalKick
-	incSWF	VocalSnare, JamHit, JamHitShort, GlassKick, GlassSmash, DanceSnare, DanceKick
-	incSWF	ComeOn, HeavySnare, LowKick, LowKickShort, Whoo, Go, SnareGo, PowerTom, Wood
+	incSWF	Snare, Tom, Kick, KickSnare, CrashCymbal, RideCymbal, MetalBlock, MutedWood, Wood
+	incSWF	CowBell, Clap, ElecTom, HeavyTom, Timpani, LooseSnare, VocalClick, VocalKick, SEGA
+	incSWF	VocalSnare, JamHit, JamHitShort, GlassKick, GlassSmash, DanceSnare, DanceKick, Go
+	incSWF	ComeOn, HeavySnare, LowKick, LowKickShort, Whoo, SnareGo, PowerTom, LowerKick
 	incSWF	Congo, CrashHit, EchoClap, EchoClapS3, KickUh, ElecKick, SynthHit, ReverseCrash
-	incSWF	SynthHit3, HeavyKick, WhooCrash, SideStick, KickOh, OrchHit, Scratch, SEGA
+	incSWF	SynthHit3, HeavyKick, WhooCrash, SideStick, KickOh, BigOrchHit, OrchHit, Scratch
 	even
 
 	listing on			; continue source listing

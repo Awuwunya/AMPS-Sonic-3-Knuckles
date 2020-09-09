@@ -1,0 +1,588 @@
+VolcanoValley1_Header:
+	sHeaderInit						; Z80 offset is $D04A
+	sHeaderTempo	$01, $1D
+	sHeaderCh	$05, $03
+	sHeaderDAC	VolcanoValley1_DAC1
+	sHeaderDAC	VolcanoValley1_DAC2
+	sHeaderFM	VolcanoValley1_FM1, $00, $18
+	sHeaderFM	VolcanoValley1_FM2, $0C, $0F
+	sHeaderFM	VolcanoValley1_FM3, $F4, $10
+	sHeaderFM	VolcanoValley1_FM4, $F4, $10
+	sHeaderFM	VolcanoValley1_FM5, $00, $1C
+	sHeaderPSG	VolcanoValley1_PSG1, $E8, $10, $00, vNone
+	sHeaderPSG	VolcanoValley1_PSG2, $E8, $20, $00, vNone
+	sHeaderPSG	VolcanoValley1_PSG3, $00, $10, $00, vNone
+
+	; Patch $00
+	; $08
+	; $0A, $70, $30, $00,	$1F, $1F, $5F, $5F
+	; $12, $0E, $0A, $0A,	$00, $04, $04, $03
+	; $2F, $2F, $2F, $2F,	$24, $2D, $13, $80
+	spAlgorithm	$00
+	spFeedback	$01
+	spDetune	$00, $03, $07, $00
+	spMultiple	$0A, $00, $00, $00
+	spRateScale	$00, $01, $00, $01
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$12, $0A, $0E, $0A
+	spSustainLv	$02, $02, $02, $02
+	spDecayRt	$00, $04, $04, $03
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$24, $13, $2D, $00
+
+	; Patch $01
+	; $3D
+	; $06, $21, $51, $06,	$12, $14, $14, $0F
+	; $0A, $06, $06, $06,	$00, $00, $00, $00
+	; $2B, $2B, $2B, $1B,	$19, $80, $80, $80
+	spAlgorithm	$05
+	spFeedback	$07
+	spDetune	$00, $05, $02, $00
+	spMultiple	$06, $01, $01, $06
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$12, $14, $14, $0F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0A, $06, $06, $06
+	spSustainLv	$02, $02, $02, $01
+	spDecayRt	$00, $00, $00, $00
+	spReleaseRt	$0B, $0B, $0B, $0B
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$19, $00, $00, $00
+
+	; Patch $02
+	; $3E
+	; $07, $01, $02, $0A,	$1F, $1F, $1F, $1F
+	; $03, $06, $00, $00,	$08, $06, $07, $0C
+	; $15, $0A, $0A, $0A,	$20, $85, $86, $88
+	spAlgorithm	$06
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$07, $02, $01, $0A
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$03, $00, $06, $00
+	spSustainLv	$01, $00, $00, $00
+	spDecayRt	$08, $07, $06, $0C
+	spReleaseRt	$05, $0A, $0A, $0A
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$20, $06, $05, $08
+
+	; Patch $03
+	; $16
+	; $7A, $74, $3C, $31,	$1F, $1F, $1F, $1F
+	; $0A, $08, $0C, $0A,	$07, $0A, $07, $05
+	; $2F, $AF, $AF, $5F,	$14, $85, $8A, $80
+	spAlgorithm	$06
+	spFeedback	$02
+	spDetune	$07, $03, $07, $03
+	spMultiple	$0A, $0C, $04, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0A, $0C, $08, $0A
+	spSustainLv	$02, $0A, $0A, $05
+	spDecayRt	$07, $07, $0A, $05
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$14, $0A, $05, $00
+
+	; Patch $04
+	; $3C
+	; $71, $71, $11, $11,	$17, $1E, $19, $1E
+	; $04, $01, $07, $01,	$00, $00, $00, $00
+	; $F7, $F8, $F7, $F8,	$1E, $80, $14, $80
+	spAlgorithm	$04
+	spFeedback	$07
+	spDetune	$07, $01, $07, $01
+	spMultiple	$01, $01, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$17, $19, $1E, $1E
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$04, $07, $01, $01
+	spSustainLv	$0F, $0F, $0F, $0F
+	spDecayRt	$00, $00, $00, $00
+	spReleaseRt	$07, $07, $08, $08
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1E, $14, $00, $00
+
+	; Patch $05
+	; $3A
+	; $01, $07, $01, $01,	$8E, $8E, $8D, $53
+	; $0E, $0E, $0E, $03,	$00, $00, $00, $07
+	; $1F, $FF, $1F, $0F,	$18, $28, $27, $80
+	spAlgorithm	$02
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$01, $01, $07, $01
+	spRateScale	$02, $02, $02, $01
+	spAttackRt	$0E, $0D, $0E, $13
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0E, $0E, $0E, $03
+	spSustainLv	$01, $01, $0F, $00
+	spDecayRt	$00, $00, $00, $07
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$18, $27, $28, $00
+
+	; Patch $06
+	; $3A
+	; $06, $06, $06, $06,	$8E, $8E, $8D, $53
+	; $0E, $0E, $0E, $03,	$00, $00, $00, $06
+	; $1F, $FF, $1F, $0F,	$17, $28, $27, $80
+	spAlgorithm	$02
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$06, $06, $06, $06
+	spRateScale	$02, $02, $02, $01
+	spAttackRt	$0E, $0D, $0E, $13
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0E, $0E, $0E, $03
+	spSustainLv	$01, $01, $0F, $00
+	spDecayRt	$00, $00, $00, $06
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$17, $27, $28, $00
+
+	; Patch $07
+	; $35
+	; $06, $06, $13, $00,	$1F, $1D, $18, $19
+	; $00, $09, $06, $0D,	$00, $00, $02, $03
+	; $00, $06, $15, $16,	$1E, $80, $83, $80
+	spAlgorithm	$05
+	spFeedback	$06
+	spDetune	$00, $01, $00, $00
+	spMultiple	$06, $03, $06, $00
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $18, $1D, $19
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$00, $06, $09, $0D
+	spSustainLv	$00, $01, $00, $01
+	spDecayRt	$00, $02, $00, $03
+	spReleaseRt	$00, $05, $06, $06
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1E, $03, $00, $00
+
+	; Patch $08
+	; $3D
+	; $01, $21, $50, $01,	$12, $14, $14, $0F
+	; $0A, $05, $05, $05,	$00, $00, $00, $00
+	; $26, $28, $28, $18,	$19, $80, $80, $80
+	spAlgorithm	$05
+	spFeedback	$07
+	spDetune	$00, $05, $02, $00
+	spMultiple	$01, $00, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$12, $14, $14, $0F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0A, $05, $05, $05
+	spSustainLv	$02, $02, $02, $01
+	spDecayRt	$00, $00, $00, $00
+	spReleaseRt	$06, $08, $08, $08
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$19, $00, $00, $00
+
+	; Patch $09
+	; $04
+	; $57, $02, $70, $50,	$1F, $1F, $1F, $1F
+	; $00, $00, $00, $00,	$06, $0A, $00, $0A
+	; $00, $0F, $00, $0F,	$1A, $80, $10, $80
+	spAlgorithm	$04
+	spFeedback	$00
+	spDetune	$05, $07, $00, $05
+	spMultiple	$07, $00, $02, $00
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$00, $00, $00, $00
+	spSustainLv	$00, $00, $00, $00
+	spDecayRt	$06, $00, $0A, $0A
+	spReleaseRt	$00, $00, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1A, $10, $00, $00
+
+VolcanoValley1_FM5:
+	dc.b nRst, $0B
+	sModAMPS	$00, $01, $01, $08
+	ssDetune	$01
+	sJump		VolcanoValley1_Jump4
+
+VolcanoValley1_FM1:
+	sModAMPS	$0B, $01, $09, $07
+
+VolcanoValley1_Jump4:
+	dc.b nRst, $30
+	sPan		spCenter
+	sVoice		$01
+
+VolcanoValley1_Jump1:
+	dc.b nRst, $60, nRst, nRst, nRst
+
+VolcanoValley1_Loop1:
+	sCall		VolcanoValley1_Call1
+	dc.b nG3, $24, nF3, nEb3, $18, sHold, $0C, nF3
+	dc.b $18, nEb3, nBb2, nB2, $0C
+	sCall		VolcanoValley1_Call1
+	dc.b nG3, $24, nC4, $3C, sHold, $60
+	sLoop		$00, $02, VolcanoValley1_Loop1
+
+VolcanoValley1_Loop2:
+	dc.b nAb4, $24, nF4, $18, nBb4, $0C, nAb4, nG4
+	sLoop		$00, $05, VolcanoValley1_Loop2
+	dc.b nAb4, $24, nG4, $18, nAb4, $0C, nG4, $18
+	dc.b nAb4, $60, sHold, nF4
+
+VolcanoValley1_Loop3:
+	dc.b nAb4, $24, nF4, $18, nBb4, $0C, nAb4, nG4
+	sLoop		$00, $05, VolcanoValley1_Loop3
+	dc.b nAb4, $24, nG4, nEb4, $18, nF4, $60, sHold
+	dc.b nF4
+	sJump		VolcanoValley1_Jump1
+
+VolcanoValley1_Call1:
+	dc.b nC3, $24, nF3, nC4, $18, sHold, $0C, nBb3
+	dc.b $18, nAb3, nG3, $0C, nF3, nAb3
+	sRet
+
+VolcanoValley1_FM2:
+	dc.b nRst, $30
+	sVoice		$00
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+
+VolcanoValley1_Loop4:
+	sCall		VolcanoValley1_Call2
+	sLoop		$00, $05, VolcanoValley1_Loop4
+	sCall		VolcanoValley1_Call3
+	sCall		VolcanoValley1_Call4
+	sCall		VolcanoValley1_Call3
+	dc.b nAb2, nAb3, nG2, $0C, nAb2, nG2, $06, nG3
+	dc.b nFs2, $0C, nG2, nAb2, $06, nG2, nD2, nEb2
+	dc.b nF2, nF3, nE2, $0C, nF2, nF2, $06, nF3
+	dc.b nEb2, $0C, nEb3, nD2, $06, nEb2, nEb2, nEb3
+	sCall		VolcanoValley1_Call3
+	sCall		VolcanoValley1_Call4
+	sCall		VolcanoValley1_Call3
+
+VolcanoValley1_Loop5:
+	dc.b nF1, nF2, nF1, $0C, nF1, nF1, $06, nF2
+	dc.b nF1, $0C, nF1, nF1, $06, nF2, nF1, nF2
+	sLoop		$00, $02, VolcanoValley1_Loop5
+	sJump		VolcanoValley1_Loop4
+
+VolcanoValley1_Call2:
+	dc.b nF2, $0C, nC2, nEb2, nC2, $06, nF2, $0C
+	dc.b $06, nC2, $0C, nEb2, nC2, nF2, nC2, nEb2
+	dc.b $06, nE2, $0C, nF2, nF2, $06, nC2, $0C
+	dc.b nF2, nE2, nEb2, nBb1, nCs2, nD2, $06, nEb2
+	dc.b $0C, $06, nBb1, $0C, nCs2, nD2, nEb2, nBb1
+	dc.b nCs2, $06, nD2, $0C, nEb2, nEb2, $06, nBb1
+	dc.b $0C, nEb2, nE2
+	sRet
+
+VolcanoValley1_Call3:
+	dc.b nCs2, $06, nCs3, nC2, $0C, nCs2, nCs2, $06
+	dc.b nCs3, nC2, $0C, nCs2, nCs2, $06, nCs3, nCs2
+	dc.b nD2, nEb2, nEb3, nD2, $0C, nEb2, nEb2, $06
+	dc.b nEb3, nD2, $0C, nEb2, nEb2, $06, nEb3, nEb2
+	dc.b nCs2
+	sRet
+
+VolcanoValley1_Call4:
+	dc.b nC2, nC3, nB1, $0C, nC2, nC2, $06, nC3
+	dc.b nB1, $0C, nC2, nC2, $06, nB1, nC2, nEb2
+	dc.b nCs2, nCs3, nC2, $0C, nCs2, nCs2, $06, nCs3
+	dc.b nC2, $0C, nCs2, nCs2, $06, nAb1, nB1, nC2
+	sRet
+
+VolcanoValley1_FM3:
+	sPan		spRight
+	sVoice		$02
+	saTranspose	$FB
+	sModAMPS	$00, $01, $0A, $B7
+	dc.b nC3, $30
+	saTranspose	$05
+
+VolcanoValley1_Jump2:
+	sVoice		$02
+	sModAMPS	$00, $01, $02, $06
+	dc.b nF3, $60, sHold, $30
+	sModAMPS	$00, $01, $0A, $B7
+	saTranspose	$FB
+	dc.b nC3
+	saTranspose	$05
+	sModAMPS	$00, $01, $02, $06
+	dc.b nEb3, $60, sHold, $30
+	saTranspose	$FB
+	sModAMPS	$00, $01, $0C, $BF
+	dc.b nC3, $30
+	saTranspose	$05
+
+VolcanoValley1_Loop6:
+	sModAMPS	$00, $01, $02, $06
+	dc.b nF3, $60, sHold, $30
+	saTranspose	$FB
+	sModAMPS	$00, $01, $0C, $BF
+	dc.b nC3
+	saTranspose	$05
+	sModAMPS	$00, $01, $02, $06
+	dc.b nEb3, $60, sHold, $30
+	saTranspose	$FB
+	sModAMPS	$00, $01, $0C, $BF
+	dc.b nC3
+	saTranspose	$05
+	sLoop		$00, $04, VolcanoValley1_Loop6
+	saTranspose	$F4
+	saVol		$03
+	sVoice		$03
+	sModAMPS	$00, $01, $02, $06
+	dc.b nAb5, $0C, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5, nBb5, nBb5, nBb5, nBb5, nBb5, nBb5, nBb5
+	dc.b nBb5, nG5, nG5, nG5, nG5, nG5, nG5, nG5
+	dc.b nG5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5, nBb5, nBb5, nBb5, nBb5, nBb5, nBb5, nBb5
+	dc.b nBb5, nC6, nC6, nC6, nBb5, nBb5, nBb5, nBb5
+	dc.b nBb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5, nBb5, nBb5, nBb5, nBb5, nBb5, nBb5, nBb5
+	dc.b nBb5, nG5, nG5, nG5, nG5, nG5, nG5, nG5
+	dc.b nG5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5, nBb5, nBb5, nBb5, nBb5, nBb5, nBb5, nBb5
+	dc.b nBb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5, nAb5
+	dc.b nAb5
+	saVol		$FD
+	saTranspose	$0C
+	sJump		VolcanoValley1_Jump2
+
+VolcanoValley1_FM4:
+	sPan		spLeft
+	sModAMPS	$00, $01, $01, $05
+	sVoice		$02
+	saTranspose	$FB
+	sModAMPS	$00, $01, $08, $B7
+	dc.b nG2, $30
+	saTranspose	$05
+
+VolcanoValley1_Jump3:
+	sVoice		$02
+	sModAMPS	$00, $01, $02, $06
+	dc.b nC3, $60, sHold, $30
+	sModAMPS	$00, $01, $08, $B7
+	saTranspose	$FB
+	dc.b nG2
+	saTranspose	$05
+	sModAMPS	$00, $01, $02, $06
+	dc.b nBb2, $60, sHold, $30
+	saTranspose	$FB
+	sModAMPS	$00, $01, $08, $BF
+	dc.b nG2, $30
+	saTranspose	$05
+
+VolcanoValley1_Loop7:
+	sModAMPS	$00, $01, $02, $06
+	dc.b nC3, $60, sHold, $30
+	saTranspose	$FB
+	sModAMPS	$00, $01, $08, $BF
+	dc.b nG2
+	sModAMPS	$00, $01, $02, $06
+	saTranspose	$05
+	dc.b nBb2, $60, sHold, $30
+	saTranspose	$FB
+	sModAMPS	$00, $01, $08, $BF
+	dc.b nBb2
+	saTranspose	$05
+	sModAMPS	$00, $01, $02, $06
+	sLoop		$00, $04, VolcanoValley1_Loop7
+	saTranspose	$F4
+	saVol		$03
+	sVoice		$03
+	sModAMPS	$00, $01, $02, $06
+	dc.b nCs5, $0C, nCs5, nCs5, nCs5, nCs5, nCs5, nCs5
+	dc.b nCs5, nEb5, nEb5, nEb5, nEb5, nEb5, nEb5, nEb5
+	dc.b nEb5, nC5, nC5, nC5, nEb5, nEb5, nEb5, nEb5
+	dc.b nEb5, nF5, nF5, nF5, nCs5, nCs5, nCs5, nCs5
+	dc.b nCs5, nCs5, nCs5, nCs5, nCs5, nCs5, nCs5, nCs5
+	dc.b nCs5, nEb5, nEb5, nEb5, nEb5, nEb5, nEb5, nEb5
+	dc.b nEb5, nAb5, nAb5, nAb5, nG5, nG5, nG5, nG5
+	dc.b nG5, nF5, nF5, nF5, nC5, nC5, nC5, nC5
+	dc.b nC5, nCs5, nCs5, nCs5, nCs5, nCs5, nCs5, nCs5
+	dc.b nCs5, nEb5, nEb5, nEb5, nEb5, nEb5, nEb5, nEb5
+	dc.b nEb5, nC5, nC5, nC5, nEb5, nEb5, nEb5, nEb5
+	dc.b nEb5, nF5, nF5, nF5, nCs5, nCs5, nCs5, nCs5
+	dc.b nCs5, nCs5, nCs5, nCs5, nCs5, nCs5, nCs5, nCs5
+	dc.b nCs5, nEb5, nEb5, nBb5, nBb5, nBb5, nBb5, nBb5
+	dc.b nBb5, nF5, nF5, nF5, nC5, nC5, nC5, nC5
+	dc.b nC5, nF5, nF5, nF5, nC5, nC5, nC5, nC5
+	dc.b nC5
+	saVol		$FD
+	saTranspose	$0C
+	sJump		VolcanoValley1_Jump3
+
+VolcanoValley1_PSG2:
+	dc.b nRst, $3D
+	ssDetune	$FE
+	sJump		VolcanoValley1_Jump5
+
+VolcanoValley1_PSG1:
+	sVolEnv		v11
+	saTranspose	$FB
+	sModAMPS	$00, $01, $F9, $A7
+	dc.b nC3, $30
+	saTranspose	$05
+
+VolcanoValley1_Jump5:
+	sVolEnv		v11
+	sModAMPS	$0E, $01, $01, $06
+	dc.b nF3, $60, sHold, $30
+	sModAMPS	$00, $01, $FB, $A7
+	saTranspose	$F7
+	dc.b nC3
+	saTranspose	$09
+	sModAMPS	$0E, $01, $01, $06
+	dc.b nEb3, $60, sHold, $30
+	saTranspose	$FB
+	sModAMPS	$00, $01, $F9, $A7
+	dc.b nC3, $30
+	saTranspose	$05
+
+VolcanoValley1_Loop8:
+	sVolEnv		v11
+	sModAMPS	$0E, $01, $01, $06
+	dc.b nF3, $60, sHold, $30
+	saTranspose	$F7
+	sModAMPS	$00, $01, $FB, $A7
+	dc.b nC3
+	saTranspose	$09
+	sModAMPS	$0E, $01, $01, $06
+	dc.b nEb3, $60, sHold, $30
+	saTranspose	$FB
+	sModAMPS	$00, $01, $F9, $A7
+	dc.b nC3
+	saTranspose	$05
+	sModAMPS	$0E, $01, $01, $06
+	dc.b nF3, $60, sHold, $30
+	saTranspose	$F7
+	sModAMPS	$00, $01, $FB, $A7
+	dc.b nC3
+	saTranspose	$09
+	sModAMPS	$0E, $01, $01, $06
+	dc.b nEb3, $6C
+	saTranspose	$0C
+	sVolEnv		v26
+	dc.b nG4, $18, nC5, $3C
+	saTranspose	$F4
+	sLoop		$00, $02, VolcanoValley1_Loop8
+	saTranspose	$0C
+	sVolEnv		v26
+	sModAMPS	$0E, $01, $01, $06
+	dc.b nAb3, $0C, nC4, nF4, nC4, nF4, nAb4, nC5
+	dc.b nAb4, nBb4, nG4, nEb4, nG4, nEb4, nBb3, nG3
+	dc.b nBb3, nG3, nEb4, nG4, nBb3, nEb4, nG4, nAb4
+	dc.b nBb4, nAb4, nF4, nCs4, nF4, nCs4, nAb3, nC4
+	dc.b nCs4, nAb3, nCs4, nF4, nCs4, nF4, nAb4, nCs5
+	dc.b nAb4, nBb4, nG4, nEb4, nG4, nEb4, nBb3, nEb4
+	dc.b nE4, nF4, nEb4, nG4, nBb3, nEb4, nG4, nAb4
+	dc.b nBb4, nAb4, nF4, nCs4, nF4, nCs4, nAb3, nC4
+	dc.b nCs4, nAb3, nCs4, nF4, nCs4, nF4, nAb4, nCs5
+	dc.b nAb4, nBb4, nG4, nEb4, nG4, nEb4, nBb3, nG3
+	dc.b nBb3, nG3, nBb3, nEb4, nBb3, nEb4, nG4, nAb4
+	dc.b nBb4, nAb4, nF4, nCs4, nF4, nCs4, nAb3, nC4
+	dc.b nCs4, nAb3, nCs4, nF4, nCs4, nF4, nAb4, nCs5
+	dc.b nAb4, nBb4, nG4, nEb4, nG4, nEb4, nBb3, nEb4
+	dc.b nE4, nF4, nEb4, nC4, nAb4, nF4, nEb4, nG4
+	dc.b nEb4, nF4, nEb4, nC4, nAb4, nF4, nEb4, nG4
+	dc.b nEb4
+	saTranspose	$F4
+	sJump		VolcanoValley1_Jump5
+
+VolcanoValley1_PSG3:
+	dc.b nRst, $30
+	sNoisePSG	$E7
+
+VolcanoValley1_Loop9:
+	sVolEnv		v0F
+	dc.b nHiHat, $06, $06, $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06, $06, $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sLoop		$00, $14, VolcanoValley1_Loop9
+
+VolcanoValley1_Loop10:
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06, $06, $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06, $06, $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sLoop		$00, $10, VolcanoValley1_Loop10
+	sJump		VolcanoValley1_Loop9
+
+VolcanoValley1_DAC1:
+	sStop
+
+VolcanoValley1_DAC2:
+	dc.b nRst, $30
+
+VolcanoValley1_Loop11:
+	sCall		VolcanoValley1_Call7
+	dc.b dHighElecTom, dMidElecTom, dLowElecTom, $0C, dLowElecTom, dMidElecTom, $06, dLowElecTom
+	dc.b dLowerElecTom, $0C, dLowerElecTom, dSnare, $06, dSnare, $0C, $06
+	sCall		VolcanoValley1_Call7
+	dc.b dHighElecTom, dMidElecTom, dLowElecTom, $0C, dLowElecTom, dMidElecTom, $06, dLowElecTom
+	dc.b dLowerElecTom, $0C, dLowerElecTom, dSnare, $06, dSnare, dSnare, dSnare
+	sLoop		$00, $05, VolcanoValley1_Loop11
+
+VolcanoValley1_Loop12:
+	sCall		VolcanoValley1_Call10
+	sCall		VolcanoValley1_Call11
+	sCall		VolcanoValley1_Call10
+	dc.b dMidElecTom, $06, dLowElecTom, dLowerElecTom, $0C
+	sCall		VolcanoValley1_Call10
+	sCall		VolcanoValley1_Call11
+	dc.b dKick, $06, dKick, dKick, dKick, dKick, $0C, dHighElecTom
+	dc.b $06, dMidElecTom, $0C, dLowElecTom, dLowerElecTom, $06, dSnare, dSnare
+	dc.b dSnare, dSnare, dKick, dKick, dSnare, $0C, dKick, dKick
+	dc.b $06, dSnare, $0C, dSnare, dSnare, $06, dHighElecTom, $04
+	dc.b dHighElecTom, dHighElecTom, dMidElecTom, $06, dLowElecTom, dKick, dKick, dSnare
+	dc.b $0C, dKick, dSnare, $06, $0C, dSnare, dSnare, $06
+	dc.b dMidElecTom, $04, dMidElecTom, dMidElecTom, dLowElecTom, $06, dLowerElecTom, dKick
+	dc.b dKick, dKick, dKick, dKick, $0C, dSnare, $06, $0C
+	dc.b dSnare, dSnare, $06, dHighElecTom, $04, dMidElecTom, dLowElecTom, dLowerElecTom
+	dc.b $06, dLowerElecTom, dSnare, $04, dSnare, dSnare, dHighElecTom, $06
+	dc.b dHighElecTom, dMidElecTom, dLowElecTom, dSnare, $04, dSnare, dSnare, dMidElecTom
+	dc.b $06, dMidElecTom, dLowElecTom, dLowerElecTom, dSnare, $0C, $06, dSnare
+	sLoop		$00, $02, VolcanoValley1_Loop12
+	sJump		VolcanoValley1_Loop11
+
+VolcanoValley1_Call7:
+	dc.b dHighElecTom, $06, dMidElecTom, dLowElecTom, $0C, dLowElecTom, dMidElecTom, $06
+	dc.b dLowElecTom, dLowerElecTom, $0C, dLowerElecTom, dKick, $06, dKick, dKick
+	dc.b dSnare
+	sRet
+
+VolcanoValley1_Call10:
+	dc.b dKick, $06, dKick, dKick, dKick, dKick, $0C, dSnare
+	dc.b $06, $0C, dSnare, dSnare, $06
+	sRet
+
+VolcanoValley1_Call11:
+	dc.b dHighElecTom, $06, dMidElecTom, dLowElecTom, $0C
+	sRet

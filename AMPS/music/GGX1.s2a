@@ -1,0 +1,683 @@
+GeneGadget1_Header:
+	sHeaderInit						; Z80 offset is $8BDE
+	sHeaderTempo	$01, $10
+	sHeaderCh	$05, $03
+	sHeaderDAC	GeneGadget1_DAC1
+	sHeaderDAC	GeneGadget1_DAC2
+	sHeaderFM	GeneGadget1_FM1, $00, $0B
+	sHeaderFM	GeneGadget1_FM2, $00, $0B
+	sHeaderFM	GeneGadget1_FM3, $0C, $1C
+	sHeaderFM	GeneGadget1_FM4, $0C, $1C
+	sHeaderFM	GeneGadget1_FM5, $00, $13
+	sHeaderPSG	GeneGadget1_PSG1, $F4, $18, $00, vNone
+	sHeaderPSG	GeneGadget1_PSG2, $F4, $28, $00, vNone
+	sHeaderPSG	GeneGadget1_PSG3, $00, $10, $00, vNone
+
+	; Patch $00
+	; $3D
+	; $01, $02, $02, $02,	$1F, $08, $8A, $0A
+	; $08, $08, $08, $08,	$00, $01, $00, $00
+	; $0F, $1F, $1F, $1F,	$1F, $88, $88, $87
+	spAlgorithm	$05
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$01, $02, $02, $02
+	spRateScale	$00, $02, $00, $00
+	spAttackRt	$1F, $0A, $08, $0A
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$08, $08, $08, $08
+	spSustainLv	$00, $01, $01, $01
+	spDecayRt	$00, $00, $01, $00
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1F, $08, $08, $07
+
+	; Patch $01
+	; $3C
+	; $01, $00, $00, $00,	$1F, $1F, $15, $1F
+	; $11, $0D, $12, $05,	$07, $04, $09, $02
+	; $55, $3A, $25, $1A,	$1A, $80, $07, $80
+	spAlgorithm	$04
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$01, $00, $00, $00
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $15, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$11, $12, $0D, $05
+	spSustainLv	$05, $02, $03, $01
+	spDecayRt	$07, $09, $04, $02
+	spReleaseRt	$05, $05, $0A, $0A
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1A, $07, $00, $00
+
+	; Patch $02
+	; $3E
+	; $07, $01, $02, $01,	$1F, $1F, $1F, $1F
+	; $0D, $06, $00, $00,	$08, $06, $00, $00
+	; $15, $0A, $0A, $0A,	$1B, $80, $80, $80
+	spAlgorithm	$06
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$07, $02, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0D, $00, $06, $00
+	spSustainLv	$01, $00, $00, $00
+	spDecayRt	$08, $00, $06, $00
+	spReleaseRt	$05, $0A, $0A, $0A
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1B, $00, $00, $00
+
+	; Patch $03
+	; $3C
+	; $71, $71, $11, $11,	$17, $1E, $19, $1E
+	; $04, $01, $07, $01,	$00, $00, $00, $00
+	; $F7, $F8, $F7, $F8,	$1E, $80, $14, $80
+	spAlgorithm	$04
+	spFeedback	$07
+	spDetune	$07, $01, $07, $01
+	spMultiple	$01, $01, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$17, $19, $1E, $1E
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$04, $07, $01, $01
+	spSustainLv	$0F, $0F, $0F, $0F
+	spDecayRt	$00, $00, $00, $00
+	spReleaseRt	$07, $07, $08, $08
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1E, $14, $00, $00
+
+	; Patch $04
+	; $E5
+	; $E6, $00, $B0, $01,	$EC, $17, $13, $09
+	; $B1, $80, $AC, $AE,	$AC, $AE, $AC, $AE
+	; $A5, $E6, $FE, $EF,	$51, $80, $80, $81
+	spAlgorithm	$05
+	spFeedback	$04
+	spDetune	$0E, $0B, $00, $00
+	spMultiple	$06, $00, $00, $01
+	spRateScale	$03, $00, $00, $00
+	spAttackRt	$0C, $13, $17, $09
+	spAmpMod	$01, $01, $01, $01
+	spSustainRt	$11, $0C, $00, $0E
+	spSustainLv	$0A, $0F, $0E, $0E
+	spDecayRt	$AC, $AC, $AE, $AE
+	spReleaseRt	$05, $0E, $06, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$51, $00, $00, $01
+
+	; Patch $05
+	; $3A
+	; $01, $07, $01, $01,	$8E, $8E, $8D, $53
+	; $0E, $0E, $0E, $03,	$00, $00, $00, $07
+	; $1F, $FF, $1F, $0F,	$18, $28, $27, $80
+	spAlgorithm	$02
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$01, $01, $07, $01
+	spRateScale	$02, $02, $02, $01
+	spAttackRt	$0E, $0D, $0E, $13
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0E, $0E, $0E, $03
+	spSustainLv	$01, $01, $0F, $00
+	spDecayRt	$00, $00, $00, $07
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$18, $27, $28, $00
+
+	; Patch $06
+	; $3C
+	; $71, $71, $11, $11,	$17, $1E, $19, $1E
+	; $04, $01, $07, $01,	$00, $00, $00, $00
+	; $F7, $F8, $F7, $F8,	$1E, $80, $0A, $80
+	spAlgorithm	$04
+	spFeedback	$07
+	spDetune	$07, $01, $07, $01
+	spMultiple	$01, $01, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$17, $19, $1E, $1E
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$04, $07, $01, $01
+	spSustainLv	$0F, $0F, $0F, $0F
+	spDecayRt	$00, $00, $00, $00
+	spReleaseRt	$07, $07, $08, $08
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1E, $0A, $00, $00
+
+GeneGadget1_FM5:
+	dc.b nRst, $70, $60
+	sModAMPS	$00, $01, $01, $06
+	ssDetune	$01
+	sJump		GeneGadget1_Jump1
+
+GeneGadget1_FM1:
+	dc.b nRst, $60
+	sPan		spCenter
+	sModAMPS	$00, $01, $01, $08
+	dc.b $60
+
+GeneGadget1_Jump1:
+	sVoice		$05
+	saVol		$07
+	saTranspose	$0C
+	dc.b nG3, $06, nC4, nG4, nG4, nC5, nG4, nG4
+	dc.b nC4, nG5, nG3, nC5, nG4, nG4, nC4, nC4
+	dc.b nG3, nG4, nC4, nC4, nG5, nC5, nC5, nG4
+	dc.b nG4, nC4, nC4, nG4, nC5, nC5, nG5, nG5
+	dc.b nC6, nG4, nC3, nG4, nG3, nC4, nG3, nG3
+	dc.b nG3, nC4, nG4, nG4, nC5, nG4, nC4, nC4
+	dc.b nG3, nC4, nG5, nC5, nG4, nC4, nC6, nG5
+	dc.b nG5, nC5, nC5, nG5, nC6, nG3, nC4, nC4
+	dc.b nG4, nC5, nG4, nG4, nC4, nG5, nG3, nC5
+	dc.b nG4, nG3, nC4, nG4, nG4, nG4, nC4, nC4
+	dc.b nG3, nG4, nG4, nC5, nC5, nG4, nC5, nC5
+	dc.b nG5, nC4, nC4, nG5, nC5, nC5, nG4, nG4
+	dc.b nC5, nG3, nC4, nG4, nC4, nG5, nG3, nC5
+	dc.b nG4, nG4, nC4, nC4, nG3, nG4, nG4, nC5
+	dc.b nG4, nG4, nC4, nC4, nG5, nC5, nC5, nG4
+	dc.b nG4, nC4, nC4, nG3, nC4, nC4, nG4, nG4
+	dc.b nC5
+	saTranspose	$F4
+	saVol		$F9
+	sVoice		$05
+	dc.b nRst, $18, nG3, nEb4, $12, nC4, $06, nRst
+	dc.b $0C, nG4, sHold, nG4, $30, $12, nF4, nEb4
+	dc.b $0C, nD4, $12, nEb4, nD4, $0C, nA3, $30
+	dc.b sHold, $2E, nRst, $1A, nG3, $0C, nF3, nRst
+	dc.b $18, nG3, nEb4, $12, nC4, $06, nRst, $0C
+	dc.b nG4, sHold, nG4, $30, $12, nF4, nEb4, $0C
+	dc.b nD4, $12, nEb4, nD4, $0C, nA3, $30, sHold
+	dc.b $2E, nRst, $32, nG4, $60, sHold, $24, nEb4
+	dc.b $18, nG4, $0C, nBb4, nEb5, nD5, $10, nBb4
+	dc.b nF4, $40, nRst, $60, nG4, sHold, nG4, $24
+	dc.b nEb4, $18, nG4, $0C, nBb4, nEb5, nD5, $12
+	dc.b nBb4, nF4, $0C, nF5, $30, nA5, $60, nRst
+	dc.b $18, nG3, nEb4, $12, nC4, $06, nRst, $0C
+	dc.b nG4, sHold, nG4, $30, $12, nF4, nEb4, $0C
+	dc.b nD4, $12, nEb4, nD4, $0C, nA3, $30, sHold
+	dc.b $2E, nRst, $1A, nG3, $0C, nF3, nRst, $18
+	dc.b nG3, nEb4, $12, nC4, $06, nRst, $0C, nG4
+	dc.b sHold, nG4, $30, $12, nF4, nEb4, $0C, nD4
+	dc.b $12, nEb4, nD4, $0C, nA3, $30, sHold, nA3
+	dc.b nRst
+	sVoice		$02
+	saVol		$0D
+
+GeneGadget1_Loop1:
+	dc.b nC4, $10
+	saVol		$03
+	sLoop		$00, $06, GeneGadget1_Loop1
+	saVol		$EE
+
+GeneGadget1_Loop2:
+	dc.b nAb4, $10
+	saVol		$03
+	sLoop		$00, $06, GeneGadget1_Loop2
+	saVol		$EE
+
+GeneGadget1_Loop3:
+	dc.b nG4, $10
+	saVol		$03
+	sLoop		$00, $06, GeneGadget1_Loop3
+	saVol		$EE
+
+GeneGadget1_Loop4:
+	dc.b nC4, $10
+	saVol		$03
+	sLoop		$00, $06, GeneGadget1_Loop4
+	saVol		$EE
+	sLoop		$01, $02, GeneGadget1_Loop1
+	sVoice		$06
+	saVol		-$06
+	dc.b nC4, $60, nD4, nEb4, nF4, $30, nBb4, $24
+	dc.b nA4, $06, nAb4, nG4, $60, nAb4, nBb4, $24
+	dc.b nA4, $06, nAb4, nG4, $30, sHold, $60
+	saTranspose	$F4
+	saVol		$FD
+	dc.b nC4, $30, $12, nD4, nEb4, $0C, nC4, $30
+	dc.b $12, nD4, nEb4, $0C, nF4, $24, nEb4, $06
+	dc.b nD4, nC4, $30, sHold, $60, $30, $12, nD4
+	dc.b nEb4, $0C, nF4, $24, nEb4, $06, nD4, nC4
+	dc.b $30, nBb3, nG3, nD4, $60, nC4, sHold, nC4
+	saVol		$03
+	dc.b nC3, sHold, nC3, $60
+	saVol		$F9
+	saTranspose	$0C
+	sJump		GeneGadget1_Jump1
+
+GeneGadget1_FM2:
+	sPan		spCenter
+	sModAMPS	$00, $01, $01, $02
+	sVoice		$01
+
+GeneGadget1_Loop5:
+	dc.b nC2, $0C, nC2, nD2, nEb2, $06, nF2, $0C
+	dc.b nC2, nC2, $06, nD2, nEb2, nF2, $0C
+	sLoop		$00, $02, GeneGadget1_Loop5
+
+GeneGadget1_Loop6:
+	dc.b nC2, $0C, nC2, nD2, nEb2, $06, nF2, $0C
+	dc.b nC2, nC2, $06, nD2, nEb2, nF2, $0C
+	sLoop		$00, $08, GeneGadget1_Loop6
+
+GeneGadget1_Loop7:
+	dc.b nC2, $0C, nC2, nD2, nEb2, $06, nG2, $0C
+	dc.b nC2, nC2, $06, nD2, nEb2, nG2, $0C, nC2
+	dc.b nC2, nD2, nEb2, $06, nG2, $0C, nC2, nC2
+	dc.b $06, nD2, nEb2, nG2, $0C, nC2, nC2, nD2
+	dc.b nEb2, $06, nF2, $0C, nC2, nC2, $06, nD2
+	dc.b nEb2, nF2, $0C, nC2, nC2, nD2, nEb2, $06
+	dc.b nF2, $0C, nC2, nC2, $06, nD2, nEb2, nF2
+	dc.b $0C
+	sLoop		$00, $02, GeneGadget1_Loop7
+
+GeneGadget1_Loop8:
+	dc.b nC2, $0C, nC2, nD2, nEb2, $06, nG2, $0C
+	dc.b nC2, nC2, $06, nD2, nEb2, nG2, $0C, nC2
+	dc.b nC2, nD2, nEb2, $06, nG2, $0C, nC2, nC2
+	dc.b $06, nD2, nEb2, nG2, $0C, nC2, nC2, nD2
+	dc.b nEb2, $06, nF2, $0C, nC2, nC2, $06, nD2
+	dc.b nEb2, nF2, $0C, nC2, nC2, nD2, nEb2, $06
+	dc.b nF2, $0C, nC2, nC2, $06, nD2, nEb2, nF2
+	dc.b $0C
+	sLoop		$00, $02, GeneGadget1_Loop8
+
+GeneGadget1_Loop9:
+	dc.b nC2, $0C, nC2, nD2, nEb2, $06, nG2, $0C
+	dc.b nC2, nC2, $06, nD2, nEb2, nG2, $0C, nC2
+	dc.b nC2, nD2, nEb2, $06, nG2, $0C, nC2, nC2
+	dc.b $06, nD2, nEb2, nG2, $0C, nC2, nC2, nD2
+	dc.b nEb2, $06, nF2, $0C, nC2, nC2, $06, nD2
+	dc.b nEb2, nF2, $0C, nC2, nC2, nD2, nEb2, $06
+	dc.b nF2, $0C, nC2, nC2, $06, nD2, nEb2, nF2
+	dc.b $0C
+	sLoop		$00, $02, GeneGadget1_Loop9
+
+GeneGadget1_Loop10:
+	dc.b nC2, $0C, nC2, nD2, nEb2, $06, nC2, $0C
+	dc.b nC2, nC2, $06, nD2, nEb2, nC2, $0C
+	sLoop		$00, $08, GeneGadget1_Loop10
+
+GeneGadget1_Loop11:
+	dc.b nC2, $0C, nC2, nD2, nEb2, $06, nC2, $0C
+	dc.b nC2, nC2, $06, nD2, nEb2, nC2, $0C
+	sLoop		$00, $14, GeneGadget1_Loop11
+	sJump		GeneGadget1_Loop6
+
+GeneGadget1_FM3:
+	sPan		spLeft
+	sModAMPS	$00, $01, $01, $07
+	dc.b nRst, $60, nRst
+
+GeneGadget1_Jump2:
+	sVoice		$04
+
+GeneGadget1_Loop12:
+	saVol		$FA
+	dc.b nC4, $06, nC4, nG4, nG4, nC5, nC5, nC4
+	dc.b nC4, nG3, nG3, nG4, nG4, nRst, $18, nC3
+	dc.b $60, nC4, $06, nC4, nG4, nG4, nC5, nC5
+	dc.b nC4, nC4, nG3, nG3, nG4, nG4, nRst, $18
+	dc.b nC3, $60
+	saVol		$06
+	sLoop		$00, $02, GeneGadget1_Loop12
+	sVoice		$02
+	dc.b nRst, $18, nG3, nG3, $12, nG3, $06, nRst
+	dc.b $0C, nG3, sHold, nG3, $60, nRst, $18, nF3
+	dc.b nF3, $12, nF3, $06, nRst, $0C, nF3, sHold
+	dc.b nF3, $18
+	sVoice		$04
+	dc.b nD5, $06, nD5, nA4, nA4, nRst, $18, nBb4
+	dc.b $06, nBb4, nF4, nF4
+	sVoice		$02
+	dc.b nRst, $18, nG3, nG3, $12, nG3, $06, nRst
+	dc.b $0C, nG3, sHold, nG3, $60, nRst, $18, nF3
+	dc.b nF3, $12, nF3, $06, nRst, $0C, nA3, sHold
+	dc.b nA3, $60
+
+GeneGadget1_Loop13:
+	dc.b nBb3, $30, nEb4, nG4, $60, nC4, $30, nF4
+	dc.b nA4, $60
+	sLoop		$00, $02, GeneGadget1_Loop13
+
+GeneGadget1_Loop14:
+	dc.b nG4, $06, nG4, nRst, $0C, nG4, $06, nG4, nRst
+	dc.b $0C, nF4, $06, nRst, $0C, nG4, $06, nRst
+	dc.b $0C, nG4, $06, nRst, nRst, nG4, nRst, $0C
+	dc.b nF4, nRst, $06, nG4, nRst, $0C, nG4, $06
+	dc.b nRst, nBb4, nG4, nRst, $0C, nRst, nA4, $06
+	dc.b nA4, nRst, nA4, nRst, nA4, nG4, $12, nA4
+	dc.b $06, nRst, $0C, nA4, $06, nA4, nRst, nA4, nRst
+	dc.b nA4, nBb4, $12
+	sVoice		$04
+	dc.b nA4, $06, nC6, nF5, nBb5, nA5, nF5, nC5
+	dc.b nBb4, nA4
+	sVoice		$02
+	sLoop		$00, $02, GeneGadget1_Loop14
+
+GeneGadget1_Loop15:
+	sVoice		$02
+	saTranspose	$F4
+	dc.b nRst, $18, nG4, nG4, $12, nFs4, $06, nRst
+	dc.b $0C, nEb4, sHold, nEb4, $2E, sHold, $32
+	saTranspose	$0C
+	sLoop		$00, $04, GeneGadget1_Loop15
+	sVoice		$06
+	saTranspose	$E8
+	saVol		$FD
+	dc.b nG4, $60, nG4, nAb4, nF4
+	saVol		-$03
+	saTranspose	$0C
+	dc.b nG4, $06, nG4, nRst, $0C, nG4, $06, nG4, nRst
+	dc.b $0C, nG4, $12, nG4, $06, nRst, $0C, nG4, $06, nG4
+	dc.b nRst, nAb4, nRst, $0C, nAb4, $12, $06, nRst, $18
+	dc.b nAb4, $06, nAb4, nAb4, nRst, nBb4, nBb4, nRst, $0C
+	dc.b nBb4, $06, nBb4, nRst, $0C, nBb4, $12, nBb4, $06, nRst
+	dc.b $0C, nBb4, $06, nBb4, nRst, nBb4, nBb4, nRst, nBb4
+	dc.b $12, nBb4, $06, nRst, $18, nBb4, $06, nBb4, nBb4, nRst
+	saTranspose	$F4
+	dc.b nG4, $60, nG4, nAb4, nF4, nG4, $30, nC4
+	dc.b nAb4, $60, nBb4, $30, nBb4, nBb4, $60, nC4
+	dc.b $30, nC4, sHold, nC4, $60, nC4, $30, nC4
+	dc.b sHold, nC4, $48, nRst, $18
+	saVol		$06
+	saTranspose	$18
+	sJump		GeneGadget1_Jump2
+
+GeneGadget1_FM4:
+	sPan		spRight
+	sModAMPS	$00, $01, $01, $08
+	dc.b nRst, $60, nRst
+
+GeneGadget1_Jump3:
+	sVoice		$04
+
+GeneGadget1_Loop16:
+	saVol		$FA
+	dc.b nRst, $1E, nG4, $06, nG4, nG5, nG5, nC5
+	dc.b nC5, nG4, nG4, nC4, nC4, nG3, nF3, $24
+	dc.b nC4, $3C, nRst, $1E, nG4, $06, nG4, nG5
+	dc.b nG5, nC5, nC5, nG4, nG4, nC4, nC4, nG3
+	dc.b nF3, $24, nC4, nC4, $06, nC4, nG4, nG4
+	saVol		$06
+	sLoop		$00, $02, GeneGadget1_Loop16
+	sVoice		$02
+	dc.b nRst, $18, nC3, nC3, $12, nC3, $06, nRst
+	dc.b $0C, nC3, sHold, nC3, $60, nRst, $18, nC3
+	dc.b nC3, $12, nC3, $06, nRst, $0C, nC3, sHold
+	dc.b nC3, $18, nRst
+	sVoice		$04
+	dc.b nC5, $06, nC5, nG4, nG4, nRst, $18, nG4, $06
+	dc.b nG4, nC4, nC4
+	sVoice		$02
+	dc.b nC3, $18, $12, nC3, $06, nRst, $0C, nC3
+	dc.b sHold, nC3, $60, nRst, $18, nC3, nC3, $12
+	dc.b nC3, $06, nRst, $0C, nC3, sHold, nC3, $60
+
+GeneGadget1_Loop17:
+	dc.b nEb3, $30, nG3, nBb3, $60, nF3, $30, nA3
+	dc.b nC4, $60
+	sLoop		$00, $02, GeneGadget1_Loop17
+
+GeneGadget1_Loop18:
+	dc.b nC4, $06, nC4, nRst, $0C, nC4, $06, nC4, nRst
+	dc.b $0C, nC4, $06, nRst, $0C, nC4, $06, nRst, $0C, nC4
+	dc.b $06, nRst, nRst, nC4, nRst, $0C, nC4, nRst
+	dc.b $06, nC4, nRst, $0C, nC4, $06, nRst, nC4
+	dc.b nC4, nRst, $0C, nRst, nF4, $06, nF4, nRst
+	dc.b nF4, nRst, nF4, nF4, $12, nF4, $06, nRst
+	dc.b $0C, nF4, $06, nF4, nRst, nF4, nRst, nF4, nF4
+	dc.b $12, $06, nRst, $06
+	sVoice		$04
+	dc.b nC6, nF5, nBb5, nA5, nF5, nC5, nBb4
+	sVoice		$02
+	sLoop		$00, $02, GeneGadget1_Loop18
+
+GeneGadget1_Loop19:
+	saTranspose	$F4
+	dc.b nRst, $18, nC4, nC4, $12, nC4, $06, nRst
+	dc.b $0C, nAb3, sHold, nAb3, $2E, sHold, $32
+	saTranspose	$0C
+	sLoop		$00, $04, GeneGadget1_Loop19
+	sVoice		$06
+	saTranspose	$E8
+	saVol		$FD
+	dc.b nC4, $60, nBb3, nEb4, nBb3
+	saVol		-$03
+	saTranspose	$0C
+	dc.b nC4, $06, nC4, nRst, $0C, nC4, $06, nC4, nRst
+	dc.b $0C, nC4, $12, nC4, $06, nRst, $0C, nC4, $06, nC4
+	dc.b nRst, nC4, nRst, $0C, nC4, $12, $06, nRst, $18
+	dc.b nC4, $06, nC4, nC4, nRst, nEb4, nEb4, nRst, $0C
+	dc.b nEb4, $06, nEb4, nRst, $0C, nEb4, $12, nEb4, $06, nRst
+	dc.b $0C, nEb4, $06, nEb4, nRst, nF4, nF4, nRst, nF4
+	dc.b $12, $06, nRst, $18, nF4, $06, nF4, nF4, nRst
+	saTranspose	$F4
+	dc.b nC4, $60, nBb3, nEb4, nBb3, nC4, $30, nC4
+	dc.b nC4, $60, nEb4, $30, nEb4, nF4, $60, nG3
+	dc.b $30, nG3, sHold, nG3, $60, nG3, $30, nG3
+	dc.b sHold, nG3, $48, nRst, $18
+	saVol		$06
+	saTranspose	$18
+	sJump		GeneGadget1_Jump3
+
+GeneGadget1_PSG2:
+	dc.b nRst, $6B, $60
+	sModAMPS	$03, $01, $01, $04
+	sJump		GeneGadget1_Jump4
+
+GeneGadget1_PSG1:
+	dc.b nRst, $60, nRst
+	sModAMPS	$02, $01, $01, $03
+
+GeneGadget1_Jump4:
+	sVolEnv		v26
+
+GeneGadget1_Loop20:
+	dc.b nRst, $18, nC5, nC4, nG4, nBb4, $12, nA4
+	dc.b nEb4, $24, nD4, $0C, nEb4, nC4, $18, nC5
+	dc.b nG4, nBb4, nA4, $12, nBb4, nF4, $24, nEb4
+	dc.b $0C, nD4
+	sLoop		$00, $02, GeneGadget1_Loop20
+	dc.b nRst, $18, nG3, nG3, $12, nG3, $06, nRst
+	dc.b $0C, nG3, sHold, nG3, $60, nRst, $18, nF3
+	dc.b nF3, $12, nF3, $06, nRst, $0C, nF3, sHold
+	dc.b nF3, $18, nRst, $48, nRst, $18, nG3, nG3
+	dc.b $12, nG3, $06, nRst, $0C, nG3, sHold, nG3
+	dc.b $60, nRst, $18, nF3, nF3, $12, nF3, $06
+	dc.b nRst, $0C, nA3, sHold, nA3, $60
+
+GeneGadget1_Loop23:
+	dc.b nRst, $10, nD4, nEb4, nG4, nD5, nEb5
+
+GeneGadget1_Loop21:
+	dc.b nBb5, $10
+	saVol		$08
+	sLoop		$00, $06, GeneGadget1_Loop21
+	saVol		-$30
+	dc.b nRst, $10, nE4, nF4, nC5, nE5, nF5
+
+GeneGadget1_Loop22:
+	dc.b nC6, $10
+	saVol		$08
+	sLoop		$00, $06, GeneGadget1_Loop22
+	saVol		-$30
+	sLoop		$01, $02, GeneGadget1_Loop23
+	dc.b nRst, $60, nRst, nRst, $10, nC6, nF5, nBb5
+	dc.b nA5, nC5, nF5, nA4, nF4, nRst, $30, nRst
+	dc.b $60, nRst, nRst, $0C, nF4, nA4, nBb4, nC5
+	dc.b $12, nBb4, nF4, $0C, nF5, $30, nRst, nRst
+	dc.b $60, nC5, $18, nEb4, nAb4, nG4, nC4, $2E
+	dc.b nRst, $32, nC5, $18, nRst, nG5, nRst, nEb5
+	dc.b $2E, nRst, $32, nC5, $18, nEb4, nAb4, nG4
+	dc.b nC4, $30, nRst, nRst, $60
+	saTranspose	$F4
+	dc.b nC4, $60, nD4, nEb4, nF4, $30, nBb4, $24
+	dc.b nA4, $06, nAb4
+	saTranspose	$0C
+	sVolEnv		v1D
+	dc.b nC4, $06, nRst, $12, nC4, $06, nEb4, nG4, nEb4
+	dc.b nC5, $0C, nG4, $06, nEb4, $0C, nC4, $06
+	dc.b nG4, $0C, nC4, $06, nRst, $12, nC4, $06, nEb4
+	dc.b nAb4, nEb4, nC5, $0C, nAb4, $06, nEb4, $0C
+	dc.b nC4, $06, nAb4, $0C, nC4, $06, nRst, $12
+	dc.b nC4, $06, nEb4, nG4, nEb4, nBb4, $0C, nG4, $06
+	dc.b nEb4, $0C, nBb3, $06, nG4, $0C, nF4, $06
+	dc.b nRst, $12, nF4, $06, nBb3, nD4, nF4, nD5, $0C
+	dc.b nBb4, $06, nF4, $0C, nD4, $06, nBb3, nD4
+	dc.b nRst, nRst, nC4, nRst, nC4, nEb4, nG4, nEb4
+	dc.b nC5, $0C, nG4, $06, nEb4, $0C, nC4, $06
+	dc.b nG4, $0C, nRst, $06, nRst, nC4, nRst, nC4
+	dc.b nD4, nG4, nD4, nD5, $0C, nBb4, $06, nG4
+	dc.b $0C, nD4, $06, nG4, $0C, nRst, $06, nRst
+	dc.b nC4, nRst, nC4, nEb4, nAb4, nEb4, nC5, $0C
+	dc.b nAb4, $06, nEb4, $0C, nC4, $06, nAb4, $0C
+	dc.b nRst, $06, nRst, nC4, nRst, nC4, nD4, nBb4
+	dc.b nF4, nD5, $0C, nBb4, $06, nF4, $0C, nD4
+	dc.b $06, nBb4, $0C, nC4, $06, nRst, nC4, nRst
+	dc.b nC4, nEb4, nG4, nEb4, nC5, $0C, nG4, $06
+	dc.b nEb4, $0C, nC4, $06, nG4, $0C, nC4, $06
+	dc.b nRst, nC4, nRst, nC4, nEb4, nAb4, nEb4, nC5
+	dc.b $0C, nAb4, $06, nEb4, $0C, nC4, $06, nAb4
+	dc.b $0C, nC4, $06, nRst, nC4, nRst, nC4, nEb4
+	dc.b nG4, nEb4, nBb4, $0C, nG4, $06, nEb4, $0C
+	dc.b nBb3, $06, nG4, $0C, nF4, $06, nRst, nF4
+	dc.b nRst, nF4, nBb3, nD4, nF4, nD5, $0C, nBb4
+	dc.b $06, nF4, $0C, nD4, $06, nBb3, nD4
+	saTranspose	$F4
+	dc.b nC6, $06, nG5, nC4, nBb4, nG4, nC4, nA4
+	dc.b nF4, nC4, nG4, nC4, nG3, nF4, nC4, nG3
+	dc.b nC3, nRst, $60, nC6, $06, nG5, nC4, nBb4
+	dc.b nG4, nC4, nA4, nF4, nC4, nG4, nC4, nG3
+	dc.b nF4, nC4, nG3, nC3, nRst, $60
+	saTranspose	$0C
+	sJump		GeneGadget1_Jump4
+
+GeneGadget1_PSG3:
+	dc.b nRst, $60, nRst
+	sNoisePSG	$E7
+	sVolEnv		v0F
+
+GeneGadget1_Loop24:
+	dc.b nHiHat, $06, nRst, nHiHat, nHiHat, nHiHat, nRst, nHiHat
+	dc.b nHiHat
+	sJump		GeneGadget1_Loop24
+
+GeneGadget1_Loop31:
+
+	; Unused data
+	sVolEnv		v0F
+	dc.b nC4, $06, nC4
+	sVolEnv		v12
+	dc.b $0C
+	sLoop		$00, $10, GeneGadget1_Loop31
+	sRet
+
+GeneGadget1_Loop32:
+	sVolEnv		v0F
+	dc.b nC4, $06, nC4
+	sVolEnv		v12
+	dc.b nC4
+	sVolEnv		v0F
+	dc.b nC4
+	sLoop		$00, $10, GeneGadget1_Loop32
+	sRet
+
+GeneGadget1_Loop33:
+	sVolEnv		v0F
+	dc.b nC4, $06, nRst, nC4, nC4
+	sVolEnv		v12
+	dc.b nC4, $0C
+	sVolEnv		v0F
+	dc.b nC4, $06, nC4
+	sVolEnv		v0F
+	dc.b nC4, $06, nRst, nC4, nRst
+	sVolEnv		v12
+	dc.b nC4, $0C
+	sVolEnv		v0F
+	dc.b $06, $06
+	sLoop		$00, $04, GeneGadget1_Loop33
+	sRet
+
+GeneGadget1_Loop34:
+	sVolEnv		v0F
+	dc.b nC4, $06, nC4, nC4, nC4
+	sVolEnv		v12
+	dc.b nC4, $0C
+	sVolEnv		v0F
+	dc.b nC4, $06, nC4
+	sVolEnv		v12
+	dc.b nC4, $06
+	sVolEnv		v0F
+	dc.b nC4, nC4, nC4, nC4, nC4, nC4, nC4
+	sLoop		$00, $07, GeneGadget1_Loop34
+	sRet
+
+GeneGadget1_DAC1:
+	sStop
+
+GeneGadget1_DAC2:
+	dc.b nRst, $60, $30, dKick, $06, dSnare, $0C
+	dc.b dKick, $06, dSnare, dSnare, dSnare, dSnare
+
+GeneGadget1_Jump5:
+	dc.b dCrashCymbal, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $0C
+	dc.b dSnare, $06, dKick, $0C, dSnare, dSnare
+
+GeneGadget1_Loop25:
+	dc.b dKick, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $0C
+	dc.b dSnare, $06, dKick, $0C, dSnare, $18
+	sLoop		$00, $02, GeneGadget1_Loop25
+	dc.b dCrashCymbal, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, $06, dSnare, dKick, $0C, $06, dSnare
+	dc.b dKick, $0C, dSnare, $06, $06, $06, $06, $06, $06, $06, $06
+
+GeneGadget1_Loop26:
+	dc.b dKick, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $0C
+	dc.b dSnare, $06, dKick, $0C, dSnare, $18
+	sLoop		$00, $07, GeneGadget1_Loop26
+	dc.b dKick, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $0C
+	dc.b dSnare, $06, dKick, $0C, dSnare, $0C, $06, $06
+	dc.b dCrashCymbal, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $0C
+	dc.b dSnare, $06, dKick, $0C, dSnare, dKick
+
+GeneGadget1_Loop27:
+	dc.b dKick, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $0C
+	dc.b dSnare, $06, dKick, $0C, dSnare, $0C, $06, $06
+	sLoop		$00, $03, GeneGadget1_Loop27
+
+GeneGadget1_Loop28:
+	dc.b dKick, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $0C
+	dc.b dSnare, $06, dKick, $0C, dSnare, $0C, $06, $06
+	sLoop		$00, $03, GeneGadget1_Loop28
+	dc.b dCrashCymbal, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $0C
+	dc.b dSnare, $06, dKick, $0C, dSnare, $06, $06, $06, $06
+
+GeneGadget1_Loop29:
+	dc.b dKick, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18
+	sLoop		$00, $06, GeneGadget1_Loop29
+	dc.b dCrashCymbal, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, $12, dLowerElecTom, $06, dSnare, $12
+	dc.b dKick, $0C, dHighElecTom, $06, dKick, dMidElecTom
+	dc.b dMidElecTom, dMidElecTom, dLowElecTom, dLowerElecTom
+
+GeneGadget1_Loop30:
+	dc.b dKick, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18
+	sLoop		$00, $0A, GeneGadget1_Loop30
+	dc.b dCrashCymbal, $18, dSnare, $12, dKick, $0C, $06, $0C
+	dc.b dSnare, $18, dKick, dSnare, $12, dKick, $06, dHighElecTom
+	dc.b dHighElecTom, dMidElecTom, dLowElecTom, dLowElecTom
+	dc.b dLowerElecTom, dLowerElecTom, dLowerElecTom
+	sJump		GeneGadget1_Jump5

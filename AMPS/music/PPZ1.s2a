@@ -1,0 +1,894 @@
+PanicPuppet1_Header:
+	sHeaderInit						; Z80 offset is $C68F
+	sHeaderTempo	$01, $00
+	sHeaderCh	$05, $03
+	sHeaderDAC	PanicPuppet1_DAC1
+	sHeaderDAC	PanicPuppet1_DAC2
+	sHeaderFM	PanicPuppet1_FM1, $00, $0E
+	sHeaderFM	PanicPuppet1_FM2, $00, $16
+	sHeaderFM	PanicPuppet1_FM3, $00, $18
+	sHeaderFM	PanicPuppet1_FM4, $00, $0E
+	sHeaderFM	PanicPuppet1_FM5, $0C, $08
+	sHeaderPSG	PanicPuppet1_PSG1, $DC, $18, $00, v06
+	sHeaderPSG	PanicPuppet1_PSG2, $DC, $18, $00, v04
+	sHeaderPSG	PanicPuppet1_PSG3, $00, $10, $00, v03
+
+	; Patch $00
+	; $08
+	; $0A, $70, $30, $00,	$1F, $1F, $5F, $5F
+	; $12, $0E, $0A, $0A,	$00, $04, $04, $03
+	; $2F, $2F, $2F, $2F,	$24, $2D, $13, $80
+	spAlgorithm	$00
+	spFeedback	$01
+	spDetune	$00, $03, $07, $00
+	spMultiple	$0A, $00, $00, $00
+	spRateScale	$00, $01, $00, $01
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$12, $0A, $0E, $0A
+	spSustainLv	$02, $02, $02, $02
+	spDecayRt	$00, $04, $04, $03
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$24, $13, $2D, $00
+
+	; Patch $01
+	; $3D
+	; $11, $21, $51, $11,	$12, $14, $14, $0F
+	; $0A, $05, $05, $05,	$00, $00, $00, $00
+	; $2B, $2B, $2B, $1B,	$19, $80, $80, $80
+	spAlgorithm	$05
+	spFeedback	$07
+	spDetune	$01, $05, $02, $01
+	spMultiple	$01, $01, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$12, $14, $14, $0F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0A, $05, $05, $05
+	spSustainLv	$02, $02, $02, $01
+	spDecayRt	$00, $00, $00, $00
+	spReleaseRt	$0B, $0B, $0B, $0B
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$19, $00, $00, $00
+
+	; Patch $02
+	; $3A
+	; $01, $07, $01, $01,	$8E, $8E, $8D, $53
+	; $0E, $0E, $0E, $03,	$00, $00, $00, $07
+	; $1F, $FF, $1F, $0F,	$18, $28, $27, $80
+	spAlgorithm	$02
+	spFeedback	$07
+	spDetune	$00, $00, $00, $00
+	spMultiple	$01, $01, $07, $01
+	spRateScale	$02, $02, $02, $01
+	spAttackRt	$0E, $0D, $0E, $13
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0E, $0E, $0E, $03
+	spSustainLv	$01, $01, $0F, $00
+	spDecayRt	$00, $00, $00, $07
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$18, $27, $28, $00
+
+	; Patch $03
+	; $3A
+	; $11, $11, $11, $11,	$8E, $8E, $8D, $53
+	; $0E, $0E, $0E, $03,	$00, $00, $00, $11
+	; $1F, $FF, $1F, $0F,	$17, $28, $27, $80
+	spAlgorithm	$02
+	spFeedback	$07
+	spDetune	$01, $01, $01, $01
+	spMultiple	$01, $01, $01, $01
+	spRateScale	$02, $02, $02, $01
+	spAttackRt	$0E, $0D, $0E, $13
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0E, $0E, $0E, $03
+	spSustainLv	$01, $01, $0F, $00
+	spDecayRt	$00, $00, $00, $11
+	spReleaseRt	$0F, $0F, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$17, $27, $28, $00
+
+	; Patch $04
+	; $35
+	; $11, $11, $13, $00,	$1F, $1D, $18, $19
+	; $00, $09, $06, $0D,	$00, $00, $02, $03
+	; $00, $06, $15, $16,	$1E, $80, $83, $80
+	spAlgorithm	$05
+	spFeedback	$06
+	spDetune	$01, $01, $01, $00
+	spMultiple	$01, $03, $01, $00
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $18, $1D, $19
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$00, $06, $09, $0D
+	spSustainLv	$00, $01, $00, $01
+	spDecayRt	$00, $02, $00, $03
+	spReleaseRt	$00, $05, $06, $06
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1E, $03, $00, $00
+
+	; Patch $05
+	; $3D
+	; $01, $21, $50, $01,	$12, $14, $14, $0F
+	; $0A, $05, $05, $05,	$00, $00, $00, $00
+	; $26, $28, $28, $18,	$19, $80, $80, $80
+	spAlgorithm	$05
+	spFeedback	$07
+	spDetune	$00, $05, $02, $00
+	spMultiple	$01, $00, $01, $01
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$12, $14, $14, $0F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$0A, $05, $05, $05
+	spSustainLv	$02, $02, $02, $01
+	spDecayRt	$00, $00, $00, $00
+	spReleaseRt	$06, $08, $08, $08
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$19, $00, $00, $00
+
+	; Patch $06
+	; $04
+	; $57, $02, $70, $50,	$1F, $1F, $1F, $1F
+	; $00, $00, $00, $00,	$06, $0A, $00, $0A
+	; $00, $0F, $00, $0F,	$1A, $80, $10, $80
+	spAlgorithm	$04
+	spFeedback	$00
+	spDetune	$05, $07, $00, $05
+	spMultiple	$07, $00, $02, $00
+	spRateScale	$00, $00, $00, $00
+	spAttackRt	$1F, $1F, $1F, $1F
+	spAmpMod	$00, $00, $00, $00
+	spSustainRt	$00, $00, $00, $00
+	spSustainLv	$00, $00, $00, $00
+	spDecayRt	$06, $00, $0A, $0A
+	spReleaseRt	$00, $00, $0F, $0F
+	spSSGEG		$00, $00, $00, $00
+	spTotalLv	$1A, $10, $00, $00
+
+PanicPuppet1_FM1:
+	sVoice		$00
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+
+PanicPuppet1_Loop1:
+	dc.b nC3, $12, $06, nRst, $0C, nC3, $06, nRst
+	dc.b nC3, $12, $06, nRst, $18
+	sLoop		$00, $10, PanicPuppet1_Loop1
+
+PanicPuppet1_Loop2:
+	sCall		PanicPuppet1_Call1
+	sCall		PanicPuppet1_Call1
+	saTranspose	$FC
+	sCall		PanicPuppet1_Call1
+	sCall		PanicPuppet1_Call1
+	saTranspose	$02
+	sCall		PanicPuppet1_Call1
+	sCall		PanicPuppet1_Call1
+	saTranspose	$02
+	sCall		PanicPuppet1_Call1
+	sCall		PanicPuppet1_Call1
+	sLoop		$01, $02, PanicPuppet1_Loop2
+
+PanicPuppet1_Loop3:
+	saTranspose	$05
+	sCall		PanicPuppet1_Call1
+	saTranspose	$03
+	sCall		PanicPuppet1_Call1
+	saTranspose	$F8
+	sCall		PanicPuppet1_Call1
+	saTranspose	$09
+	sCall		PanicPuppet1_Call1
+	saTranspose	$FC
+	sCall		PanicPuppet1_Call1
+	saTranspose	$03
+	sCall		PanicPuppet1_Call1
+	saTranspose	$FF
+	sCall		PanicPuppet1_Call1
+	sCall		PanicPuppet1_Call1
+	saTranspose	$F9
+	sLoop		$01, $02, PanicPuppet1_Loop3
+
+PanicPuppet1_Loop4:
+	sCall		PanicPuppet1_Call2
+	sCall		PanicPuppet1_Call2
+	saTranspose	$FC
+	sCall		PanicPuppet1_Call2
+	sCall		PanicPuppet1_Call2
+	saTranspose	$02
+	sCall		PanicPuppet1_Call2
+	sCall		PanicPuppet1_Call2
+	saTranspose	$02
+	sCall		PanicPuppet1_Call2
+	sCall		PanicPuppet1_Call2
+	sLoop		$00, $02, PanicPuppet1_Loop4
+	dc.b nC2, $0C, nC3, $06, nC3, nC2, nRst, nC3
+	dc.b $0C, nRst, $60, nRst, $30, nG2, $06, nG2
+	dc.b nG2, nG2, nG2, nG2, nG2, nG2
+	sJump		PanicPuppet1_Loop2
+
+PanicPuppet1_Call1:
+	dc.b nC2, $0C, nC3, $06, nRst, $06
+	sLoop		$00, $04, PanicPuppet1_Call1
+	sRet
+
+PanicPuppet1_Call2:
+	dc.b nC2, $0C, nC3, $06, nC3, nC2, nRst, nC3
+	dc.b $0C, nC2, $06, nRst, nC3, $0C, nC2, $06
+	dc.b nRst, nC3, nC3
+	sRet
+
+PanicPuppet1_FM2:
+	dc.b nRst, $60
+	sLoop		$00, $0F, PanicPuppet1_FM2
+	sVoice		$01
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+	dc.b $60
+
+PanicPuppet1_Loop6:
+	sCall		PanicPuppet1_Call3
+	sLoop		$00, $02, PanicPuppet1_Loop6
+	sCall		PanicPuppet1_Call4
+	sCall		PanicPuppet1_Call4
+	sCall		PanicPuppet1_Call5
+	saTranspose	$0C
+	sCall		PanicPuppet1_Call5
+	saTranspose	$F4
+	sLoop		$01, $02, PanicPuppet1_Loop6
+	sCall		PanicPuppet1_Call6
+	sCall		PanicPuppet1_Call7
+	sCall		PanicPuppet1_Call6
+	dc.b nC5, $60, nB4
+	sCall		PanicPuppet1_Call6
+	sCall		PanicPuppet1_Call7
+	sCall		PanicPuppet1_Call6
+	dc.b nC5, $3C, nB4, $0C, nA4, nAb4, nG4, $60
+
+PanicPuppet1_Loop7:
+	sCall		PanicPuppet1_Call3
+	sLoop		$00, $02, PanicPuppet1_Loop7
+	sCall		PanicPuppet1_Call4
+	sCall		PanicPuppet1_Call4
+	sCall		PanicPuppet1_Call5
+	saTranspose	$0C
+	sCall		PanicPuppet1_Call5
+	saTranspose	$F4
+	sLoop		$01, $02, PanicPuppet1_Loop7
+	dc.b nRst, $30, nRst, $60, nRst, $60
+	sJump		PanicPuppet1_Loop6
+
+PanicPuppet1_Call3:
+	dc.b nRst, $0C, nC4, nG4, nC5, nBb4, $09, nRst
+	dc.b nBb4, nRst, nG4, $0C, nF4, $09, nRst, nG4
+	dc.b nRst, nC4, $0C, nRst, $30
+	sRet
+
+PanicPuppet1_Call4:
+	dc.b nRst, $0C, nC4, nG4, nC5, nBb4, $09, nRst
+	dc.b nBb4, nRst, nG4, $0C
+	sRet
+
+PanicPuppet1_Call5:
+	dc.b nBb4, $09, nRst, nB4, nRst, nC5, $0C, nRst
+	dc.b $30
+	sRet
+
+PanicPuppet1_Call6:
+	dc.b nA4, $24, nF4, $0C, nRst, nC5, $24, nAb4
+	dc.b nF4, $0C, nRst, nC5, $24
+	sRet
+
+PanicPuppet1_Call7:
+	dc.b nC5, $24, nB4, $18, nG4, $0C, nA4, nBb4
+	dc.b nB4, nBb4, nRst, nA4, $18, nG4, nAb4, $0C
+	sRet
+
+PanicPuppet1_FM3:
+	dc.b nRst, $60
+	sLoop		$00, $10, PanicPuppet1_FM3
+	sVoice		$01
+	sPan		spCenter
+	sModAMPS	$06, $01, $03, $05
+
+PanicPuppet1_Loop9:
+	sCall		PanicPuppet1_Call8
+	sLoop		$00, $02, PanicPuppet1_Loop9
+	sCall		PanicPuppet1_Call9
+	sCall		PanicPuppet1_Call10
+	sCall		PanicPuppet1_Call9
+	dc.b nG4, $60, nG4
+	sCall		PanicPuppet1_Call9
+	sCall		PanicPuppet1_Call10
+	sCall		PanicPuppet1_Call9
+	dc.b nG4, $3C, $0C, nD4, nD4, nD4, $60
+	sCall		PanicPuppet1_Call8
+	sCall		PanicPuppet1_Call8
+	dc.b nRst, $30, nRst, $60, nRst
+	sJump		PanicPuppet1_Loop9
+
+PanicPuppet1_Call8:
+	dc.b nRst, $0C, nG3, nE4, nG4, nG4, $09, nRst
+	dc.b nG4, nRst, nE4, $0C, nC4, $09, nRst, nE4
+	dc.b nRst, nG3, $0C, nRst, $30, nRst, $0C, nAb3
+	dc.b nEb4, nAb4, nEb4, $09, nRst, nEb4, nRst, nEb4
+	dc.b $0C, nC4, $09, nRst, nEb4, nRst, nAb3, $0C
+	dc.b nRst, $30, nRst, $0C, nF3, nD4, nF4, nF4
+	dc.b $09, nRst, nF4, nRst, nD4, $0C, nRst, nF3
+	dc.b nD4, nF4, nF4, $09, nRst, nF4, nRst, nD4
+	dc.b $0C, nG4, $09, nRst, nG4, nRst, nG4, $0C
+	dc.b nRst, $30, nG5, $09, nRst, nG5, nRst, nG5
+	dc.b $0C, nRst, $30
+	sRet
+
+PanicPuppet1_Call9:
+	dc.b nF4, $24, nC4, $0C, nRst, nA4, $24, nEb4
+	dc.b nC4, $0C, nRst, nAb4, $24
+	sRet
+
+PanicPuppet1_Call10:
+	dc.b nG4, nG4, $18, nE4, $0C, nE4, nE4, nE4
+	dc.b nE4, nRst, nE4, $18, nE4, nE4, $0C
+	sRet
+
+PanicPuppet1_FM4:
+	sVoice		$02
+	sGate		$03
+	sModAMPS	$06, $01, $03, $05
+
+PanicPuppet1_Loop10:
+	sCall		PanicPuppet1_Call11
+	sLoop		$00, $03, PanicPuppet1_Loop10
+	sCall		PanicPuppet1_Call12
+	sLoop		$01, $02, PanicPuppet1_Loop10
+
+PanicPuppet1_Loop11:
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$FC
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$02
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$02
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	sLoop		$00, $02, PanicPuppet1_Loop11
+
+PanicPuppet1_Loop12:
+	saTranspose	$05
+	sCall		PanicPuppet1_Call13
+	saTranspose	$F7
+	sCall		PanicPuppet1_Call13
+	saTranspose	$04
+	sCall		PanicPuppet1_Call13
+	saTranspose	$FD
+	sCall		PanicPuppet1_Call13
+	saTranspose	$08
+	sCall		PanicPuppet1_Call13
+	saTranspose	$F7
+	sCall		PanicPuppet1_Call13
+	saTranspose	$FF
+	sCall		PanicPuppet1_Call13
+	saTranspose	$05
+	sPan		spLeft
+	dc.b nD5, $0C, $06, nG5, $0C, nD5, $06, nG5
+	dc.b nD5
+	sPan		spRight
+	dc.b nG5, $0C, nD5, $06, nG5, $0C, nG5, $06
+	dc.b nD5, $0C
+	sLoop		$00, $02, PanicPuppet1_Loop12
+
+PanicPuppet1_Loop13:
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$FC
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$02
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$02
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	sLoop		$00, $02, PanicPuppet1_Loop13
+	sPan		spLeft
+	dc.b nC5, $0C, $06, nG5, $0C, nC5, $06, nG5
+	dc.b nC5
+	sCall		PanicPuppet1_Call12
+	sJump		PanicPuppet1_Loop11
+
+PanicPuppet1_Call11:
+	dc.b nRst, $60
+	sPan		spLeft
+	dc.b nRst, $0C, nG5, nC6, nG6, nF6
+	sPan		spRight
+	dc.b nG6, $06, nF6, $0C, nG6, $06, nC6, $0C
+	sRet
+
+PanicPuppet1_Call12:
+	dc.b nRst, $60
+	sPan		spRight
+	dc.b nRst, $0C, nG5, nC6, nG6, nF6
+	sPan		spLeft
+	dc.b nG6, $06, nF6, $0C, nG6, $06, nC6, $0C
+	sRet
+
+PanicPuppet1_Call13:
+	sPan		spLeft
+	dc.b nC5, $0C, $06, nG5, $0C, nC5, $06, nG5
+	dc.b nC5
+	sPan		spRight
+	dc.b nG5, $0C, nC5, $06, nG5, $0C, nG5, $06
+	dc.b nC5, $0C
+	sRet
+
+PanicPuppet1_FM5:
+	sVoice		$03
+	sModAMPS	$06, $01, $03, $05
+	saTranspose	$E8
+	sPan		spRight
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sPan		spCenter
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sPan		spLeft
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sPan		spRight
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sPan		spCenter
+	dc.b nAb4, $0C, nAb5, $06, nEb5, nAb5, nEb5, nAb5
+	dc.b nEb5
+	sPan		spRight
+	dc.b nAb4, $0C, nAb5, $06, nEb5, nAb5, nEb5, nAb5
+	dc.b nEb5
+	sPan		spLeft
+	dc.b nAb4, $0C, nAb5, $06, nEb5, nAb5, nEb5, nAb5
+	dc.b nEb5
+	sPan		spCenter
+	dc.b nAb4, $0C, nAb5, $06, nEb5, nAb5, nEb5, nAb5
+	dc.b nEb5
+	sPan		spLeft
+	dc.b nBb4, $0C, nBb5, $06, nEb5, nBb5, nEb5, nBb5
+	dc.b nEb5
+	sPan		spCenter
+	dc.b nBb4, $0C, nBb5, $06, nEb5, nBb5, nEb5, nBb5
+	dc.b nEb5
+	sPan		spRight
+	dc.b nBb4, $0C, nBb5, $06, nEb5, nBb5, nEb5, nBb5
+	dc.b nEb5
+	sPan		spCenter
+	dc.b nBb4, $0C, nBb5, $06, nEb5, nBb5, nEb5, nBb5
+	dc.b nEb5
+	sPan		spLeft
+	dc.b nBb4, $0C, nBb5, $06, nD5, nBb5, nD5, nBb5
+	dc.b nD5
+	sPan		spCenter
+	dc.b nBb4, $0C, nBb5, $06, nD5, nBb5, nD5, nBb5
+	dc.b nD5
+	sPan		spRight
+	dc.b nBb4, $0C, nBb5, $06, nD5, nBb5, nD5, nBb5
+	dc.b nD5
+	sPan		spCenter
+	dc.b nBb4, $0C, nBb5, $06, nD5, nBb5, nD5, nBb5
+	dc.b nD5
+	sPan		spLeft
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sPan		spRight
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sPan		spCenter
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sPan		spRight
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sPan		spLeft
+	dc.b nAb4, $0C, nAb5, $06, nEb5, nAb5, nEb5, nAb5
+	dc.b nEb5
+	sPan		spCenter
+	dc.b nAb4, $0C, nAb5, $06, nEb5, nAb5, nEb5, nAb5
+	dc.b nEb5
+	sPan		spLeft
+	dc.b nAb4, $0C, nAb5, $06, nEb5, nAb5, nEb5, nAb5
+	dc.b nEb5
+	sPan		spCenter
+	dc.b nAb4, $0C, nAb5, $06, nEb5, nAb5, nEb5, nAb5
+	dc.b nEb5
+	sPan		spRight
+	dc.b nEb5, $0C, nEb6, $06, nBb5, nEb6, nBb5, nEb6
+	dc.b nBb5
+	sPan		spCenter
+	dc.b nEb5, $0C, nEb6, $06, nBb5, nEb6, nBb5, nEb6
+	dc.b nBb5
+	sPan		spLeft
+	dc.b nEb5, $0C, nEb6, $06, nBb5, nEb6, nBb5, nEb6
+	dc.b nBb5
+	sPan		spCenter
+	dc.b nEb5, $0C, nEb6, $06, nBb5, nEb6, nBb5, nEb6
+	dc.b nBb5
+	sPan		spRight
+	dc.b nBb4, $0C, nBb5, $06, nF5, nBb5, nF5, nBb5
+	dc.b nF5
+	sPan		spCenter
+	dc.b nBb4, $0C, nBb5, $06, nF5, nBb5, nF5, nBb5
+	dc.b nF5
+	sPan		spLeft
+	dc.b nBb4, $0C, nBb5, $06, nF5, nBb5, nF5, nBb5
+	dc.b nF5
+	sPan		spCenter
+	dc.b nBb4, $0C, nBb5, $06, nF5, nBb5, nF5, nBb5
+	dc.b nF5
+	saVol		$08
+	dc.b nRst, $02
+
+PanicPuppet1_Loop14:
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$FC
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$02
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	saTranspose	$02
+	sCall		PanicPuppet1_Call13
+	sCall		PanicPuppet1_Call13
+	sLoop		$00, $02, PanicPuppet1_Loop14
+
+PanicPuppet1_Loop15:
+	saTranspose	$05
+	sCall		PanicPuppet1_Call13
+	saTranspose	$F7
+	sCall		PanicPuppet1_Call13
+	saTranspose	$04
+	sCall		PanicPuppet1_Call13
+	saTranspose	$FD
+	sCall		PanicPuppet1_Call13
+	saTranspose	$08
+	sCall		PanicPuppet1_Call13
+	saTranspose	$F7
+	sCall		PanicPuppet1_Call13
+	saTranspose	$FF
+	sCall		PanicPuppet1_Call13
+	saTranspose	$05
+	sPan		spLeft
+	dc.b nD5, $0C, $06, nG5, $0C, nD5, $06, nG5
+	dc.b nD5
+	sPan		spRight
+	dc.b nG5, $0C, nD5, $06, nG5, $0C, nG5, $06
+	dc.b nD5, $0C
+	sLoop		$00, $02, PanicPuppet1_Loop15
+	saVol		$F8
+	saTranspose	$18
+
+PanicPuppet1_Loop16:
+	dc.b nRst, $5E, nRst, $30
+	sPan		spLeft
+	dc.b nG4, $06, nE4, nC4
+	sPan		spRight
+	dc.b nC5, nG4, nE4
+	sPan		spCenter
+	dc.b nE5, nC5, nRst, $60, nRst, $30
+	sPan		spRight
+	dc.b nAb4, $06, nEb4, nC4
+	sPan		spLeft
+	dc.b nC5, nAb4, nEb4
+	sPan		spCenter
+	dc.b nEb5, nC5, nRst, $60
+	sPan		spLeft
+	dc.b nF3, $06, nBb3, nD4
+	sPan		spRight
+	dc.b nF4, nBb3, nD4
+	sPan		spCenter
+	dc.b nF4, nBb4, nD4
+	sPan		spRight
+	dc.b nF4, nBb4, nD5
+	sPan		spLeft
+	dc.b nF4, nBb4, nD5
+	sPan		spCenter
+	dc.b nF5, nE5, nC5
+	sPan		spLeft
+	dc.b nG4, nC5, nG4
+	sPan		spCenter
+	dc.b nE4, nG4, nE4
+	sPan		spRight
+	dc.b nC4, nE4, nC4
+	sPan		spCenter
+	dc.b nG3, nC4, nG3
+	sPan		spLeft
+	dc.b nE3, nG3, nC3
+	sPan		spRight
+	dc.b nE3, nG3, nC4
+	sPan		spCenter
+	dc.b nE3, nG3, nC4
+	sPan		spRight
+	dc.b nE4, nG3, nC4
+	sPan		spLeft
+	dc.b nE4, nG4, nC4
+	sPan		spCenter
+	dc.b nE4, nG4, nC5, nRst, $02
+	sLoop		$00, $02, PanicPuppet1_Loop16
+	dc.b nRst, $2E, nRst, $60, nRst, $60
+	saVol		$08
+	saTranspose	$E8
+	dc.b nRst, $02
+	sJump		PanicPuppet1_Loop14
+
+	; Unused data
+	dc.b nC5, $0C, nC6, $06, nG5, nC6, nG5, nC6
+	dc.b nG5
+	sRet
+
+PanicPuppet1_PSG1:
+	sVolEnv		v12
+	dc.b nC5, $60, sHold, nC5, nAb4, sHold, nAb4, nBb4
+	dc.b sHold, nBb4, nBb4, sHold, nBb4, nC5, sHold, nC5
+	dc.b nC5, sHold, nC5, nEb5, sHold, nEb5, nD5, sHold
+	dc.b nD5
+
+PanicPuppet1_Jump1:
+	dc.b nC5, sHold, nC5, nC5, sHold, nC5, nD5, sHold
+	dc.b nD5, nE5, sHold, nE5, nC5, sHold, nC5, nEb5
+	dc.b sHold, nEb5, nF5, sHold, nF5, nG5, sHold, nG5
+	dc.b nC5, nC5, nC5, nC5, nC5, nC5, nD5, sHold
+	dc.b nD5, nF5, nF5, nE5, nE5, nF5, nF5, nD5
+	dc.b nD5, nC5, sHold, nC5, nC5, sHold, nC5, nD5
+	dc.b sHold, nD5, nE5, sHold, nE5, nC5, sHold, nC5
+	dc.b nEb5, sHold, nEb5, nF5, sHold, nF5, nG5, sHold
+	dc.b nG5, sHold, nG5, $30, nRst, $60, nRst
+	sJump		PanicPuppet1_Jump1
+
+PanicPuppet1_PSG2:
+	sVolEnv		v12
+	dc.b nG5, $60, sHold, nG5, nEb5, sHold, nEb5, nG5
+	dc.b sHold, nG5, nF5, sHold, nF5, nG5, sHold, nG5
+	dc.b nAb5, sHold, nAb5, nBb5, sHold, nBb5, nBb5, sHold
+	dc.b nBb5
+
+PanicPuppet1_Jump2:
+	dc.b nG5, sHold, nG5, nAb5, sHold, nAb5, nBb5, sHold
+	dc.b nBb5, nC6, sHold, nC6, nG5, sHold, nG5, nC6
+	dc.b sHold, nC6, nD6, sHold, nD6, nE6, sHold, nE6
+	dc.b nA5, nAb5, nG5, nA5, nA5, nAb5, nB5, sHold
+	dc.b nB5, nC6, nC6, nC6, nC6, nC6, nC6, nC6
+	dc.b nB5, nG5, sHold, nG5, nAb5, sHold, nAb5, nBb5
+	dc.b sHold, nBb5, nC6, sHold, nC6, nG5, sHold, nG5
+	dc.b nC6, sHold, nC6, nD6, sHold, nD6, nE6, sHold
+	dc.b nE6, sHold, nE6, $30, nRst, $60, nRst
+	sJump		PanicPuppet1_Jump2
+
+PanicPuppet1_PSG3:
+	sNoisePSG	$E7
+	dc.b nRst, $70, $70, $7C
+	sVolEnv		v0F
+	dc.b nHiHat, $06, $06, $06, $06
+	sVolEnv		v12
+	dc.b $0C
+
+PanicPuppet1_Loop18:
+	sCall		PanicPuppet1_Call14
+	sLoop		$00, $06, PanicPuppet1_Loop18
+
+PanicPuppet1_Loop20:
+	sCall		PanicPuppet1_Call15
+	sLoop		$01, $04, PanicPuppet1_Loop20
+
+PanicPuppet1_Loop22:
+	sCall		PanicPuppet1_Call16
+	sCall		PanicPuppet1_Call17
+	sCall		PanicPuppet1_Call18
+	sCall		PanicPuppet1_Call17
+	sLoop		$01, $04, PanicPuppet1_Loop22
+	saVol		-$08
+	sVolEnv		v12
+	dc.b $0C
+	saVol		$08
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v12
+	dc.b $0C
+
+PanicPuppet1_Loop23:
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sLoop		$00, $04, PanicPuppet1_Loop23
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $06, $06, $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sJump		PanicPuppet1_Loop20
+
+PanicPuppet1_Call14:
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $06, $06, $0C
+	sVolEnv		v12
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $18
+	sVolEnv		v0F
+	dc.b $06, $06, $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sRet
+
+PanicPuppet1_Call15:
+	saVol		-$08
+	sVolEnv		v12
+	dc.b $18
+	saVol		$08
+
+PanicPuppet1_Loop19:
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sLoop		$00, $1F, PanicPuppet1_Loop19
+	sRet
+
+PanicPuppet1_Call16:
+	saVol		-$08
+	sVolEnv		v12
+	dc.b $0C
+	saVol		$08
+	dc.b $0C
+
+PanicPuppet1_Loop21:
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sLoop		$00, $03, PanicPuppet1_Loop21
+	sRet
+
+PanicPuppet1_Call17:
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sRet
+
+PanicPuppet1_Call18:
+	saVol		-$08
+	sVolEnv		v12
+	dc.b $0C
+	saVol		$08
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $06, $06
+	sVolEnv		v12
+	dc.b $0C
+	sVolEnv		v0F
+	dc.b $0C
+	sVolEnv		v12
+	dc.b $0C
+	sRet
+
+PanicPuppet1_DAC1:
+	sStop
+
+PanicPuppet1_DAC2:
+	dc.b nRst, $60
+	sLoop		$00, $0C, PanicPuppet1_DAC2
+	dc.b dKick, $24, $0C, $30, dKick, dKick, dKick, $24
+	dc.b $0C, $30, dKick, $06, dSnare, dSnare, dSnare, dSnare
+	dc.b dSnare, dSnare, dSnare, dKick, dSnare, dSnare, dSnare, dKick
+	dc.b dSnare, dSnare, dSnare
+
+PanicPuppet1_Loop24:
+	sCall		PanicPuppet1_Call19
+	sLoop		$00, $03, PanicPuppet1_Loop24
+	sCall		PanicPuppet1_Call20
+	dc.b dKick, $18, dKick, dSnare, $06, dSnare, dSnare, dSnare
+	dc.b dSnare, $0C, $06, dSnare
+
+PanicPuppet1_Loop25:
+	sCall		PanicPuppet1_Call19
+	sLoop		$00, $03, PanicPuppet1_Loop25
+	sCall		PanicPuppet1_Call20
+	dc.b dKick, $18, dKick, dSnare, $06, dSnare, dSnare, dSnare
+	dc.b dSnare, $03, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare
+	dc.b dSnare
+
+PanicPuppet1_Loop26:
+	sCall		PanicPuppet1_Call19
+	sLoop		$00, $03, PanicPuppet1_Loop26
+	sCall		PanicPuppet1_Call20
+	dc.b dKick, $18, dKick, dSnare, $06, dSnare, dSnare, $0C
+	dc.b dSnare, dSnare, $06, dSnare
+
+PanicPuppet1_Loop27:
+	sCall		PanicPuppet1_Call19
+	sLoop		$00, $03, PanicPuppet1_Loop27
+	sCall		PanicPuppet1_Call20
+	dc.b dKick, $06, dSnare, dSnare, dSnare, dKick, dSnare, dSnare
+	dc.b dSnare, dSnare, $03, dSnare, dSnare, dSnare, dSnare, dSnare
+	dc.b dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare
+	dc.b dSnare, dSnare
+
+PanicPuppet1_Loop28:
+	sCall		PanicPuppet1_Call21
+	sCall		PanicPuppet1_Call22
+	sLoop		$00, $03, PanicPuppet1_Loop28
+	sCall		PanicPuppet1_Call21
+	dc.b dKick, $18, $0C, dKick, dKickSnare, $06, dKickSnare, dKickSnare
+	dc.b dKick, dKickSnare, $0C, $06, dKickSnare
+	sCall		PanicPuppet1_Call21
+	dc.b dKick, $18, $0C, dKick, dKick, dKickSnare, $06, dKick
+	dc.b dKickSnare, $0C, $06, dKickSnare
+	sCall		PanicPuppet1_Call21
+	dc.b dKick, $18, $0C, dKick, dKickSnare, $06, dKickSnare, dKick
+	dc.b dKickSnare, dKickSnare, $0C, $06, dKick
+	sCall		PanicPuppet1_Call21
+	dc.b dKick, $18, $0C, dKick, dKickSnare, $06, dKickSnare, dKick
+	dc.b dKickSnare, dKick, dKickSnare, dKickSnare, dKick
+	sCall		PanicPuppet1_Call21
+	dc.b dKick, $18, $0C, dKick, dKickSnare, $06, dKickSnare, dKickSnare
+	dc.b dKickSnare, dKickSnare, $0C, $06, dKickSnare, dKick, $18, $0C
+	dc.b $0C, nRst, $60, dKick, $06, dSnare, dSnare, dSnare
+	dc.b dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare
+	dc.b dSnare, dSnare, dSnare, dSnare
+	sJump		PanicPuppet1_Loop24
+
+PanicPuppet1_Call20:
+	dc.b dKick, $18, dKick, dKick, dKick
+	sRet
+
+PanicPuppet1_Call19:
+	dc.b dKick, $18, dKick, dKick, dKick, dKick, dKick, dKick
+	dc.b dKick, $0C, dKick
+	sRet
+
+PanicPuppet1_Call21:
+	dc.b dKick, $18, $0C, dKick, dKick, $18, $0C, $06
+	dc.b dKick
+	sRet
+
+PanicPuppet1_Call22:
+	dc.b dKick, $18, $0C, dKick, dKick, dKick, $06, dKick
+	dc.b dKickSnare, $0C, dKick, $06, dKick
+	sRet

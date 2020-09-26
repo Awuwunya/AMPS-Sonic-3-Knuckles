@@ -2,8 +2,8 @@
 	sHeaderInitSFX
 	sHeaderPrio	$7A
 	sHeaderCh	$02
-	sHeaderSFX	$E1, ctPSG3, .PSG3, $0C, $18
-	sHeaderSFX	$C0, ctFM5, sfxSplash_FM5, $00, $06
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbWater)|(1<<cfbVol)|(1<<cfbRest), ctPSG3, .PSG3, $0C, $18
+	sHeaderSFX	(1<<cfbRun)|(1<<cfbWater), ctFM5, sfxSplash_FM5, $00, $06
 
 .PSG3:
 	sVolEnv		v0D
